@@ -5,7 +5,7 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     public float m_speed = 5f;
-    public bool m_useImpulse = false;
+    public bool m_WASD = false;
     private Rigidbody m_rb = null;
     private float m_speedMultiplier = 20f;
 
@@ -16,34 +16,50 @@ public class Movement : MonoBehaviour
 
     public void FixedUpdate()
     {
-        if(m_useImpulse)
+        var speed = m_speed * m_speedMultiplier * Time.deltaTime;
+        var velocity = new Vector3();
+        if(m_WASD)
         {
-            var multiplier = m_speedMultiplier / 6;
             if(Input.GetKey(KeyCode.D))
             {
-                var speed = m_speed * multiplier * Time.deltaTime;
-                var movement = new Vector3(speed,0f,0f);
-                m_rb.AddForce(movement, ForceMode.Impulse);
+                velocity.z = 1 * speed;
             }
-            if (Input.GetKey(KeyCode.A))
+            else if (Input.GetKey(KeyCode.A))
             {
-                var speed = m_speed * multiplier * Time.deltaTime;
-                var movement = new Vector3(-speed, 0f, 0f);
-                m_rb.AddForce(movement, ForceMode.Impulse);
+                velocity.z = -1 * speed;
             }
+
             if (Input.GetKey(KeyCode.W))
             {
-                var speed = m_speed * multiplier * Time.deltaTime;
-                var movement = new Vector3(0f, 0f, speed);
-                m_rb.AddForce(movement, ForceMode.Impulse);
+                velocity.x = -1 * speed;
             }
-            if (Input.GetKey(KeyCode.S))
+            else if(Input.GetKey(KeyCode.S))
             {
-                var speed = m_speed * multiplier * Time.deltaTime;
-                var movement = new Vector3(0f, 0f, -speed);
-                m_rb.AddForce(movement, ForceMode.Impulse);
+                velocity.x = 1 * speed; 
             }
         }
+        else
+        {
+            if(Input.GetKey(KeyCode.RightArrow))
+            {
+                velocity.z = 1 * speed;
+            }
+            else if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                velocity.z = -1 * speed;
+            }
+
+            if (Input.GetKey(KeyCode.UpArrow))
+            {
+                velocity.x = -1 * speed;
+            }
+            else if(Input.GetKey(KeyCode.DownArrow))
+            {
+                velocity.x = 1 * speed; 
+            }
+        }
+        m_rb.velocity = velocity;
+        /*
         else
         {
             var h = Input.GetAxisRaw("Horizontal");
@@ -53,6 +69,8 @@ public class Movement : MonoBehaviour
             var velocity = new Vector3(v * -speed, 0f, h * speed);
             m_rb.velocity = velocity;
         }
+         */
+        
     }
 }
 
