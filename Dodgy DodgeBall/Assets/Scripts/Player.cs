@@ -38,11 +38,19 @@ public class Player : MonoBehaviour
 
     // Xbox Controller Settings
     [Header("Xbox Movement")]
-    public bool m_useXboxController = true;
+    public bool m_useXboxController;
+    public float m_moveSpeed_Xbox;
     private Vector3 m_moveInput_Xbox;
     private Vector3 m_moveVelocity_Xbox;
     private Rigidbody m_rigidBody_Xbox;
-    public float m_moveSpeed_Xbox;
+    
+
+
+    //Renderer
+    [Header("Renderer's")]
+    public Renderer rightTriggerSphere;
+
+    
 
 
     public void Start()
@@ -53,7 +61,6 @@ public class Player : MonoBehaviour
         {
             m_hand = transform.gameObject;
         }
-        
     }
 
     // Fixed update is general used for anything physics related
@@ -62,36 +69,11 @@ public class Player : MonoBehaviour
         var speed = m_speed * m_speedMultiplier * Time.deltaTime;
         var velocity = new Vector3();
 
-        // Used for keyboard + mouse movement
-        if (m_useXboxController == false)
-        {
-            // substitute the values in the getkey for the controller equivalent
-            if (Input.GetKey(KeyCode.RightArrow))
-            {
-                velocity.x = 1 * speed;
-            }
-            else if (Input.GetKey(KeyCode.LeftArrow))
-            {
-                velocity.x = -1 * speed;
-            }
-
-            if (Input.GetKey(KeyCode.UpArrow))
-            {
-                velocity.z = 1 * speed;
-            }
-            else if (Input.GetKey(KeyCode.DownArrow))
-            {
-                velocity.z = -1 * speed;
-            }
-        }
-        
-        
-
-        // Used for xbox controller movement
-        else if (m_useXboxController == true)
+        //Used for xbox controller movement
+        if (m_useXboxController)
         {
             //Left Stick Movement
-            m_moveInput_Xbox = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
+            m_moveInput_Xbox = new Vector3(Input.GetAxisRaw("HorizontalJoyStick"), 0f, Input.GetAxisRaw("VerticalJoyStick"));
             m_moveVelocity_Xbox = m_moveInput_Xbox * m_moveSpeed_Xbox;
 
             //Right Stick Rotation
@@ -101,8 +83,31 @@ public class Player : MonoBehaviour
                 transform.rotation = Quaternion.LookRotation(playerDirection, Vector3.up);
             }
         }
-        m_rb.velocity = velocity;
 
+        //Used for keyboard + mouse movement
+        if (!m_useXboxController)
+        {
+            //substitute the values in the getkey for the controller equivalent
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                velocity.x = 1 * speed;
+            }
+            else if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                velocity.x = -1 * speed;
+            }
+            if (Input.GetKey(KeyCode.UpArrow))
+            {
+                velocity.z = 1 * speed;
+            }
+            else if (Input.GetKey(KeyCode.DownArrow))
+            {
+                velocity.z = -1 * speed;
+            }
+        }
+
+        // Rigidbody
+        m_rb.velocity = velocity;
         m_rigidBody_Xbox.velocity = m_moveVelocity_Xbox;
 
 
@@ -120,9 +125,6 @@ public class Player : MonoBehaviour
 
 public void Update()
     {
-       
-
-        
         // Casts to from the mouse position to an object
         // if hit then grab that position and create a direction vector
         // from the player
@@ -136,36 +138,49 @@ public void Update()
             m_lastLookDirection = hit.point - transform.position;
         }
 
+
+        //Input
+        float rightTrigger = Input.GetAxis("Right Trigger");
+        bool rightBumper = Input.GetButton("Right Bumper");
+        bool leftBumper = Input.GetButton("Left Bumper");
+
+        // Changes the colour of a ball by pressing right trigger [ RT ]
+        rightTriggerSphere.material.color = new Color(rightTrigger, rightTrigger, rightTrigger, rightTrigger);
+
         // only runs if a ball is being held and cooldown is off
         // Used to continually change the ball position when the player
         // moves or rotates
         if (m_ball != null && !m_onCoolDown)
         {
-            if (Input.GetKey(KeyCode.Mouse0))
+            if (rightBumper || Input.GetKey(KeyCode.Mouse0))
             {
+                
                 m_ball.gameObject.transform.position = m_hand.transform.position;
                 m_ball.gameObject.transform.rotation = m_hand.transform.rotation;
+              //Debug.Log("Right Bumper");
+                
             }
-            if (Input.GetKeyUp(KeyCode.Mouse0))
+            if (Input.GetButtonUp("Left Bumper") || Input.GetKeyUp(KeyCode.Mouse0))
             {
+                
                 m_holdingBall = false;
                 m_ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
                 m_ball = null;
+              //Debug.Log("Right Bumper");
             }
         }
 
         // if a ball is being held and space is pushed run the throw coroutine
         if (m_holdingBall && m_ball != null)
         {
-            if (!m_onCoolDown && Input.GetKey(KeyCode.Space))
+            Debug.Log("Holding Ball");
+            if (!m_onCoolDown && (Input.GetKey(KeyCode.Space) || Input.GetButton("Left Bumper")))
             {
+                Debug.Log("Thrown the ball");
                 Debug.Log(m_onCoolDown);
                 StartCoroutine(Throw());
             }
         }
-        
-
-        
     }  
 
     public void SetBall(GameObject ball)
@@ -181,6 +196,7 @@ public void Update()
         var rb = m_ball.GetComponent<Rigidbody>();
         rb.velocity = Vector3.zero;        
         var force = m_lastLookDirection.normalized * m_throwStrength;
+        
         rb.AddForce(force,ForceMode.Impulse);
 
         yield return new WaitForSeconds(.5f);

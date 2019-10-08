@@ -32,12 +32,13 @@ public class CatchCollide : MonoBehaviour
         if(m_cooldown)
             return;
         
-        if(other.gameObject.layer == 9 && Input.GetKey(KeyCode.Mouse0))
+        if(other.gameObject.layer == 9 && Input.GetKey(KeyCode.Mouse0) || Input.GetButton("Right Bumper") && other.tag == "Ball")
         {
             m_player.GetComponent<Player>().SetBall(other.gameObject);
+            //Debug.Log("SetBall");
 
-            if(Input.GetKeyDown(KeyCode.Space))
-            {
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Left Bumper"))
+            { 
                 m_lastBall = other.gameObject;
                 StartCoroutine(cooldown());
             }
