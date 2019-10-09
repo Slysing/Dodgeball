@@ -46,6 +46,7 @@ public class Player : MonoBehaviour
     // Xbox Controller Settings
     [Header("Xbox Movement")]
     public bool m_useXboxController;
+    // Changes the character speed for keyboard and controller at the moment
     public float m_moveSpeed_Xbox;
     private Vector3 m_moveInput_Xbox;
     private Vector3 m_moveVelocity_Xbox;

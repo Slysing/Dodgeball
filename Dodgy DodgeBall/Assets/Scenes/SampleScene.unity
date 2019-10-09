@@ -1192,7 +1192,7 @@ PrefabInstance:
     - target: {fileID: 2743571209736448484, guid: 9904e6212565c044190526cd2d667547,
         type: 3}
       propertyPath: m_useXboxController
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2743571209736448484, guid: 9904e6212565c044190526cd2d667547,
         type: 3}
