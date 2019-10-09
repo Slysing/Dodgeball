@@ -43,21 +43,24 @@ public class Player : MonoBehaviour
     private Vector3 m_moveInput_Xbox;
     private Vector3 m_moveVelocity_Xbox;
     private Rigidbody m_rigidBody_Xbox;
-    
+
+    // Keyboard and Mouse movement Working
+    [Header("Keyboard & Mouse Movement")]
+    private Camera m_mainCamera;
 
 
     //Renderer
     [Header("Renderer's")]
     public Renderer rightTriggerSphere;
 
-    
-
 
     public void Start()
     {
+        m_mainCamera = FindObjectOfType<Camera>();
         m_rigidBody_Xbox = GetComponent<Rigidbody>();
         m_rb = transform.GetComponent<Rigidbody>();
-        if(m_hand == null)
+        
+        if (m_hand == null)
         {
             m_hand = transform.gameObject;
         }
@@ -83,11 +86,13 @@ public class Player : MonoBehaviour
                 transform.rotation = Quaternion.LookRotation(playerDirection, Vector3.up);
             }
         }
-
-        //Used for keyboard + mouse movement
-        if (!m_useXboxController)
+        else
         {
+            //Used for keyboard + mouse movement
+            //if (!m_useXboxController)
+            //{
             //substitute the values in the getkey for the controller equivalent
+
             if (Input.GetKey(KeyCode.RightArrow))
             {
                 velocity.x = 1 * speed;
@@ -104,9 +109,13 @@ public class Player : MonoBehaviour
             {
                 velocity.z = -1 * speed;
             }
+
+            //}
         }
 
-        // Rigidbody
+
+
+        //Rigidbody
         m_rb.velocity = velocity;
         m_rigidBody_Xbox.velocity = m_moveVelocity_Xbox;
 
@@ -125,18 +134,63 @@ public class Player : MonoBehaviour
 
 public void Update()
     {
+        /* 
+            This movement works if you only want one type selected (E.g. only controller moving the character if ticked in public bool)
+            Comment out other movement that was used if you want to use this.
+        */
+
+        //// Rotate with mouse
+        //if (!m_useXboxController)
+        //{
+        //    m_moveInput_Xbox = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
+        //    m_moveVelocity_Xbox = m_moveInput_Xbox * m_moveSpeed_Xbox;
+
+        //    Ray cameraRay = m_mainCamera.ScreenPointToRay(Input.mousePosition);
+        //    Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+        //    float rayLength;
+
+        //    if (groundPlane.Raycast(cameraRay, out rayLength))
+        //    {
+        //        Vector3 pointToLook = cameraRay.GetPoint(rayLength);
+        //        Debug.DrawLine(cameraRay.origin, pointToLook, Color.blue);
+
+        //        transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
+        //    }
+        //}
+
+        //// Rotate with controller
+        //if (m_useXboxController)
+        //{
+        //    m_moveInput_Xbox = new Vector3(Input.GetAxisRaw("HorizontalJoyStick"), 0f, Input.GetAxisRaw("VerticalJoyStick"));
+        //    m_moveVelocity_Xbox = m_moveInput_Xbox * m_moveSpeed_Xbox;
+
+        //    Vector3 playerDirection = Vector3.right * Input.GetAxisRaw("RHorizontal") + Vector3.forward * Input.GetAxisRaw("RVertical");
+        //    if (playerDirection.sqrMagnitude > 0.2f)
+        //    {
+        //        transform.rotation = Quaternion.LookRotation(playerDirection, Vector3.up);
+        //    }
+        //}
+
+
+
+
+
         // Casts to from the mouse position to an object
         // if hit then grab that position and create a direction vector
         // from the player
-        Vector3 mouse = Input.mousePosition;
-        Ray castPoint = Camera.main.ScreenPointToRay(mouse);
-        RaycastHit hit;
-        if (Physics.Raycast(castPoint, out hit, Mathf.Infinity))
+        if (!m_useXboxController)
         {
-            transform.LookAt(hit.point);
-            transform.eulerAngles = new Vector3(0.0f, transform.eulerAngles.y, 0f);
-            m_lastLookDirection = hit.point - transform.position;
+            Vector3 mouse = Input.mousePosition;
+            Ray castPoint = Camera.main.ScreenPointToRay(mouse);
+            RaycastHit hit;
+            if (Physics.Raycast(castPoint, out hit, Mathf.Infinity))
+            {
+                transform.LookAt(hit.point);
+                transform.eulerAngles = new Vector3(0.0f, transform.eulerAngles.y, 0f);
+                m_lastLookDirection = hit.point - transform.position;
+            }
         }
+        
 
 
         //Input
