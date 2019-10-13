@@ -3,15 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 ///<summary>
-/// Description: Handles the movement/catch of a player
-/// Authors Leith Merrifield
-/// Creation Date: 07/10/2019
-/// Modified: 07/10/2019
-///</summary>
-
-///<summary>
 /// Description: Handles the movement/catch of a player (With keyboard and Controller)
-/// Authors Boran Baykan
+/// Authors Boran Baykan, Leith Merrifield
 /// Creation Date: 07/10/2019
 /// Modified: 09/10/2019
 ///</summary>
@@ -41,7 +34,7 @@ public class Player : MonoBehaviour
     private Rigidbody m_rb = null;
     private Vector3 m_lastLookDirection = Vector3.forward;
     private bool m_onCoolDown = false;
-
+    private bool m_dashCooldown = false;
 
     // Xbox Controller Settings
     [Header("Xbox Movement")]
@@ -49,8 +42,6 @@ public class Player : MonoBehaviour
     // Changes the character speed for keyboard and controller at the moment
     public float m_moveSpeed_Xbox;
     private Vector3 m_moveInput_Xbox;
-    private Vector3 m_moveVelocity_Xbox;
-    private Rigidbody m_rigidBody_Xbox;
 
     // Keyboard and Mouse movement Working
     [Header("Keyboard & Mouse Movement")]
@@ -65,7 +56,6 @@ public class Player : MonoBehaviour
     public void Start()
     {
         m_mainCamera = FindObjectOfType<Camera>();
-        m_rigidBody_Xbox = GetComponent<Rigidbody>();
         m_rb = transform.GetComponent<Rigidbody>();
         
         if (m_hand == null)
@@ -79,102 +69,17 @@ public class Player : MonoBehaviour
     {
         //Rigidbody
         //m_rb.velocity = velocity;
-        m_rigidBody_Xbox.velocity = m_moveVelocity_Xbox;
+        Vector3 moveVelocity = Vector3.zero;
 
-        /*
-            Did not work, code below    
-        */
-
-        //var speed = m_speed * m_speedMultiplier * Time.deltaTime;
-        //var velocity = new Vector3();
-
-        ////Used for xbox controller movement
-        //if (m_useXboxController)
-        //{
-        //    //Left Stick Movement
-        //    m_moveInput_Xbox = new Vector3(Input.GetAxisRaw("HorizontalJoyStick"), 0f, Input.GetAxisRaw("VerticalJoyStick"));
-        //    m_moveVelocity_Xbox = m_moveInput_Xbox * m_moveSpeed_Xbox;
-
-        //    //Right Stick Rotation
-        //    Vector3 playerDirection = Vector3.right * Input.GetAxisRaw("RHorizontal") + Vector3.forward * Input.GetAxisRaw("RVertical");
-        //    if (playerDirection.sqrMagnitude > 0.0f)
-        //    {
-        //        transform.rotation = Quaternion.LookRotation(playerDirection, Vector3.up);
-        //    }
-        //}
-        //else
-        //{
-        //    //Used for keyboard + mouse movement
-        //    if (!m_useXboxController)
-        //    {
-
-        //        if (Input.GetKey(KeyCode.RightArrow))
-        //        {
-        //            velocity.x = 1 * speed;
-        //        }
-        //        else if (Input.GetKey(KeyCode.LeftArrow))
-        //        {
-        //            velocity.x = -1 * speed;
-        //        }
-        //        if (Input.GetKey(KeyCode.UpArrow))
-        //        {
-        //            velocity.z = 1 * speed;
-        //        }
-        //        else if (Input.GetKey(KeyCode.DownArrow))
-        //        {
-        //            velocity.z = -1 * speed;
-        //        }
-
-        //    }
-        //}
-
-
-
-        /*
-            This will also work, however it's not as specific as the above movement
-        */
-
-        //var h = Input.GetAxisRaw("Horizontal");
-        //var v = Input.GetAxisRaw("Vertical");
-
-        //var speed = m_speed * m_speedMultiplier * Time.deltaTime;
-        //var velocity = new Vector3(v * -speed, 0f, h * speed);
-        //m_rb.velocity = velocity;
-    }
-
-
-    public void Update()
-    {
-        /* 
-            This movement works if you only want one type selected (E.g. only controller moving the character if ticked in public bool)
-        */
-
-        // Movement * Rotatation with mouse
         if (!m_useXboxController)
         {
             /*
              Movement with  [ W A S D ] for player 
             */
-            m_moveInput_Xbox = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
-            m_moveVelocity_Xbox = m_moveInput_Xbox * m_moveSpeed_Xbox;
-
-
-            /*
-                Boran's mouse control for player
-            */
-
-            //Ray cameraRay = m_mainCamera.ScreenPointToRay(Input.mousePosition);
-            //Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
-            //float rayLength;
-
-            //if (groundPlane.Raycast(cameraRay, out rayLength))
-            //{
-            //    Vector3 pointToLook = cameraRay.GetPoint(rayLength);
-            //    Debug.DrawLine(cameraRay.origin, pointToLook, Color.blue);
-
-            //    transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
-            //}
-
+            var h = Input.GetAxisRaw("Horizontal");
+            var v = Input.GetAxisRaw("Vertical");
+            Vector3 moveInput = new Vector3(h, 0f, v);
+            moveVelocity = moveInput * m_moveSpeed_Xbox;
 
             // Leith's Code // - Mouse movement for direction 
             /*
@@ -191,44 +96,53 @@ public class Player : MonoBehaviour
                 transform.eulerAngles = new Vector3(0.0f, transform.eulerAngles.y, 0f);
                 m_lastLookDirection = hit.point - transform.position;
             }
-        }
 
-        //Movement & Rotatation with controller
-        if (m_useXboxController)
+        }
+        else
         {
+            /* 
+                This movement works if you only want one type selected (E.g. only controller moving the character if ticked in public bool)
+            */
             //Left Stick Movement
             m_moveInput_Xbox = new Vector3(Input.GetAxisRaw("HorizontalJoyStick"), 0f, Input.GetAxisRaw("VerticalJoyStick"));
-            m_moveVelocity_Xbox = m_moveInput_Xbox * m_moveSpeed_Xbox;
+            moveVelocity = m_moveInput_Xbox * m_moveSpeed_Xbox;
 
             //Right Stick Rotation
             Vector3 playerDirection = Vector3.right * Input.GetAxisRaw("RHorizontal") + Vector3.forward * Input.GetAxisRaw("RVertical");
             if (playerDirection.sqrMagnitude > 0.0f)
             {
                 transform.rotation = Quaternion.LookRotation(playerDirection, Vector3.up);
+                m_lastLookDirection = playerDirection - transform.position;
             }
         }
 
+        m_rb.velocity = moveVelocity * Time.fixedDeltaTime * 50.0f;
+    }
 
+    public void Update()
+    {
+
+        if((Input.GetKeyDown(KeyCode.LeftAlt) || Input.GetButton("A Button")) && !m_dashCooldown)
+        {
+            StartCoroutine(Dash());
+        }
         //Input Manager
-        float rightTrigger = Input.GetAxis("Right Trigger");
+        //float rightTrigger = Input.GetAxis("Right Trigger");
         // Changes the colour of a ball by pressing right trigger [ RT ] ---TESTING PURPOSE---
-        rightTriggerSphere.material.color = new Color(rightTrigger, rightTrigger, rightTrigger, rightTrigger);
-
-
+        //rightTriggerSphere.material.color = new Color(rightTrigger, rightTrigger, rightTrigger, rightTrigger);
         /*
          Only runs if a ball is being held and cooldown is off
          Used to continually change the ball position when the player moves or rotates
         */
         if (m_ball != null && !m_onCoolDown)
         {
-            if (Input.GetButton("Right Bumper") || Input.GetKey(KeyCode.Mouse0))
+            if ((Input.GetAxis("Right Trigger") > 0 && m_useXboxController) || Input.GetKey(KeyCode.Mouse0))
             {
                 m_ball.gameObject.transform.position = m_hand.transform.position;
                 m_ball.gameObject.transform.rotation = m_hand.transform.rotation;
                 //Debug.Log("Right Bumper");
-                
             }
-            if (Input.GetButtonUp("Left Bumper") || Input.GetKeyUp(KeyCode.Mouse0))
+            if ((Input.GetAxis("Right Trigger") == 0 && m_useXboxController) || Input.GetKeyUp(KeyCode.Mouse0))
             {
                 
                 m_holdingBall = false;
@@ -241,8 +155,7 @@ public class Player : MonoBehaviour
         // If a ball is being held and space bar is pushed, run the throw coroutine
         if (m_holdingBall && m_ball != null)
         {
-            Debug.Log("Holding Ball");
-            if (!m_onCoolDown && (Input.GetKey(KeyCode.Space) || Input.GetButton("Left Bumper")))
+            if (!m_onCoolDown && (Input.GetKey(KeyCode.Space) || Input.GetAxis("Left Trigger") > 0))
             {
                 Debug.Log("Thrown the ball");
                 Debug.Log(m_onCoolDown);
@@ -263,7 +176,7 @@ public class Player : MonoBehaviour
         m_onCoolDown = true;
         var rb = m_ball.GetComponent<Rigidbody>();
         rb.velocity = Vector3.zero;        
-        var force = m_lastLookDirection.normalized * m_throwStrength;
+        var force = transform.forward * m_throwStrength;
         
         rb.AddForce(force,ForceMode.Impulse);
 
@@ -272,5 +185,18 @@ public class Player : MonoBehaviour
         m_holdingBall = false;
 
         m_onCoolDown = false;
+    }
+
+    IEnumerator Dash()
+    {
+            Debug.Log("Dash");
+            var x = 1.15f;
+            m_moveSpeed_Xbox *= x;
+            yield return new WaitForSeconds(.15f);
+            m_moveSpeed_Xbox /= x;
+            m_dashCooldown = true;
+
+            yield return new WaitForSeconds(1f);
+            m_dashCooldown = false;
     }
 }
