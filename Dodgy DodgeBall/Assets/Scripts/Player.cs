@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
     public GameObject m_hand = null;
     public GameObject m_catchRange = null;
 
-    private float m_speedMultiplier = 20f;
+    //private float m_speedMultiplier = 20f;
     private bool m_holdingBall = false;
     private GameObject m_ball = null;
     private Rigidbody m_rb = null;
@@ -39,6 +39,8 @@ public class Player : MonoBehaviour
     // Xbox Controller Settings
     [Header("Xbox Movement")]
     public bool m_useXboxController;
+    public int m_PlayerControllerNumber;
+
     // Changes the character speed for keyboard and controller at the moment
     public float m_moveSpeed_Xbox;
     private Vector3 m_moveInput_Xbox;
@@ -47,11 +49,9 @@ public class Player : MonoBehaviour
     [Header("Keyboard & Mouse Movement")]
     private Camera m_mainCamera;
 
-
     //Renderer 
     [Header("Renderer's")]
     public Renderer rightTriggerSphere;
-
 
     public void Start()
     {
@@ -104,25 +104,24 @@ public class Player : MonoBehaviour
                 This movement works if you only want one type selected (E.g. only controller moving the character if ticked in public bool)
             */
             //Left Stick Movement
-            m_moveInput_Xbox = new Vector3(Input.GetAxisRaw("HorizontalJoyStick"), 0f, Input.GetAxisRaw("VerticalJoyStick"));
+            m_moveInput_Xbox = new Vector3(Input.GetAxisRaw("P" + m_PlayerControllerNumber + " HorizontalJoyStick"), 0f, Input.GetAxisRaw("P" + m_PlayerControllerNumber + " VerticalJoyStick"));
             moveVelocity = m_moveInput_Xbox * m_moveSpeed_Xbox;
 
             //Right Stick Rotation
-            Vector3 playerDirection = Vector3.right * Input.GetAxisRaw("RHorizontal") + Vector3.forward * Input.GetAxisRaw("RVertical");
+            Vector3 playerDirection = Vector3.right * Input.GetAxisRaw("P" + m_PlayerControllerNumber + " HorizontalRightJoystick") + Vector3.forward * Input.GetAxisRaw("P" + m_PlayerControllerNumber + " VerticalRightJoystick");
             if (playerDirection.sqrMagnitude > 0.0f)
             {
                 transform.rotation = Quaternion.LookRotation(playerDirection, Vector3.up);
                 m_lastLookDirection = playerDirection - transform.position;
             }
         }
-
         m_rb.velocity = moveVelocity * Time.fixedDeltaTime * 50.0f;
     }
 
     public void Update()
     {
 
-        if((Input.GetKeyDown(KeyCode.LeftAlt) || Input.GetButton("A Button")) && !m_dashCooldown)
+        if((Input.GetKeyDown(KeyCode.LeftAlt) || Input.GetButton("P" + m_PlayerControllerNumber + " Right Bumper")) && !m_dashCooldown)
         {
             StartCoroutine(Dash());
         }
@@ -136,13 +135,13 @@ public class Player : MonoBehaviour
         */
         if (m_ball != null && !m_onCoolDown)
         {
-            if ((Input.GetAxis("Right Trigger") > 0 && m_useXboxController) || Input.GetKey(KeyCode.Mouse0))
+            if ((Input.GetAxis("P" + m_PlayerControllerNumber + " Right Trigger") > 0 && m_useXboxController) || Input.GetKey(KeyCode.Mouse0))
             {
                 m_ball.gameObject.transform.position = m_hand.transform.position;
                 m_ball.gameObject.transform.rotation = m_hand.transform.rotation;
                 //Debug.Log("Right Bumper");
             }
-            if ((Input.GetAxis("Right Trigger") == 0 && m_useXboxController) || Input.GetKeyUp(KeyCode.Mouse0))
+            if ((Input.GetAxis("P" + m_PlayerControllerNumber + " Right Trigger") == 0 && m_useXboxController) || Input.GetKeyUp(KeyCode.Mouse0))
             {
                 
                 m_holdingBall = false;
@@ -155,7 +154,7 @@ public class Player : MonoBehaviour
         // If a ball is being held and space bar is pushed, run the throw coroutine
         if (m_holdingBall && m_ball != null)
         {
-            if (!m_onCoolDown && (Input.GetKey(KeyCode.Space) || Input.GetAxis("Left Trigger") > 0))
+            if (!m_onCoolDown && (Input.GetKey(KeyCode.Space) || Input.GetAxis("P" + m_PlayerControllerNumber + " Left Trigger") > 0))
             {
                 Debug.Log("Thrown the ball");
                 Debug.Log(m_onCoolDown);
@@ -190,7 +189,7 @@ public class Player : MonoBehaviour
     IEnumerator Dash()
     {
             Debug.Log("Dash");
-            var x = 1.15f;
+            var x = 1.20f;
             m_moveSpeed_Xbox *= x;
             yield return new WaitForSeconds(.15f);
             m_moveSpeed_Xbox /= x;
