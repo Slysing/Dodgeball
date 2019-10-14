@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 
 ///<summary>
@@ -27,6 +28,7 @@ public class Player : MonoBehaviour
     public float m_throwStrength = 5f;
     public GameObject m_hand = null;
     public GameObject m_catchRange = null;
+    private Animator m_animator = null;
 
     private float m_speedMultiplier = 20f;
     private bool m_holdingBall = false;
@@ -62,6 +64,7 @@ public class Player : MonoBehaviour
         {
             m_hand = transform.gameObject;
         }
+        m_animator = GetComponent<Animator>();
     }
 
     // Fixed update is general used for anything physics related
@@ -125,6 +128,7 @@ public class Player : MonoBehaviour
         if((Input.GetKeyDown(KeyCode.LeftAlt) || Input.GetButton("A Button")) && !m_dashCooldown)
         {
             StartCoroutine(Dash());
+
         }
         //Input Manager
         //float rightTrigger = Input.GetAxis("Right Trigger");
@@ -192,6 +196,10 @@ public class Player : MonoBehaviour
             var x = 150.0f * Time.deltaTime;
             Debug.Log(x);
             m_moveSpeed_Xbox *= x;
+            if(m_animator != null)
+            {
+                m_animator.SetTrigger("Dash");
+            }
             yield return new WaitForSeconds(.15f);
             m_moveSpeed_Xbox /= x;
             m_dashCooldown = true;
