@@ -15,12 +15,12 @@ public class ButtonMananger : MonoBehaviour
 {
 
     [SerializeField] GameObject[] buttons;
-    
+
     // Update is called once per frame
     void Update()
     {
         //Iterates through the array of buttons changing the color of the "highlighted" color variable giving the chaging color effect 
-        foreach (GameObject button in buttons) 
+        foreach (GameObject button in buttons)
         {
             Button currentButton = button.GetComponent<Button>();
             ColorBlock cb = currentButton.colors;
@@ -28,4 +28,5 @@ public class ButtonMananger : MonoBehaviour
             currentButton.colors = cb;
         }
     }
+}
     

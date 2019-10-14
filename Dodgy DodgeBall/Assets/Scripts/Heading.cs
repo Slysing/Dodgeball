@@ -12,7 +12,8 @@ using UnityEngine.UI;
 /// 
 public class Heading : MonoBehaviour
 {
-    
+    public Image HeadingImage;
+
     float TimeLeft;
     Color TargetColour; 
     
