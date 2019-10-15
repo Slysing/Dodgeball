@@ -29,7 +29,9 @@ public class BallManager : MonoBehaviour
             m_ballPool.Add(newBall);
         }
         if(m_active)
-            StartCoroutine(BallSpawner());
+        {
+         StartCoroutine("BallSpawner");
+        }
     }
 
     // Update is called once per frame
@@ -37,11 +39,11 @@ public class BallManager : MonoBehaviour
     {
         if(!m_active && m_isSpawning)
         {
-            StopCoroutine(BallSpawner());
+            StopCoroutine("BallSpawner");
         }
         else if(m_active && !m_isSpawning)
         {
-            StartCoroutine(BallSpawner());
+            StartCoroutine("BallSpawner");
         }
 
         if(Input.GetKeyDown(KeyCode.P))
@@ -50,6 +52,7 @@ public class BallManager : MonoBehaviour
         }
     }
 
+    // removes specific ball and reorganises the pool
     void RemoveBall(GameObject ball)
     {
         ball.SetActive(false);
@@ -71,6 +74,19 @@ public class BallManager : MonoBehaviour
         }
     }
 
+    public void ResetBalls()
+    {
+        foreach(GameObject ball in m_ballPool)
+        {
+            ball.SetActive(false);
+            ball.transform.position = m_ballPoolPosition;
+            ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        }
+        m_currentBallCount = 0;
+        StopCoroutine("BallSpawner");
+        StartCoroutine("BallSpawner");
+    }
+
     // ball spawner will spawn a set of balls every m_spawnInterval and only spawn if there is no player or ball in the way
     // instead of instantiating and destroy setup an object pool
     IEnumerator BallSpawner()
@@ -78,15 +94,19 @@ public class BallManager : MonoBehaviour
         m_isSpawning = true;
         while(true)
         {
+            // loops through all the spawn points
             foreach(var point in m_spawnPoints)
             {
+                // activates the ball
                 var tempBall = m_ballPool[m_currentBallCount];
                 tempBall.SetActive(true);
                 tempBall.transform.position = point.transform.position;
                 m_currentBallCount++;
 
+                // Checks if there is already a ball or player
+                // on the spawn point
                 var colliders = Physics.OverlapSphere(point.transform.position,.5f);
-                int ballCount = 0;
+                int ballCount = 0; // used to grab whats inside the sphere
                 foreach(var obj in colliders)
                 {
                     if(obj.gameObject.layer == 9)
@@ -99,6 +119,7 @@ public class BallManager : MonoBehaviour
                     }
                 }
 
+                // sends the ball back to the pool
                 if(ballCount > 1)
                 {
                     tempBall.transform.position = m_ballPoolPosition;
@@ -108,6 +129,15 @@ public class BallManager : MonoBehaviour
             }
             for(int i = m_spawnInterval; i > 0; i--)
             {
+                // if the game is in a paused state then this will run
+                // basically resuming the corroutine every 1 second
+                // to check if the game has started yet
+                if(!RoundManager.m_isPlaying)
+                {
+                    i++;
+                    yield return new WaitForSeconds(1f);
+                    continue;
+                }
                 Debug.Log(i);
                 yield return new WaitForSeconds(1f);
             }
@@ -118,7 +148,6 @@ public class BallManager : MonoBehaviour
             }
         }
     }
-
 
     void OnDrawGizmos()
     {
