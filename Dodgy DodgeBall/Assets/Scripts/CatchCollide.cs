@@ -46,7 +46,7 @@ public class CatchCollide : MonoBehaviour
             m_player.GetComponent<Player>().SetBall(other.gameObject);
             //Debug.Log("SetBall");
 
-            if (Input.GetKeyDown(KeyCode.Space) || Input.GetAxis("P" + m_pNumber + " Left Trigger") > 0)
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetAxis("P" + m_pNumber + " Right Trigger") == 0)
             { 
                 m_lastBall = other.gameObject;
                 StartCoroutine(cooldown());

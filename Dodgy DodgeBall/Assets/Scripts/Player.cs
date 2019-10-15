@@ -121,7 +121,7 @@ public class Player : MonoBehaviour
     public void Update()
     {
 
-        if((Input.GetKeyDown(KeyCode.LeftAlt) || Input.GetButton("P" + m_PlayerControllerNumber + " Right Bumper")) && !m_dashCooldown)
+        if((Input.GetKeyDown(KeyCode.F) || Input.GetAxis("P" + m_PlayerControllerNumber + " Left Trigger") > 0) && !m_dashCooldown)
         {
             StartCoroutine(Dash());
         }
@@ -139,28 +139,33 @@ public class Player : MonoBehaviour
             {
                 m_ball.gameObject.transform.position = m_hand.transform.position;
                 m_ball.gameObject.transform.rotation = m_hand.transform.rotation;
+
+                //m_moveSpeed_Xbox /= 2;
                 //Debug.Log("Right Bumper");
             }
             if ((Input.GetAxis("P" + m_PlayerControllerNumber + " Right Trigger") == 0 && m_useXboxController) || Input.GetKeyUp(KeyCode.Mouse0))
             {
                 
-                m_holdingBall = false;
-                m_ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
-                m_ball = null;
+                //m_holdingBall = false;
+                //m_ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                //m_ball = null;
+
+                //if (!m_onCoolDown && (Input.GetKey(KeyCode.Space) || Input.GetAxis("P" + m_PlayerControllerNumber + " Left Trigger") > 0))
+                //{
+                    Debug.Log("Thrown the ball");
+                    Debug.Log(m_onCoolDown);
+                    StartCoroutine(Throw());
+
+                //}
                 //Debug.Log("Right Bumper | Button Up");
             }
         }
 
         // If a ball is being held and space bar is pushed, run the throw coroutine
-        if (m_holdingBall && m_ball != null)
-        {
-            if (!m_onCoolDown && (Input.GetKey(KeyCode.Space) || Input.GetAxis("P" + m_PlayerControllerNumber + " Left Trigger") > 0))
-            {
-                Debug.Log("Thrown the ball");
-                Debug.Log(m_onCoolDown);
-                StartCoroutine(Throw());
-            }
-        }
+        //if (m_holdingBall && m_ball != null)
+        //{
+            
+        //}
     }  
 
     public void SetBall(GameObject ball)
