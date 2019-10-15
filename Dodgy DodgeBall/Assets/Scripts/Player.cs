@@ -19,6 +19,9 @@ public enum PLAYER_STATE
 
 public class Player : MonoBehaviour
 {
+    [Header("Stats")]
+    public bool m_isAlive = true;
+    
     [Header("Movement")]
     public float m_speed = 5f;
 
@@ -168,6 +171,15 @@ public class Player : MonoBehaviour
         //}
     }  
 
+    public void OnCollisionEnter(Collision collider)
+    {
+        if(collider.gameObject.layer == 9)
+        {
+            m_isAlive = false;   
+            gameObject.SetActive(false);
+        }
+    }
+    
     public void SetBall(GameObject ball)
     {
             m_ball = ball;
