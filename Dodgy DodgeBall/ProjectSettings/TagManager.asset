@@ -4,7 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Ball
+  - Blue Ball
+  - Neutral Ball
+  - Red Ball
+  - Red Team
+  - Blue Team
   layers:
   - Default
   - TransparentFX
