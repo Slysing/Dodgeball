@@ -48,7 +48,7 @@ public class CatchCollide : MonoBehaviour
 
         if(other.tag == "Neutral Ball")
         {
-            if(m_isRedTeam && !m_isRedTeam)
+            if(m_isRedTeam || !m_isRedTeam)
             {
                 // other.gameObject.layer == 9 && 
                 if (Input.GetKey(KeyCode.Mouse0) || (1.21f * (1.0f - XCI.GetAxis(XboxAxis.RightTrigger, controller)) > 0))
