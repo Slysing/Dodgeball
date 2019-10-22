@@ -76,6 +76,7 @@ public class Player : MonoBehaviour
 
     // Ball
     public float m_timeLeft;
+    public bool m_dropCooldown;
 
 
     // Players Instantiate
@@ -379,7 +380,9 @@ public class Player : MonoBehaviour
 
     IEnumerator WaitPickUp()
     {
+        m_dropCooldown = true;
         yield return new WaitForSeconds(2.5f);
+        m_dropCooldown = false;
     }
 
     void OnDrawGizmos()
