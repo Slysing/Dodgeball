@@ -80,12 +80,6 @@ public class CatchCollide : MonoBehaviour
                         Debug.Log("Now a Red ball");
                     }
 
-                    
-
-                    
-
-
-
                     if (Input.GetKeyDown(KeyCode.Space) || XCI.GetAxis(XboxAxis.RightTrigger, m_controller) == 0)
                     {
                         m_lastBall = other.gameObject;
