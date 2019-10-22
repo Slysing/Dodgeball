@@ -74,6 +74,9 @@ public class Player : MonoBehaviour
     [Header("Keyboard & Mouse Movement")]
     private Camera m_mainCamera;
 
+    // Ball
+    public float m_timeLeft;
+
 
     // Players Instantiate
     //GameObject m_P1RedTeam;
@@ -85,6 +88,7 @@ public class Player : MonoBehaviour
 
     public void Start()
     {
+        m_timeLeft = 0.0f;
         //m_P1RedTeam = GameObject.FindWithTag("Red Team");
         //m_P2RedTeam = GameObject.FindWithTag("Red Team");
 
@@ -212,6 +216,16 @@ public class Player : MonoBehaviour
 
     public void Update()
     {
+        if (m_holdingBall == true)
+        {
+            m_timeLeft += Time.deltaTime;
+        }
+        else
+        {
+            m_timeLeft = 0.0f;
+        }
+        
+
 
         if ((Input.GetKeyDown(KeyCode.Space) || XCI.GetAxis(XboxAxis.LeftTrigger, m_controller) > 0) && !m_dashCooldown)
         {
@@ -310,6 +324,27 @@ public class Player : MonoBehaviour
     {
             m_ball = ball;
             m_holdingBall = true;
+
+        if (m_holdingBall == true)
+        {
+            if (m_timeLeft > 5)
+            {
+                m_ball = null;
+                m_holdingBall = false;
+                m_onCoolDown = false;
+                Debug.Log("5 seconds");
+
+                ball.tag = "Neutral Ball";
+                ball.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.green);
+                if (ball.tag == "Green Ball")
+                {
+                    Debug.Log("Now a Neutral ball");
+                }
+
+                StartCoroutine(WaitPickUp());
+
+            }
+        }
     }
 
     // Thowing function with a cooldown
@@ -340,6 +375,11 @@ public class Player : MonoBehaviour
 
             yield return new WaitForSeconds(1f);
             m_dashCooldown = false;
+    }
+
+    IEnumerator WaitPickUp()
+    {
+        yield return new WaitForSeconds(2.5f);
     }
 
     void OnDrawGizmos()
