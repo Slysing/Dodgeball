@@ -8,7 +8,7 @@ using XboxCtrlrInput;
 /// Description: Handles the movement/catch of a player (With keyboard and Controller)
 /// Authors Boran Baykan, Leith Merrifield
 /// Creation Date: 07/10/2019
-/// Modified: 09/10/2019
+/// Modified: 23/10/2019
 ///</summary>
 
 public enum PLAYER_STATE
@@ -19,20 +19,28 @@ public enum PLAYER_STATE
     PLAYER_HOLDING
 }
 
+public enum PLAYER_TEAM
+{
+    TEAM_BLUE,
+    TEAM_RED
+}
+
 public class Player : MonoBehaviour
 {
     [Header("Stats")]
     public bool m_isAlive = true;
-    public bool m_isRedTeam;
-    
+    public PLAYER_TEAM m_currentTeam;
+
     [Header("Movement")]
     public float m_speed = 5f;
+    public float m_dashMultiplier = 1.5f;
 
     [Header("Catch and Throw")]
     public float m_pickupRadius = 5f;
     public float m_throwStrength = 5f;
     public GameObject m_hand = null;
     public GameObject m_catchRange = null;
+    public GameObject m_fakeBallCollider = null;
 
     //private float m_speedMultiplier = 20f;
     private bool m_holdingBall = false;
@@ -41,16 +49,6 @@ public class Player : MonoBehaviour
     private Vector3 m_lastLookDirection = Vector3.forward;
     private bool m_onCoolDown = false;
     private bool m_dashCooldown = false;
-
-    // Xbox Controller Settings
-    //[Header("Xbox Movement")]
-    //public bool m_useXboxController;
-    //public int m_PlayerControllerNumber;
-
-    // Changes the character speed for keyboard and controller at the moment
-    //public float m_moveSpeed_Xbox;
-    //private Vector3 m_moveInput_Xbox;
-
     
     // New Xbox Movement Input
     [Header("New Xbox Movement")]
@@ -85,7 +83,6 @@ public class Player : MonoBehaviour
 
     //GameObject m_P1BlueTeam;
     //GameObject m_P2BlueTeam;
-
 
     public void Start()
     {
@@ -154,7 +151,6 @@ public class Player : MonoBehaviour
             Vector3 moveInput = new Vector3(h, 0f, v);
             moveVelocity = moveInput * m_moveSpeed_Xbox;
 
-            // Leith's Code // - Mouse movement for direction 
             /*
                 Casts to from the mouse position to an object
                 if hit then grab that position and create a direction vector
@@ -219,132 +215,77 @@ public class Player : MonoBehaviour
     {
         if (m_holdingBall == true)
         {
+            m_fakeBallCollider.SetActive(true);
             m_timeLeft += Time.deltaTime;
         }
         else
         {
+            m_fakeBallCollider.SetActive(false);
             m_timeLeft = 0.0f;
         }
-        
-
 
         if ((Input.GetKeyDown(KeyCode.Space) || XCI.GetAxis(XboxAxis.LeftTrigger, m_controller) > 0) && !m_dashCooldown)
         {
             StartCoroutine(Dash());
         }
-        //Input Manager
-        //float rightTrigger = Input.GetAxis("Right Trigger");
-        // Changes the colour of a ball by pressing right trigger [ RT ] ---TESTING PURPOSE---
-        //rightTriggerSphere.material.color = new Color(rightTrigger, rightTrigger, rightTrigger, rightTrigger);
+
         /*
          Only runs if a ball is being held and cooldown is off
          Used to continually change the ball position when the player moves or rotates
         */
         if (m_ball != null && !m_onCoolDown)
         {
-            if ((m_MaxTriggerScale * (1.0f - XCI.GetAxis(XboxAxis.RightTrigger, m_controller)) > 0 && m_useXboxController) || Input.GetKey(KeyCode.Mouse0))
+            m_ball.gameObject.transform.position = m_hand.transform.position;
+            m_ball.gameObject.transform.rotation = m_hand.transform.rotation;
+
+            if ((XCI.GetAxis(XboxAxis.RightTrigger, m_controller) > 0 && m_useXboxController) || Input.GetKeyUp(KeyCode.Mouse0))
             {
-                m_ball.gameObject.transform.position = m_hand.transform.position;
-                m_ball.gameObject.transform.rotation = m_hand.transform.rotation;
-
-                //m_moveSpeed_Xbox /= 2;
-                //Debug.Log("Right Bumper");
-            }
-            if ((m_MaxTriggerScale * (1.0f - XCI.GetAxis(XboxAxis.RightTrigger, m_controller)) == 0 && m_useXboxController) || Input.GetKeyUp(KeyCode.Mouse0))
-            {
-
-                //m_holdingBall = false;
-                //m_ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
-                //m_ball = null;
-
-                //if (!m_onCoolDown && (Input.GetKey(KeyCode.Space) || Input.GetAxis("P" + m_PlayerControllerNumber + " Left Trigger") > 0))
-                //{
                 Debug.Log("Thrown the ball");
                 Debug.Log(m_onCoolDown);
                 StartCoroutine(Throw());
-
-                //}
-                //Debug.Log("Right Bumper | Button Up");
             }
         }
-
-        // If a ball is being held and space bar is pushed, run the throw coroutine
-        //if (m_holdingBall && m_ball != null)
-        //{
-
-        //}
     }  
 
     public void OnCollisionEnter(Collision collider)
     {
-        if (m_isRedTeam)
+        switch(collider.gameObject.tag)
         {
-            if (collider.gameObject.tag == "Blue Ball")
-            {
-                m_isAlive = false;
-                gameObject.SetActive(false);
-            }
+            case "Blue Ball":
+                BallCollide(PLAYER_TEAM.TEAM_BLUE);
+                break;
+            case "Red Ball":
+                BallCollide(PLAYER_TEAM.TEAM_RED);
+                break;
         }
-        else
-        {
-            if (collider.gameObject.tag == "Red Ball")
-            {
-                m_isAlive = false;
-                gameObject.SetActive(false);
-            }
-        }
-
-        //switch(collider.gameObject.tag)
-        //{
-        //    case "Red Team":
-        //        if (collider.gameObject.tag == "Blue Ball")
-        //        {
-        //            m_isAlive = false;
-        //            gameObject.SetActive(false);
-        //        }
-        //        break;
-
-        //    case "Blue Team":
-        //        if (collider.gameObject.tag == "Red Ball")
-        //        {
-        //            m_isAlive = false;
-        //            gameObject.SetActive(false);
-        //        }
-        //        break;
-        //}
-
-
-        //if (collider.gameObject.layer == 9 || collider.gameObject.tag == "Neutral Ball")
-        //{
-        //    m_isAlive = false;   
-        //    gameObject.SetActive(false);
-        //}
     }
-    
+
+    void BallCollide(PLAYER_TEAM team)
+    {
+        if(team != m_currentTeam)
+        {
+            m_isAlive = false;
+            gameObject.SetActive(false);
+        }
+    }
+
     public void SetBall(GameObject ball)
     {
             m_ball = ball;
             m_holdingBall = true;
 
-        if (m_holdingBall == true)
+        if (m_timeLeft > 5)
         {
-            if (m_timeLeft > 5)
-            {
-                m_ball = null;
-                m_holdingBall = false;
-                m_onCoolDown = false;
-                Debug.Log("5 seconds");
+            m_ball = null;
+            m_holdingBall = false;
+            m_onCoolDown = false;
+            Debug.Log("5 seconds");
 
-                ball.tag = "Neutral Ball";
-                ball.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.green);
-                if (ball.tag == "Green Ball")
-                {
-                    Debug.Log("Now a Neutral ball");
-                }
+            ball.tag = "Neutral Ball";
+            ball.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.green);
+            Debug.Log("Now a Neutral ball");
 
-                StartCoroutine(WaitPickUp());
-
-            }
+            StartCoroutine(WaitPickUp());
         }
     }
 
@@ -368,10 +309,11 @@ public class Player : MonoBehaviour
     IEnumerator Dash()
     {
             Debug.Log("Dash");
-            var x = 1.20f;
-            m_moveSpeed_Xbox *= x;
+            var speed = m_dashMultiplier * Time.deltaTime * 100.0f;
+            print("Dash Speed: " + speed);
+            m_moveSpeed_Xbox *= speed;
             yield return new WaitForSeconds(.15f);
-            m_moveSpeed_Xbox /= x;
+            m_moveSpeed_Xbox /= speed;
             m_dashCooldown = true;
 
             yield return new WaitForSeconds(1f);

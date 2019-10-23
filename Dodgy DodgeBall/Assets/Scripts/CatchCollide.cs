@@ -17,16 +17,11 @@ public class CatchCollide : MonoBehaviour
     private GameObject m_lastBall = null;
     private bool m_cooldown = false;
 
-    
     public bool m_countDown = false;
-
     public XboxController m_controller;
-
-    public bool m_isRedTeam;
-
-
-    //public const float m_Max_Trigger_Scale;
-    //public int m_PlayerControllerNumber;
+    public PLAYER_TEAM m_team;
+    
+    private Color m_testColour = Color.green;
 
     void Start()
     {
@@ -42,116 +37,51 @@ public class CatchCollide : MonoBehaviour
     public void Update()
     {
 
-        m_isRedTeam = gameObject.transform.parent.GetComponent<Player>().m_isRedTeam;
+        m_team = gameObject.transform.parent.GetComponent<Player>().m_currentTeam;
     }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        
-    }
-
 
     // When an object is colliding with the catch range
     void OnTriggerStay(Collider other)
     {
         if (m_cooldown)
             return;
-
-
-        if(other.tag == "Neutral Ball")
+        if(other.tag == "Red Ball" ||
+           other.tag == "Blue Ball" ||
+           other.tag == "Neutral Ball")
         {
-            if(m_isRedTeam)
+            // Set timer from 0 seconds upto 5 seconds then set the ball back to Neutral and Have the ball leave the collider
+            
+
+            MeshRenderer ballMesh = other.GetComponent<MeshRenderer>();
+            // sets the ball's team accordinly and if the ball is of the opposing colour dont pick up
+            switch(m_team)
             {
-                // other.gameObject.layer == 9 && 
-                if (Input.GetKey(KeyCode.Mouse0) || (1.21f * (1.0f - XCI.GetAxis(XboxAxis.RightTrigger, m_controller)) > 0))
-                {
-                    // Set timer from 0 seconds upto 5 seconds then set the ball back to Neutral and Have the ball leave the collider
-                    
-
-                    //Debug.Log("SetBall");
-                    m_player.GetComponent<Player>().SetBall(other.gameObject);
-
-
-                    // Sets the Neutral colour ball to red
-                    other.tag = "Red Ball";
-                    other.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.red);
-                    if (other.tag == "Red Ball")
-                    {
-                        Debug.Log("Now a Red ball");
-                    }
-
-                    if (Input.GetKeyDown(KeyCode.Space) || XCI.GetAxis(XboxAxis.RightTrigger, m_controller) == 0)
-                    {
-                        m_lastBall = other.gameObject;
-                        StartCoroutine(cooldown());
-                    }
-                }
-            }
-        }
-        if (other.tag == "Neutral Ball")
-        {
-            if (!m_isRedTeam)
-            {
-                // other.gameObject.layer == 9 && 
-                if (Input.GetKey(KeyCode.Mouse0) || (1.21f * (1.0f - XCI.GetAxis(XboxAxis.RightTrigger, m_controller)) > 0))
-                {
-                    //Debug.Log("SetBall");
-                    m_player.GetComponent<Player>().SetBall(other.gameObject);
-
-                    // Sets the Neutral colour ball to blue
+                case PLAYER_TEAM.TEAM_BLUE:
+                    if(other.tag == "Red Ball")
+                        return;
                     other.tag = "Blue Ball";
-                    other.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.blue);
-                    if (other.tag == "Blue Ball")
-                    {
-                        Debug.Log("Now a Blue ball");
-                    }
+                    m_testColour = Color.blue;
+                    break;
+                case PLAYER_TEAM.TEAM_RED:
+                    if(other.tag == "Blue Ball")
+                        return;
+                    other.tag = "Red Ball";
+                    m_testColour = Color.red;
+                    break;
+            }            
+            
+            // checks the colour and sets if the colour is different
+            // prevents setting the colour every loop
+            if(ballMesh.material.color != m_testColour)
+                ballMesh.material.color = m_testColour;
 
-                    
+            m_player.GetComponent<Player>().SetBall(other.gameObject);
 
-                    if (Input.GetKeyDown(KeyCode.Space) || XCI.GetAxis(XboxAxis.RightTrigger, m_controller) == 0)
-                    {
-                        m_lastBall = other.gameObject;
-                        StartCoroutine(cooldown());
-                    }
-                }
-            }
-        }
-        if (other.tag == "Red Ball")
-        {
-            if (m_isRedTeam)
+            //Debug.Log("Now a " + other.tag);
+            if (Input.GetKeyDown(KeyCode.Space) || XCI.GetAxis(XboxAxis.RightTrigger, m_controller) == 0)
             {
-                // other.gameObject.layer == 9 && 
-                if (Input.GetKey(KeyCode.Mouse0) || (1.21f * (1.0f - XCI.GetAxis(XboxAxis.RightTrigger, m_controller)) > 0))
-                {
-                    //Debug.Log("SetBall");
-                    m_player.GetComponent<Player>().SetBall(other.gameObject);
-                    
-
-                    if (Input.GetKeyDown(KeyCode.Space) || XCI.GetAxis(XboxAxis.RightTrigger, m_controller) == 0)
-                    {
-                        m_lastBall = other.gameObject;
-                        StartCoroutine(cooldown());
-                    }
-                }
-            }
-        }
-        if (other.tag == "Blue Ball")
-        {
-            if (!m_isRedTeam)
-            {
-                // other.gameObject.layer == 9 && 
-                if (Input.GetKey(KeyCode.Mouse0) || (1.21f * (1.0f - XCI.GetAxis(XboxAxis.RightTrigger, m_controller)) > 0))
-                {
-                    //Debug.Log("SetBall");
-                    m_player.GetComponent<Player>().SetBall(other.gameObject);
-                    
-
-                    if (Input.GetKeyDown(KeyCode.Space) || XCI.GetAxis(XboxAxis.RightTrigger, m_controller) == 0)
-                    {
-                        m_lastBall = other.gameObject;
-                        StartCoroutine(cooldown());
-                    }
-                }
+                m_lastBall = other.gameObject;
+                StartCoroutine(cooldown());
             }
         }
     }

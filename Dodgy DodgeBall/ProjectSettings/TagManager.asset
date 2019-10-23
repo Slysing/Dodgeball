@@ -9,6 +9,7 @@ TagManager:
   - Red Ball
   - Red Team
   - Blue Team
+  - Invisible Ball
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - 
   - PostProcessing
   - Ball
-  - 
+  - Invisible Ball
   - 
   - 
   - 

@@ -219,16 +219,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player 2 - Blue Team
       objectReference: {fileID: 0}
-    - target: {fileID: 819858825295999710, guid: 9904e6212565c044190526cd2d667547,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 819858825295999710, guid: 9904e6212565c044190526cd2d667547,
-        type: 3}
-      propertyPath: m_TagString
-      value: Blue Team
-      objectReference: {fileID: 0}
     - target: {fileID: 819858825295999707, guid: 9904e6212565c044190526cd2d667547,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -284,76 +274,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2474799876827403039, guid: 9904e6212565c044190526cd2d667547,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2474799876825206237, guid: 9904e6212565c044190526cd2d667547,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2743571209736448484, guid: 9904e6212565c044190526cd2d667547,
-        type: 3}
-      propertyPath: m_useController
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2743571209736448484, guid: 9904e6212565c044190526cd2d667547,
-        type: 3}
-      propertyPath: moveSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2743571209736448484, guid: 9904e6212565c044190526cd2d667547,
-        type: 3}
-      propertyPath: m_moveSpeed_Xbox
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 2743571209736448484, guid: 9904e6212565c044190526cd2d667547,
-        type: 3}
-      propertyPath: m_useXboxController
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2743571209736448484, guid: 9904e6212565c044190526cd2d667547,
-        type: 3}
-      propertyPath: rightTriggerSphere
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2743571209736448484, guid: 9904e6212565c044190526cd2d667547,
-        type: 3}
-      propertyPath: m_PlayerControllerNumber
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2743571209736448484, guid: 9904e6212565c044190526cd2d667547,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2743571209736448484, guid: 9904e6212565c044190526cd2d667547,
-        type: 3}
-      propertyPath: controller
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2743571209736448484, guid: 9904e6212565c044190526cd2d667547,
-        type: 3}
-      propertyPath: matRed
-      value: 
-      objectReference: {fileID: 2100000, guid: 2ec82251ace17c8479adbae797aa6658, type: 2}
-    - target: {fileID: 2743571209736448484, guid: 9904e6212565c044190526cd2d667547,
-        type: 3}
-      propertyPath: matGreen
-      value: 
-      objectReference: {fileID: 2100000, guid: c8f5dc41f6ba0af45a8f799631c4aa15, type: 2}
-    - target: {fileID: 2743571209736448484, guid: 9904e6212565c044190526cd2d667547,
-        type: 3}
-      propertyPath: matBlue
-      value: 
-      objectReference: {fileID: 2100000, guid: 4a2f7808cff707241825f2a82aee31e1, type: 2}
-    - target: {fileID: 2743571209736448484, guid: 9904e6212565c044190526cd2d667547,
-        type: 3}
-      propertyPath: matYellow
-      value: 
-      objectReference: {fileID: 2100000, guid: 00858e47c1a5a784d9a5e942f1721063, type: 2}
     - target: {fileID: 2743571209736448484, guid: 9904e6212565c044190526cd2d667547,
         type: 3}
       propertyPath: m_controller
@@ -361,49 +281,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2743571209736448484, guid: 9904e6212565c044190526cd2d667547,
         type: 3}
-      propertyPath: m_throwStrength
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 819858825295999711, guid: 9904e6212565c044190526cd2d667547,
-        type: 3}
-      propertyPath: m_UseGravity
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 819858825295999711, guid: 9904e6212565c044190526cd2d667547,
-        type: 3}
-      propertyPath: m_CollisionDetection
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 819858825295999711, guid: 9904e6212565c044190526cd2d667547,
-        type: 3}
-      propertyPath: m_Interpolate
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 819858825295999711, guid: 9904e6212565c044190526cd2d667547,
-        type: 3}
-      propertyPath: m_IsKinematic
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 819858825295999704, guid: 9904e6212565c044190526cd2d667547,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
+      propertyPath: m_fakeBallCollider
+      value: 
+      objectReference: {fileID: 1455095488}
     - target: {fileID: 819858825295999705, guid: 9904e6212565c044190526cd2d667547,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 1e76068f76d56034f9f4bbbc7bbf2425, type: 2}
-    - target: {fileID: 6315153751914743803, guid: 9904e6212565c044190526cd2d667547,
-        type: 3}
-      propertyPath: controller
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8121889671994656576, guid: 9904e6212565c044190526cd2d667547,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 1.3
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9904e6212565c044190526cd2d667547, type: 3}
 --- !u!1001 &127948886
@@ -495,6 +380,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6905558922265767037, guid: eee3cff9b0c2bc64e8c9526bd2d80fc3,
     type: 3}
   m_PrefabInstance: {fileID: 127948886}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &137354876 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1455095488, guid: 9904e6212565c044190526cd2d667547,
+    type: 3}
+  m_PrefabInstance: {fileID: 819858824589734116}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &170076733
 GameObject:
@@ -667,7 +558,7 @@ PrefabInstance:
     - target: {fileID: 1748379444922619460, guid: 67964f784b6d663419f452a2881d22b5,
         type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2550458024253773178, guid: 67964f784b6d663419f452a2881d22b5,
         type: 3}
@@ -863,7 +754,7 @@ PrefabInstance:
     - target: {fileID: 1748379444922619460, guid: 67964f784b6d663419f452a2881d22b5,
         type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2550458024253773178, guid: 67964f784b6d663419f452a2881d22b5,
         type: 3}
@@ -1239,6 +1130,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 33442b9c472c1f04eb0c9bc977f6e379, type: 3}
+--- !u!1 &1455095488 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1455095488, guid: 9904e6212565c044190526cd2d667547,
+    type: 3}
+  m_PrefabInstance: {fileID: 110997325}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1842140063
 GameObject:
   m_ObjectHideFlags: 0
@@ -1405,16 +1302,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player 1 - Red Team
       objectReference: {fileID: 0}
-    - target: {fileID: 819858825295999710, guid: 9904e6212565c044190526cd2d667547,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 819858825295999710, guid: 9904e6212565c044190526cd2d667547,
-        type: 3}
-      propertyPath: m_TagString
-      value: Red Team
-      objectReference: {fileID: 0}
     - target: {fileID: 819858825295999707, guid: 9904e6212565c044190526cd2d667547,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1470,135 +1357,24 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2474799876827403039, guid: 9904e6212565c044190526cd2d667547,
+    - target: {fileID: 2743571209736448484, guid: 9904e6212565c044190526cd2d667547,
         type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2474799876825206237, guid: 9904e6212565c044190526cd2d667547,
-        type: 3}
-      propertyPath: m_Enabled
+      propertyPath: m_currentTeam
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2743571209736448484, guid: 9904e6212565c044190526cd2d667547,
         type: 3}
-      propertyPath: m_useController
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2743571209736448484, guid: 9904e6212565c044190526cd2d667547,
-        type: 3}
-      propertyPath: moveSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2743571209736448484, guid: 9904e6212565c044190526cd2d667547,
-        type: 3}
-      propertyPath: m_moveSpeed_Xbox
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 2743571209736448484, guid: 9904e6212565c044190526cd2d667547,
-        type: 3}
-      propertyPath: m_useXboxController
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2743571209736448484, guid: 9904e6212565c044190526cd2d667547,
-        type: 3}
-      propertyPath: rightTriggerSphere
+      propertyPath: m_fakeBallCollider
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2743571209736448484, guid: 9904e6212565c044190526cd2d667547,
-        type: 3}
-      propertyPath: m_PlayerControllerNumber
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2743571209736448484, guid: 9904e6212565c044190526cd2d667547,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2743571209736448484, guid: 9904e6212565c044190526cd2d667547,
-        type: 3}
-      propertyPath: controller
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2743571209736448484, guid: 9904e6212565c044190526cd2d667547,
-        type: 3}
-      propertyPath: matRed
-      value: 
-      objectReference: {fileID: 2100000, guid: 2ec82251ace17c8479adbae797aa6658, type: 2}
-    - target: {fileID: 2743571209736448484, guid: 9904e6212565c044190526cd2d667547,
-        type: 3}
-      propertyPath: matGreen
-      value: 
-      objectReference: {fileID: 2100000, guid: c8f5dc41f6ba0af45a8f799631c4aa15, type: 2}
-    - target: {fileID: 2743571209736448484, guid: 9904e6212565c044190526cd2d667547,
-        type: 3}
-      propertyPath: matBlue
-      value: 
-      objectReference: {fileID: 2100000, guid: 4a2f7808cff707241825f2a82aee31e1, type: 2}
-    - target: {fileID: 2743571209736448484, guid: 9904e6212565c044190526cd2d667547,
-        type: 3}
-      propertyPath: matYellow
-      value: 
-      objectReference: {fileID: 2100000, guid: 00858e47c1a5a784d9a5e942f1721063, type: 2}
-    - target: {fileID: 2743571209736448484, guid: 9904e6212565c044190526cd2d667547,
-        type: 3}
-      propertyPath: m_isRedTeam
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2743571209736448484, guid: 9904e6212565c044190526cd2d667547,
-        type: 3}
-      propertyPath: m_controller
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2743571209736448484, guid: 9904e6212565c044190526cd2d667547,
-        type: 3}
-      propertyPath: m_throwStrength
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 819858825295999711, guid: 9904e6212565c044190526cd2d667547,
-        type: 3}
-      propertyPath: m_UseGravity
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 819858825295999711, guid: 9904e6212565c044190526cd2d667547,
-        type: 3}
-      propertyPath: m_CollisionDetection
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 819858825295999711, guid: 9904e6212565c044190526cd2d667547,
-        type: 3}
-      propertyPath: m_Interpolate
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 819858825295999711, guid: 9904e6212565c044190526cd2d667547,
-        type: 3}
-      propertyPath: m_IsKinematic
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 819858825295999704, guid: 9904e6212565c044190526cd2d667547,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 137354876}
     - target: {fileID: 819858825295999705, guid: 9904e6212565c044190526cd2d667547,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 390f483c50667ec46a7511328343a916, type: 2}
-    - target: {fileID: 6315153751914743803, guid: 9904e6212565c044190526cd2d667547,
-        type: 3}
-      propertyPath: m_isRedTeam
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6315153751914743803, guid: 9904e6212565c044190526cd2d667547,
-        type: 3}
-      propertyPath: controller
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8121889671994656576, guid: 9904e6212565c044190526cd2d667547,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 1.3
+    - target: {fileID: 1455095488, guid: 9904e6212565c044190526cd2d667547, type: 3}
+      propertyPath: m_Name
+      value: Fake Ball
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9904e6212565c044190526cd2d667547, type: 3}
@@ -1644,7 +1420,7 @@ PrefabInstance:
     - target: {fileID: 1748379444922619460, guid: 67964f784b6d663419f452a2881d22b5,
         type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2550458024253773178, guid: 67964f784b6d663419f452a2881d22b5,
         type: 3}
