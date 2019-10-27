@@ -13,8 +13,13 @@ public class BallManager : MonoBehaviour
     private int m_currentBallCount = 0;
     private List<GameObject> m_ballPool = new List<GameObject>();
     private Vector3 m_ballPoolPosition = new Vector3(999f,999f,999f);
-    private int m_ballPoolSize = 100;
-    IEnumerator m_ballSpawner;
+    private int m_ballPoolSize = 200;
+
+    public Material m_redMaterial = null;
+    public Material m_blueMaterial = null;
+    public Material m_greenMaterial = null;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,7 +35,6 @@ public class BallManager : MonoBehaviour
         }
         if(m_active)
         {
-         m_ballSpawner = BallSpawner();
          StartCoroutine("BallSpawner");
         }
     }
@@ -40,11 +44,11 @@ public class BallManager : MonoBehaviour
     {
         if(!m_active && m_isSpawning)
         {
-            StopCoroutine(m_ballSpawner);
+            StopCoroutine("BallSpawner");
         }
         else if(m_active && !m_isSpawning)
         {
-            StartCoroutine(m_ballSpawner);
+            StartCoroutine("BallSpawner");
         }
 
         if(Input.GetKeyDown(KeyCode.P))
@@ -82,6 +86,8 @@ public class BallManager : MonoBehaviour
             ball.SetActive(false);
             ball.transform.position = m_ballPoolPosition;
             ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            ball.tag = "Neutral Ball";
+            ball.GetComponent<MeshRenderer>().material = m_greenMaterial;
         }
         m_currentBallCount = 0;
         StopCoroutine("BallSpawner");
@@ -110,7 +116,7 @@ public class BallManager : MonoBehaviour
                 int ballCount = 0; // used to grab whats inside the sphere
                 foreach(var obj in colliders)
                 {
-                    if(obj.gameObject.layer == 9)
+                    if(obj.tag == "Neutral Ball")
                     {
                         ballCount++;
                     }

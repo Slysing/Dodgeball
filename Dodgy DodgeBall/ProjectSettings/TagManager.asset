@@ -3,7 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - OptionsMenu
+  - MainMenu
+  - Neutral Ball
+  - Red Ball
+  - Blue Ball
+  - Red Team
+  - Blue Team
   layers:
   - Default
   - TransparentFX
@@ -14,8 +21,8 @@ TagManager:
   - 
   - 
   - PostProcessing
-  - 
-  - 
+  - Ball
+  - InvisBall
   - 
   - 
   - 

@@ -6,7 +6,8 @@ public class TeamManager : MonoBehaviour
 {
     public static List<GameObject> m_blueTeam = new List<GameObject>();
     public static List<GameObject> m_redTeam = new List<GameObject>();
-    public GameObject m_playerPrefab = null;
+    public GameObject m_redplayerPrefab = null;
+    public GameObject m_blueplayerPrefab = null;
     public List<GameObject> m_blueSpawns = new List<GameObject>();
     public List<GameObject> m_redSpawns = new List<GameObject>();
 
@@ -41,16 +42,16 @@ public class TeamManager : MonoBehaviour
         foreach(var player in m_blueTeam)
         {
             player.transform.position = m_blueSpawns[idx].transform.position;  
-            player.GetComponent<Player>().m_isAlive = true;
             player.SetActive(true);
+            player.GetComponent<Player>().ResetPlayer();
             idx++;
         }
         idx = 0;
         foreach(var player in m_redTeam)
         {
             player.transform.position = m_redSpawns[idx].transform.position;
-            player.GetComponent<Player>().m_isAlive = true;
             player.SetActive(true);
+            player.GetComponent<Player>().ResetPlayer();
             idx++;
         }
     }
@@ -58,14 +59,20 @@ public class TeamManager : MonoBehaviour
     void Start()
     {
         // This only here in place of a team select
-        m_blueTeam.Add(Instantiate(m_playerPrefab,m_blueSpawns[0].transform.position, Quaternion.identity));
-        m_blueTeam.Add(Instantiate(m_playerPrefab,m_blueSpawns[1].transform.position, Quaternion.identity));
-        m_redTeam.Add(Instantiate(m_playerPrefab,m_redSpawns[0].transform.position, Quaternion.identity));
-        m_redTeam.Add(Instantiate(m_playerPrefab,m_redSpawns[1].transform.position, Quaternion.identity));
+        m_blueTeam.Add(Instantiate(m_blueplayerPrefab,m_blueSpawns[0].transform.position, Quaternion.identity));
+        ///m_blueTeam.Add(Instantiate(m_playerPrefab,m_blueSpawns[1].transform.position, Quaternion.identity));
+        m_redTeam.Add(Instantiate(m_redplayerPrefab,m_redSpawns[0].transform.position, Quaternion.identity));
+        //m_redTeam.Add(Instantiate(m_playerPrefab,m_redSpawns[1].transform.position, Quaternion.identity));
 
-        foreach(var i in m_blueTeam)
-            i.GetComponent<MeshRenderer>().material = m_blueMaterial;
-        foreach(var i in m_redTeam)
-            i.GetComponent<MeshRenderer>().material = m_redMaterial;
+        //m_blueTeam[0].GetComponent<Player>().m_PlayerControllerNumber = 2;
+        ////m_blueTeam[0].GetComponent<Player>().gameObject.tag = "BlueTeam"; 
+        //m_blueTeam[0].transform.Find("Catch_Range").gameObject.tag = "RedTeam";
+        ////m_blueTeam[1].GetComponent<Player>().m_PlayerControllerNumber = 2;
+        //m_redTeam[0].GetComponent<Player>().m_PlayerControllerNumber = 1;
+        //m_redTeam[0].transform.Find("Catch_Range").gameObject.tag = "RedTeam";
+
+        //m_redTeam[1].GetComponent<Player>().m_PlayerControllerNumber = 4;
+        //m_blueTeam[0].GetComponent<MeshRenderer>().material = m_blueMaterial;
+        //m_redTeam[0].GetComponent<MeshRenderer>().material = m_redMaterial;
     }
 }

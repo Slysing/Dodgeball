@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 ///<summary>
 /// Description: Handles the Score needed to win the game, round duration
@@ -31,6 +33,10 @@ public class RoundManager : MonoBehaviour
     public static bool m_isPlaying = false; // static bool to be used globally to pause the game
     private bool m_gameStart = true; // Used to run the initial timer once
 
+    public Text m_redScoreText;
+    public Text m_blueScoreText;
+    public Text m_RoundTimer; 
+
     void Start()
     {
         m_gameStart = true; // temp, but the variable will the entry point of a round
@@ -46,6 +52,9 @@ public class RoundManager : MonoBehaviour
 
         if (m_isGameOver)
         {
+            TeamManager.m_blueTeam.Clear();
+            TeamManager.m_redTeam.Clear();
+            SceneManager.LoadScene("MainMenuScene");
             // anything relating to the game being over
             // can go here
             return;
@@ -59,8 +68,8 @@ public class RoundManager : MonoBehaviour
                 m_roundStart = true;
             }
             m_roundDuration += Time.deltaTime;
-            m_duration = (Math.Floor((double)m_roundDuration * 100) / 100);
-
+            m_duration = (Math.Floor(m_roundDuration));
+            m_RoundTimer.text = m_duration.ToString(); 
             // Checks if a member of the team are still alive
             foreach(var player in TeamManager.m_blueTeam)
             {
@@ -87,6 +96,7 @@ public class RoundManager : MonoBehaviour
             if(!m_blueTeamAlive)
             {
                 m_redScore++;
+                m_redScoreText.text = m_redScore.ToString(); 
                 if(m_redScore == m_roundsToWin)
                 {
                     EndGame();
@@ -101,6 +111,7 @@ public class RoundManager : MonoBehaviour
             else if(!m_redTeamAlive)
             {
                 m_blueScore++;
+                m_blueScoreText.text = m_blueScore.ToString(); 
                 if(m_blueScore == m_roundsToWin)
                 {
                     EndGame();
@@ -139,6 +150,7 @@ public class RoundManager : MonoBehaviour
     {
         for(int i = seconds; i > 0 ; --i)
         {
+            m_RoundTimer.text = String.Format("0:{00}", i.ToString());
             Debug.Log("Starts in: " +  i);
             yield return new WaitForSeconds(1.0f);
         }
