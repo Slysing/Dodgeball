@@ -299,7 +299,7 @@ public class Player : MonoBehaviour
     {
 
         m_isAlive = true;
-        m_ball.SetActive(false);
+        //m_ball.SetActive(false);
         m_holdingBall = false;
         m_ball = null;
     }
