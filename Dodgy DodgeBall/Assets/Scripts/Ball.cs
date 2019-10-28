@@ -19,4 +19,3 @@ public class Ball : MonoBehaviour
             rb.AddForce(rb.velocity, ForceMode.VelocityChange);
     }
 }
-
