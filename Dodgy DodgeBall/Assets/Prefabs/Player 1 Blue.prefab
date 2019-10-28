@@ -133,10 +133,12 @@ MonoBehaviour:
   m_isAlive: 1
   m_isRedTeam: 0
   m_speed: 5
+  m_dashSpeed: 5
   m_pickupRadius: 5
   m_throwStrength: 5
   m_hand: {fileID: 6144400090003452892}
   m_catchRange: {fileID: 3560995952411976332}
+  m_holdingBall: 0
   m_useXboxController: 1
   m_moveSpeed_Xbox: 10
   m_controller: 2
@@ -267,6 +269,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_player: {fileID: 0}
+  m_cooldown: 0
   m_countDown: 0
   m_controller: 2
   m_isRedTeam: 0

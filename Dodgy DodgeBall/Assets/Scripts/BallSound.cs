@@ -6,10 +6,19 @@ public class BallSound : MonoBehaviour
 {
     public AudioSource bounce;
     public AudioClip collisionSound;
+
+    void SetRef()
+    {
+        bounce = GetComponent<AudioSource>(); 
+    }
     // Start is called before the first frame update
     void Start() 
     {
-        bounce = GetComponent<AudioSource>(); 
+        SetRef();
+    }
+    private void Reset()
+    {
+        SetRef();
     }
 
     void OnCollisionEnter(Collision _c)
