@@ -286,6 +286,10 @@ public class Player : MonoBehaviour
             {
                 m_isAlive = false;
                 gameObject.SetActive(false);
+
+                m_ball = null;
+                m_holdingBall = false;
+                m_onCoolDown = false;
             }
         }
         else
@@ -294,6 +298,10 @@ public class Player : MonoBehaviour
             {
                 m_isAlive = false;
                 gameObject.SetActive(false);
+
+                m_ball = null;
+                m_holdingBall = false;
+                m_onCoolDown = false;
             }
         }
 

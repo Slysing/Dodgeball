@@ -6,8 +6,11 @@ public class TeamManager : MonoBehaviour
 {
     public static List<GameObject> m_blueTeam = new List<GameObject>();
     public static List<GameObject> m_redTeam = new List<GameObject>();
-    public GameObject m_redplayerPrefab = null;
-    public GameObject m_blueplayerPrefab = null;
+    public GameObject m_redplayer1Prefab = null;
+    public GameObject m_redplayer2Prefab = null;
+
+    public GameObject m_blueplayer1Prefab = null;
+    public GameObject m_blueplayer2Prefab = null;
     public List<GameObject> m_blueSpawns = new List<GameObject>();
     public List<GameObject> m_redSpawns = new List<GameObject>();
 
@@ -59,10 +62,12 @@ public class TeamManager : MonoBehaviour
     void Start()
     {
         // This only here in place of a team select
-        m_blueTeam.Add(Instantiate(m_blueplayerPrefab,m_blueSpawns[0].transform.position, Quaternion.identity));
-        ///m_blueTeam.Add(Instantiate(m_playerPrefab,m_blueSpawns[1].transform.position, Quaternion.identity));
-        m_redTeam.Add(Instantiate(m_redplayerPrefab,m_redSpawns[0].transform.position, Quaternion.identity));
-        //m_redTeam.Add(Instantiate(m_playerPrefab,m_redSpawns[1].transform.position, Quaternion.identity));
+        m_redTeam.Add(Instantiate(m_redplayer1Prefab, m_redSpawns[0].transform.position, Quaternion.identity));
+        m_redTeam.Add(Instantiate(m_redplayer2Prefab, m_redSpawns[1].transform.position, Quaternion.identity));
+
+        m_blueTeam.Add(Instantiate(m_blueplayer1Prefab,m_blueSpawns[0].transform.position, Quaternion.identity));
+        m_blueTeam.Add(Instantiate(m_blueplayer2Prefab, m_blueSpawns[1].transform.position, Quaternion.identity));
+        
 
         //m_blueTeam[0].GetComponent<Player>().m_PlayerControllerNumber = 2;
         ////m_blueTeam[0].GetComponent<Player>().gameObject.tag = "BlueTeam"; 

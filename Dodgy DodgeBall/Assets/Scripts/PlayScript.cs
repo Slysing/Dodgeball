@@ -20,6 +20,6 @@ public class PlayScript : MonoBehaviour
 
     public void LoadScene()
     {
-        SceneManager.LoadScene("Alpha");
+        SceneManager.LoadScene("Beta");
     }
 }
