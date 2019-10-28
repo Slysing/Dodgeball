@@ -1,16 +1,14 @@
 fileFormatVersion: 2
-guid: 158aa42e6e9767e4596d34c5e6ee02a4
+guid: 72be7f74bc28ac746840cf06687d729a
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
-    100002: polySurface344_pCylinder14
     400000: //RootNode
-    400002: polySurface344_pCylinder14
-    2100000: polySurface344_pCylinder14Mat
-    2300000: polySurface344_pCylinder14
-    3300000: polySurface344_pCylinder14
-    4300000: polySurface344_pCylinder14
+    2100000: lambert2
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Blue_Robot_Low
   externalObjects: {}
   materials:
     importMaterials: 1
