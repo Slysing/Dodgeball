@@ -1,14 +1,14 @@
 fileFormatVersion: 2
-guid: 66813dabd5401f4439edb15c7d40177c
+guid: 72be7f74bc28ac746840cf06687d729a
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: straightPipe_MAT
+    2100000: lambert2
     2300000: //RootNode
     3300000: //RootNode
-    4300000: straightPipeKit_GEO
+    4300000: Blue_Robot_Low
   externalObjects: {}
   materials:
     importMaterials: 1

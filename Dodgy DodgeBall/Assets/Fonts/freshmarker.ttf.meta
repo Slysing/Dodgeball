@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: bb2a1d1a9e3b01a4ea03e437198002af
+guid: e2d35928e75453a40b12348dc7e0ec1a
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -11,7 +11,8 @@ TrueTypeFontImporter:
   fontName: Fresh Marker
   fontNames:
   - Fresh Marker
-  fallbackFontReferences: []
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: bb2a1d1a9e3b01a4ea03e437198002af, type: 3}
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1
