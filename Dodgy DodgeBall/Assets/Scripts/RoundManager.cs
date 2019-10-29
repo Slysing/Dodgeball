@@ -130,17 +130,6 @@ public class RoundManager : MonoBehaviour
     {
         m_isGameOver = true;
         m_isPlaying = false;
-
-        foreach (var player in TeamManager.m_redTeam)
-        {
-            player.GetComponent<Player>().DropBall();
-        }
-        foreach (var player in TeamManager.m_blueTeam)
-        {
-            player.GetComponent<Player>().DropBall();
-        }
-
-
         GetComponent<TeamManager>().Reset();
         GetComponent<BallManager>().ResetBalls();        
     }
@@ -153,18 +142,6 @@ public class RoundManager : MonoBehaviour
         m_currentRound++;
         // duration reset
         m_roundStart = false;
-
-
-        foreach (var player in TeamManager.m_redTeam)
-        {
-            player.GetComponent<Player>().DropBall();
-        }
-        foreach (var player in TeamManager.m_blueTeam)
-        {
-            player.GetComponent<Player>().DropBall();
-        }
-
-
         GetComponent<TeamManager>().Reset();
         GetComponent<BallManager>().ResetBalls();        
     }

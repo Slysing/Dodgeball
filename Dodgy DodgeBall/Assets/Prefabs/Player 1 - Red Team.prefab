@@ -106,7 +106,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_player: {fileID: 3723419903023742563}
-  m_cooldown: 0
   m_countDown: 0
   m_controller: 1
   m_isRedTeam: 1
@@ -669,7 +668,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3723419903023742563}
-  m_LocalRotation: {x: -0, y: 0.6900969, z: -0, w: 0.72371703}
+  m_LocalRotation: {x: 0, y: 0.69009966, z: 0, w: 0.72371435}
   m_LocalPosition: {x: -67.443886, y: 0, z: 27.492388}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -743,12 +742,10 @@ MonoBehaviour:
   m_isAlive: 1
   m_isRedTeam: 1
   m_speed: 10
-  m_dashSpeed: 50
   m_pickupRadius: 5
   m_throwStrength: 50
   m_hand: {fileID: 8492107111815941031}
   m_catchRange: {fileID: 1293799509910723319}
-  m_holdingBall: 0
   m_useXboxController: 1
   m_moveSpeed_Xbox: 10
   m_controller: 1
@@ -869,7 +866,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 4300000, guid: eae15ebaa7ba88e40b0b39ebd4fc02fe, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 34f84482a4d82b449997a50fd8364c9c, type: 3}
   m_Bones:
   - {fileID: 3723419903024095789}
   - {fileID: 3723419903024095745}
