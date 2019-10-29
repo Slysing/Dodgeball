@@ -745,7 +745,7 @@ MonoBehaviour:
   m_speed: 10
   m_dashSpeed: 50
   m_pickupRadius: 5
-  m_throwStrength: 15
+  m_throwStrength: 50
   m_hand: {fileID: 8492107111815941031}
   m_catchRange: {fileID: 1293799509910723319}
   m_holdingBall: 0
