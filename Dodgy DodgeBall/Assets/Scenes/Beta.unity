@@ -7821,6 +7821,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: LightContainer_002_Warning_002
       objectReference: {fileID: 0}
+    - target: {fileID: 9098817202706215429, guid: fa5caf2491ea07a49acfe1718472faa8,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: bbddbf2ac1223e34eaa83b1cb5059b0e, type: 2}
+    - target: {fileID: 9098817202706215429, guid: fa5caf2491ea07a49acfe1718472faa8,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: bd6ea37573ad27347a062a940f758ab5, type: 2}
     - target: {fileID: 8515398403958586951, guid: fa5caf2491ea07a49acfe1718472faa8,
         type: 3}
       propertyPath: m_Range
@@ -7846,16 +7856,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: bbddbf2ac1223e34eaa83b1cb5059b0e, type: 2}
-    - target: {fileID: 9098817202706215429, guid: fa5caf2491ea07a49acfe1718472faa8,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: bbddbf2ac1223e34eaa83b1cb5059b0e, type: 2}
-    - target: {fileID: 9098817202706215429, guid: fa5caf2491ea07a49acfe1718472faa8,
-        type: 3}
-      propertyPath: m_Materials.Array.data[1]
-      value: 
-      objectReference: {fileID: 2100000, guid: bd6ea37573ad27347a062a940f758ab5, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fa5caf2491ea07a49acfe1718472faa8, type: 3}
 --- !u!1 &1266465979
