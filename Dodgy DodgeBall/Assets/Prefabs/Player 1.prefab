@@ -106,6 +106,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_player: {fileID: 3421153087062053289}
+  m_cooldown: 0
+  m_countDown: 0
+  m_controller: 0
+  m_isRedTeam: 0
+  m_redMaterial: {fileID: 0}
+  m_blueMaterial: {fileID: 0}
+  m_greenMaterial: {fileID: 0}
 --- !u!1 &3421153087062053289
 GameObject:
   m_ObjectHideFlags: 0
@@ -204,14 +211,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f177f2276454c794ebcf92c802ed0afa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_isAlive: 1
+  m_isRedTeam: 0
   m_speed: 30
+  m_dashSpeed: 50
   m_pickupRadius: 5
-  m_throwStrength: 80
+  m_throwStrength: 50
   m_hand: {fileID: 7569522221628154989}
   m_catchRange: {fileID: 946356235618514237}
+  m_holdingBall: 0
   m_useXboxController: 0
   m_moveSpeed_Xbox: 15
-  rightTriggerSphere: {fileID: 0}
+  m_controller: 0
+  matRed: {fileID: 0}
+  matGreen: {fileID: 0}
+  matBlue: {fileID: 0}
+  matYellow: {fileID: 0}
+  m_timeLeft: 0
+  m_redMaterial: {fileID: 0}
+  m_blueMaterial: {fileID: 0}
+  m_greenMaterial: {fileID: 0}
 --- !u!1 &3421153087062053291
 GameObject:
   m_ObjectHideFlags: 0
@@ -323,7 +342,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: eae15ebaa7ba88e40b0b39ebd4fc02fe, type: 3}
+  - {fileID: 2100000, guid: 1d7a7ae2a705dc743b9e0dcb5f355a4e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

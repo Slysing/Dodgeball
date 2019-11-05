@@ -133,9 +133,9 @@ MonoBehaviour:
   m_isAlive: 1
   m_isRedTeam: 0
   m_speed: 5
-  m_dashSpeed: 6
+  m_dashSpeed: 50
   m_pickupRadius: 5
-  m_throwStrength: 90
+  m_throwStrength: 50
   m_hand: {fileID: 6144400090003452892}
   m_catchRange: {fileID: 3560995952411976332}
   m_holdingBall: 0

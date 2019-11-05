@@ -14,10 +14,9 @@ GameObject:
   - component: {fileID: 49656010319241165}
   - component: {fileID: 49656010319241164}
   - component: {fileID: 49656010319240753}
-  - component: {fileID: 7506768116293609718}
   - component: {fileID: 1678667168847832643}
   - component: {fileID: 6159082215305797801}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Ball
   m_TagString: Neutral Ball
   m_Icon: {fileID: 0}
@@ -125,18 +124,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7506768116293609718
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 49656010319241163}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 356c9c85c7f0440449fcda5ff0a40e27, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!82 &1678667168847832643
 AudioSource:
   m_ObjectHideFlags: 0
@@ -242,7 +229,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 49656010319241163}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30d488bac209d874c81d522ed60aee7d, type: 3}
+  m_Script: {fileID: 11500000, guid: 0e217cddfb8374c4cb2d7a4260f6368a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bounce: {fileID: 1678667168847832643}
