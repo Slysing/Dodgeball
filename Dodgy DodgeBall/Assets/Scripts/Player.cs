@@ -24,9 +24,11 @@ public class Player : MonoBehaviour
     [Header("Stats")]
     public bool m_isAlive = true;
     public bool m_isRedTeam;
-    
+
     [Header("Movement")]
     public float m_speed = 5f;
+    public float m_dashSpeed = 5f;
+
 
     [Header("Catch and Throw")]
     public float m_pickupRadius = 5f;
@@ -35,7 +37,7 @@ public class Player : MonoBehaviour
     public GameObject m_catchRange = null;
 
     //private float m_speedMultiplier = 20f;
-    private bool m_holdingBall = false;
+    [SerializeField] private bool m_holdingBall = false;
     private GameObject m_ball = null;
     private Rigidbody m_rb = null;
     private Vector3 m_lastLookDirection = Vector3.forward;
@@ -51,7 +53,7 @@ public class Player : MonoBehaviour
     //public float m_moveSpeed_Xbox;
     //private Vector3 m_moveInput_Xbox;
 
-    
+
     // New Xbox Movement Input
     [Header("New Xbox Movement")]
     public bool m_useXboxController;
@@ -133,7 +135,7 @@ public class Player : MonoBehaviour
 
         m_mainCamera = FindObjectOfType<Camera>();
         m_rb = transform.GetComponent<Rigidbody>();
-        
+
         if (m_hand == null)
         {
             m_hand = transform.gameObject;
@@ -228,7 +230,7 @@ public class Player : MonoBehaviour
         {
             m_timeLeft = 0.0f;
         }
-        
+
 
 
         if ((Input.GetKeyDown(KeyCode.Space) || XCI.GetAxis(XboxAxis.LeftTrigger, m_controller) > 0) && !m_dashCooldown)
@@ -276,32 +278,50 @@ public class Player : MonoBehaviour
         //{
 
         //}
-    }  
+    }
 
+    void Death()
+    {
+
+        m_isAlive = false;
+        m_catchRange.GetComponent<CatchCollide>().ResetCooldown();
+
+
+        m_holdingBall = false;
+        m_onCoolDown = false;
+
+        m_dashCooldown = false;
+        m_moveSpeed_Xbox = m_speed;
+
+        DropBall();
+        gameObject.SetActive(false);
+    }
+
+
+    public void DropBall()
+    {
+        if (m_ball != null)
+        {
+            m_ball.tag = "Neutral Ball";
+            m_ball.GetComponent<MeshRenderer>().material = m_greenMaterial;
+            m_ball = null;
+        }
+
+    }
     public void OnCollisionEnter(Collision collider)
     {
         if (m_isRedTeam)
         {
             if (collider.gameObject.tag == "Blue Ball")
             {
-                m_isAlive = false;
-                gameObject.SetActive(false);
-
-                m_ball = null;
-                m_holdingBall = false;
-                m_onCoolDown = false;
+                Death();
             }
         }
         else
         {
             if (collider.gameObject.tag == "Red Ball")
             {
-                m_isAlive = false;
-                gameObject.SetActive(false);
-
-                m_ball = null;
-                m_holdingBall = false;
-                m_onCoolDown = false;
+                Death();
             }
         }
 
@@ -331,11 +351,11 @@ public class Player : MonoBehaviour
         //    gameObject.SetActive(false);
         //}
     }
-    
+
     public void SetBall(GameObject ball)
     {
-            m_ball = ball;
-            m_holdingBall = true;
+        m_ball = ball;
+        m_holdingBall = true;
 
         if (m_holdingBall == true)
         {
@@ -353,6 +373,8 @@ public class Player : MonoBehaviour
                     Debug.Log("Now a Neutral ball");
                 }
 
+                ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
+
                 StartCoroutine(WaitPickUp());
 
             }
@@ -364,10 +386,10 @@ public class Player : MonoBehaviour
     {
         m_onCoolDown = true;
         var rb = m_ball.GetComponent<Rigidbody>();
-        rb.velocity = Vector3.zero;        
+        rb.velocity = Vector3.zero;
         var force = transform.forward * m_throwStrength;
-        
-        rb.AddForce(force,ForceMode.Impulse);
+
+        rb.AddForce(force, ForceMode.Impulse);
 
         yield return new WaitForSeconds(.5f);
         m_ball = null;
@@ -378,15 +400,15 @@ public class Player : MonoBehaviour
 
     IEnumerator Dash()
     {
-            Debug.Log("Dash");
-            var x = 1.20f;
-            m_moveSpeed_Xbox *= x;
-            yield return new WaitForSeconds(.15f);
-            m_moveSpeed_Xbox /= x;
-            m_dashCooldown = true;
+        Debug.Log("Dash");
+        var x = 1.20f;
+        m_moveSpeed_Xbox = m_dashSpeed;
+        yield return new WaitForSeconds(.15f);
+        m_moveSpeed_Xbox = m_speed;
+        m_dashCooldown = true;
 
-            yield return new WaitForSeconds(1f);
-            m_dashCooldown = false;
+        yield return new WaitForSeconds(1f);
+        m_dashCooldown = false;
     }
 
     IEnumerator WaitPickUp()

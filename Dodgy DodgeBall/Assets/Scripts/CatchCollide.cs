@@ -15,7 +15,7 @@ public class CatchCollide : MonoBehaviour
 {
     public GameObject m_player = null;
     private GameObject m_lastBall = null;
-    private bool m_cooldown = false;
+  [SerializeField]  private bool m_cooldown = false;
 
     
     public bool m_countDown = false;
@@ -164,6 +164,11 @@ public class CatchCollide : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void ResetCooldown()
+    {
+        m_cooldown = false;
     }
 
     IEnumerator cooldown()
