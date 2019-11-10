@@ -1,15 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-using XboxCtrlrInput;
+﻿/* Player.cs
+ * Authors: Boran Baykan, Leith Merrifield
+ * Description: Handles the movement/catch of a player using keyboard or Controoler
+ * Creation: 07/10/2019
+ * Modifield: 09/10/2019
+ */
 
-///<summary>
-/// Description: Handles the movement/catch of a player (With keyboard and Controller)
-/// Authors Boran Baykan, Leith Merrifield
-/// Creation Date: 07/10/2019
-/// Modified: 09/10/2019
-///</summary>
+using System.Collections;
+using UnityEngine;
+using XboxCtrlrInput;
 
 public enum PLAYER_STATE
 {
@@ -19,44 +17,45 @@ public enum PLAYER_STATE
     PLAYER_HOLDING
 }
 
+public enum PLAYER_TEAM
+{
+    TEAM_BLUE,
+    TEAM_RED
+}
+
 public class Player : MonoBehaviour
 {
     [Header("Stats")]
     public bool m_isAlive = true;
-    public bool m_isRedTeam;
+
+    public PLAYER_TEAM m_currentTeam;
 
     [Header("Movement")]
     public float m_speed = 5f;
-    public float m_dashSpeed = 5f;
 
+    public float m_dashSpeed = 5f;
 
     [Header("Catch and Throw")]
     public float m_pickupRadius = 5f;
+
     public float m_throwStrength = 5f;
     public GameObject m_hand = null;
     public GameObject m_catchRange = null;
+    public GameObject m_fakeBallCollider = null;
 
     //private float m_speedMultiplier = 20f;
     [SerializeField] private bool m_holdingBall = false;
+
     private GameObject m_ball = null;
     private Rigidbody m_rb = null;
     private Vector3 m_lastLookDirection = Vector3.forward;
     private bool m_onCoolDown = false;
     private bool m_dashCooldown = false;
 
-    // Xbox Controller Settings
-    //[Header("Xbox Movement")]
-    //public bool m_useXboxController;
-    //public int m_PlayerControllerNumber;
-
-    // Changes the character speed for keyboard and controller at the moment
-    //public float m_moveSpeed_Xbox;
-    //private Vector3 m_moveInput_Xbox;
-
-
     // New Xbox Movement Input
     [Header("New Xbox Movement")]
     public bool m_useXboxController;
+
     public float m_moveSpeed_Xbox;
     private Vector3 m_moveInput_Xbox;
     public XboxController m_controller;
@@ -83,24 +82,9 @@ public class Player : MonoBehaviour
     public Material m_blueMaterial = null;
     public Material m_greenMaterial = null;
 
-
-    // Players Instantiate
-    //GameObject m_P1RedTeam;
-    //GameObject m_P2RedTeam;
-
-    //GameObject m_P1BlueTeam;
-    //GameObject m_P2BlueTeam;
-
-
     public void Start()
     {
         m_timeLeft = 0.0f;
-        //m_P1RedTeam = GameObject.FindWithTag("Red Team");
-        //m_P2RedTeam = GameObject.FindWithTag("Red Team");
-
-        //m_P1BlueTeam = GameObject.FindWithTag("Blue Team");
-        //m_P2BlueTeam = GameObject.FindWithTag("Blue Team");
-
 
         switch (m_controller)
         {
@@ -145,21 +129,19 @@ public class Player : MonoBehaviour
     // Fixed update is general used for anything physics related
     public void FixedUpdate()
     {
-        //Rigidbody
-        //m_rb.velocity = velocity;
         Vector3 moveVelocity = Vector3.zero;
 
         if (!m_useXboxController)
         {
             /*
-             Movement with  [ W A S D ] for player 
+             Movement with  [ W A S D ] for player
             */
             var h = Input.GetAxisRaw("Horizontal");
             var v = Input.GetAxisRaw("Vertical");
             Vector3 moveInput = new Vector3(h, 0f, v);
             moveVelocity = moveInput * m_moveSpeed_Xbox;
 
-            // Leith's Code // - Mouse movement for direction 
+            // Leith's Code // - Mouse movement for direction
             /*
                 Casts to from the mouse position to an object
                 if hit then grab that position and create a direction vector
@@ -174,11 +156,10 @@ public class Player : MonoBehaviour
                 transform.eulerAngles = new Vector3(0.0f, transform.eulerAngles.y, 0f);
                 m_lastLookDirection = hit.point - transform.position;
             }
-
         }
         else
         {
-            /* 
+            /*
                 This movement works if you only want one type selected (E.g. only controller moving the character if ticked in public bool)
             */
             //Left Stick Movement
@@ -193,7 +174,6 @@ public class Player : MonoBehaviour
             //    m_lastLookDirection = playerDirection - transform.position;
             //}
 
-
             // -New- Left Stick Movement
             m_newPosition = transform.position;
             float axisX = XCI.GetAxis(XboxAxis.LeftStickX, m_controller);
@@ -201,7 +181,6 @@ public class Player : MonoBehaviour
 
             m_moveInput_Xbox = new Vector3(XCI.GetAxis(XboxAxis.LeftStickX, m_controller), 0f, XCI.GetAxis(XboxAxis.LeftStickY, m_controller));
             moveVelocity = m_moveInput_Xbox * m_moveSpeed_Xbox;
-
 
             // New Right Stick Rotation
             m_newPosition = transform.position;
@@ -215,7 +194,6 @@ public class Player : MonoBehaviour
                 m_lastLookDirection = playerDirection - transform.position;
             }
             transform.position = m_newPosition;
-
         }
         m_rb.velocity = moveVelocity * Time.fixedDeltaTime * 50.0f;
     }
@@ -224,23 +202,21 @@ public class Player : MonoBehaviour
     {
         if (m_holdingBall == true)
         {
+            if (m_fakeBallCollider.activeSelf != true)
+                m_fakeBallCollider.SetActive(true);
             m_timeLeft += Time.deltaTime;
         }
         else
         {
+            if (m_fakeBallCollider.activeSelf != false)
+                m_fakeBallCollider.SetActive(false);
             m_timeLeft = 0.0f;
         }
-
-
 
         if ((Input.GetKeyDown(KeyCode.Space) || XCI.GetAxis(XboxAxis.LeftTrigger, m_controller) > 0) && !m_dashCooldown)
         {
             StartCoroutine(Dash());
         }
-        //Input Manager
-        //float rightTrigger = Input.GetAxis("Right Trigger");
-        // Changes the colour of a ball by pressing right trigger [ RT ] ---TESTING PURPOSE---
-        //rightTriggerSphere.material.color = new Color(rightTrigger, rightTrigger, rightTrigger, rightTrigger);
         /*
          Only runs if a ball is being held and cooldown is off
          Used to continually change the ball position when the player moves or rotates
@@ -251,41 +227,18 @@ public class Player : MonoBehaviour
             {
                 m_ball.gameObject.transform.position = m_hand.transform.position;
                 m_ball.gameObject.transform.rotation = m_hand.transform.rotation;
-
-                //m_moveSpeed_Xbox /= 2;
-                //Debug.Log("Right Bumper");
             }
             if ((m_MaxTriggerScale * (1.0f - XCI.GetAxis(XboxAxis.RightTrigger, m_controller)) == 0 && m_useXboxController) || Input.GetKeyUp(KeyCode.Mouse0))
             {
-
-                //m_holdingBall = false;
-                //m_ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
-                //m_ball = null;
-
-                //if (!m_onCoolDown && (Input.GetKey(KeyCode.Space) || Input.GetAxis("P" + m_PlayerControllerNumber + " Left Trigger") > 0))
-                //{
-                Debug.Log("Thrown the ball");
-                Debug.Log(m_onCoolDown);
                 StartCoroutine(Throw());
-
-                //}
-                //Debug.Log("Right Bumper | Button Up");
             }
         }
-
-        // If a ball is being held and space bar is pushed, run the throw coroutine
-        //if (m_holdingBall && m_ball != null)
-        //{
-
-        //}
     }
 
-    void Death()
+    private void Death()
     {
-
         m_isAlive = false;
         m_catchRange.GetComponent<CatchCollide>().ResetCooldown();
-
 
         m_holdingBall = false;
         m_onCoolDown = false;
@@ -297,7 +250,6 @@ public class Player : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-
     public void DropBall()
     {
         if (m_ball != null)
@@ -306,50 +258,28 @@ public class Player : MonoBehaviour
             m_ball.GetComponent<MeshRenderer>().material = m_greenMaterial;
             m_ball = null;
         }
-
     }
+
     public void OnCollisionEnter(Collision collider)
     {
-        if (m_isRedTeam)
+        switch (collider.gameObject.tag)
         {
-            if (collider.gameObject.tag == "Blue Ball")
-            {
-                Death();
-            }
+            case "Blue Ball":
+                BallCollide(PLAYER_TEAM.TEAM_BLUE);
+                break;
+
+            case "Red Ball":
+                BallCollide(PLAYER_TEAM.TEAM_RED);
+                break;
         }
-        else
+    }
+
+    private void BallCollide(PLAYER_TEAM team)
+    {
+        if (team != m_currentTeam)
         {
-            if (collider.gameObject.tag == "Red Ball")
-            {
-                Death();
-            }
+            Death();
         }
-
-        //switch(collider.gameObject.tag)
-        //{
-        //    case "Red Team":
-        //        if (collider.gameObject.tag == "Blue Ball")
-        //        {
-        //            m_isAlive = false;
-        //            gameObject.SetActive(false);
-        //        }
-        //        break;
-
-        //    case "Blue Team":
-        //        if (collider.gameObject.tag == "Red Ball")
-        //        {
-        //            m_isAlive = false;
-        //            gameObject.SetActive(false);
-        //        }
-        //        break;
-        //}
-
-
-        //if (collider.gameObject.layer == 9 || collider.gameObject.tag == "Neutral Ball")
-        //{
-        //    m_isAlive = false;   
-        //    gameObject.SetActive(false);
-        //}
     }
 
     public void SetBall(GameObject ball)
@@ -364,25 +294,18 @@ public class Player : MonoBehaviour
                 m_ball = null;
                 m_holdingBall = false;
                 m_onCoolDown = false;
-                Debug.Log("5 seconds");
 
                 ball.tag = "Neutral Ball";
                 ball.GetComponent<MeshRenderer>().material = m_greenMaterial;
-                if (ball.tag == "Green Ball")
-                {
-                    Debug.Log("Now a Neutral ball");
-                }
-
                 ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
 
                 StartCoroutine(WaitPickUp());
-
             }
         }
     }
 
     // Thowing function with a cooldown
-    IEnumerator Throw()
+    private IEnumerator Throw()
     {
         m_onCoolDown = true;
         var rb = m_ball.GetComponent<Rigidbody>();
@@ -398,9 +321,8 @@ public class Player : MonoBehaviour
         m_onCoolDown = false;
     }
 
-    IEnumerator Dash()
+    private IEnumerator Dash()
     {
-        Debug.Log("Dash");
         var x = 1.20f;
         m_moveSpeed_Xbox = m_dashSpeed;
         yield return new WaitForSeconds(.15f);
@@ -411,12 +333,12 @@ public class Player : MonoBehaviour
         m_dashCooldown = false;
     }
 
-    IEnumerator WaitPickUp()
+    private IEnumerator WaitPickUp()
     {
         yield return new WaitForSeconds(2.5f);
     }
 
-    void OnDrawGizmos()
+    private void OnDrawGizmos()
     {
         switch (m_controller)
         {

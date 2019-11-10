@@ -1,29 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class UINonRotate : MonoBehaviour
 {
     private Quaternion rotation;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    void Awake()
+    private void Awake()
     {
         rotation = transform.rotation;
     }
 
-    void LateUpdate()
+    private void LateUpdate()
     {
         transform.rotation = rotation;
     }

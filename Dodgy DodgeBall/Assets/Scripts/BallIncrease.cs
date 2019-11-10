@@ -1,43 +1,38 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿/*   BallIncrease.cs
+ *   Authors: Riley Palmer, Leith Merrifield
+ *   Description: If the ball falls below minimum speed apply a force
+ *   Modified: 09/11/2019
+ */
+
 using UnityEngine;
 
 public class BallIncrease : MonoBehaviour
 {
-    public AudioSource bounce;
-    public AudioClip collisionSound;
+    public AudioSource m_audioSource;
+    public AudioClip m_collisionSound;
+    public float m_bounceAmount = 10.0f;
+    public float m_mininumSpeed = 15.0f;
+    private Rigidbody m_rb;
+    private float m_bounceSpeedMultiplier = 20.0f; // constant multiplier for force
 
-    void SetRef()
+    private void Start()
     {
-        bounce = GetComponent<AudioSource>();
-        rb = GetComponent<Rigidbody>();
+        m_audioSource = GetComponent<AudioSource>();
+        m_rb = GetComponent<Rigidbody>();
     }
-    Rigidbody rb;
-    // Start is called before the first frame update
-    void Start()
-    {
 
-        SetRef();
-    }
-    private void Reset()
+    private void OnCollisionExit(Collision collider)
     {
-        SetRef();
-    }
-    void OnCollisionExit(Collision _c)
-    {
-        if (_c.gameObject.tag == "Wall")
+        if (collider.gameObject.tag == "Wall")
         {
-            bounce.PlayOneShot(collisionSound);
-               Debug.Log("testbounce " + rb.velocity.magnitude);
-            // change the value after magnitude within the f eg "15f" to alter the speed increase from the projectile
-            if (rb.velocity.magnitude < 15f)
-            rb.AddForce(rb.velocity, ForceMode.VelocityChange);
+            m_audioSource.PlayOneShot(m_collisionSound);
+            Debug.Log("testbounce " + m_rb.velocity.magnitude);
+
+            // If magnitude is less then m_mininumSpeed then apply force using m_bounceAmount
+            if (m_rb.velocity.magnitude < m_mininumSpeed)
+            {
+                m_rb.AddForce(m_rb.velocity * (Time.deltaTime * m_bounceAmount * 20.0f), ForceMode.Impulse);
+            }
         }
     }
-
-    
-
-    // Update is called once per frame
-    void Update() { }
-
 }
