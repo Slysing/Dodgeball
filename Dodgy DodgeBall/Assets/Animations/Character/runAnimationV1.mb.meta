@@ -3,6 +3,89 @@ guid: 81efe113b18a68d4581b88b133fd079f
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
+    100000: Blue
+    100002: Chest
+    100004: group
+    100006: group1
+    100008: Head
+    100010: L_Clav
+    100012: L_Elbow
+    100014: L_Fingers
+    100016: L_Fingertips
+    100018: L_Foot
+    100020: L_Hip
+    100022: L_Knee
+    100024: L_Shoulder
+    100026: L_Thumb
+    100028: L_Thumbtip
+    100030: L_Wrist
+    100032: nurbsCircle1
+    100034: pasted__Blue
+    100036: pasted__Blue 1
+    100038: Pelvis
+    100040: R_Clav
+    100042: R_Elbow
+    100044: R_Fingers
+    100046: R_Fingertips
+    100048: R_Foot
+    100050: R_Hip
+    100052: R_Knee
+    100054: R_Shoulder
+    100056: R_Thumb
+    100058: R_Thumbtip
+    100060: R_Wrist
+    100062: Red
+    100064: //RootNode
+    100066: Waist
+    400000: Blue
+    400002: Chest
+    400004: group
+    400006: group1
+    400008: Head
+    400010: L_Clav
+    400012: L_Elbow
+    400014: L_Fingers
+    400016: L_Fingertips
+    400018: L_Foot
+    400020: L_Hip
+    400022: L_Knee
+    400024: L_Shoulder
+    400026: L_Thumb
+    400028: L_Thumbtip
+    400030: L_Wrist
+    400032: nurbsCircle1
+    400034: pasted__Blue
+    400036: pasted__Blue 1
+    400038: Pelvis
+    400040: R_Clav
+    400042: R_Elbow
+    400044: R_Fingers
+    400046: R_Fingertips
+    400048: R_Foot
+    400050: R_Hip
+    400052: R_Knee
+    400054: R_Shoulder
+    400056: R_Thumb
+    400058: R_Thumbtip
+    400060: R_Wrist
+    400062: Red
+    400064: //RootNode
+    400066: Waist
+    2100000: pasted__lambert2
+    2100002: lambert1
+    2300000: Blue
+    2300002: pasted__Blue
+    2300004: pasted__Blue 1
+    3300000: Blue
+    3300002: pasted__Blue
+    3300004: pasted__Blue 1
+    4300000: Red
+    4300002: Blue
+    4300004: pasted__Blue
+    4300006: pasted__Blue
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: Red
     2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
@@ -57,7 +140,7 @@ ModelImporter:
     secondaryUVPackMargin: 4
     useFileScale: 1
     previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 0
+    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0

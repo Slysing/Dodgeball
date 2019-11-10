@@ -229,10 +229,12 @@ public class Player : MonoBehaviour
             if (m_fakeBallCollider.activeSelf != true)
                 m_fakeBallCollider.SetActive(true);
             m_timeLeft += Time.deltaTime;
+            m_moveSpeed_Xbox = 10.0f;
         }
         else
         {
             m_timeLeft = 0.0f;
+            m_moveSpeed_Xbox = 15.0f;
         }
 
         if ((Input.GetKeyDown(KeyCode.Space) || XCI.GetAxis(XboxAxis.LeftTrigger, m_controller) > 0) && !m_dashCooldown)
