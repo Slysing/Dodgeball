@@ -82,17 +82,21 @@ public class Player : MonoBehaviour
     public Material m_blueMaterial = null;
     public Material m_greenMaterial = null;
 
+    public Animator playerAnim;
+    public GameObject deathParticle;
+
+
     public void Start()
     {
         m_timeLeft = 0.0f;
 
-        switch (m_controller)
-        {
-            case XboxController.First: GetComponent<Renderer>().material = matRed; break;
-            case XboxController.Second: GetComponent<Renderer>().material = matBlue; break;
-            case XboxController.Third: GetComponent<Renderer>().material = matGreen; break;
-            case XboxController.Fourth: GetComponent<Renderer>().material = matYellow; break;
-        }
+     //  switch (m_controller)
+     //  {
+     //      case XboxController.First: GetComponent<Renderer>().material = matRed; break;
+     //      case XboxController.Second: GetComponent<Renderer>().material = matBlue; break;
+     //      case XboxController.Third: GetComponent<Renderer>().material = matGreen; break;
+     //      case XboxController.Fourth: GetComponent<Renderer>().material = matYellow; break;
+     //  }
 
         m_newPosition = transform.position;
 
@@ -195,27 +199,58 @@ public class Player : MonoBehaviour
             }
             transform.position = m_newPosition;
         }
-        m_rb.velocity = moveVelocity * Time.fixedDeltaTime * 50.0f;
+
+        if (RoundManager.m_isPlaying)
+            m_rb.velocity = moveVelocity * Time.fixedDeltaTime * 50.0f;
+
+
+        if (moveVelocity.magnitude > 0)
+        {
+            if (playerAnim != null)
+            {
+                playerAnim.SetBool("Walking", true);
+                Debug.Log("Walking");
+            }
+        }
+        else
+        {
+            if (playerAnim != null)
+            {
+                playerAnim.SetBool("Walking", false);
+                Debug.Log("Walking");
+            }
+        }
     }
 
     public void Update()
     {
         if (m_holdingBall == true)
         {
+            if (m_fakeBallCollider != null)
+            {
             if (m_fakeBallCollider.activeSelf != true)
                 m_fakeBallCollider.SetActive(true);
+            }
             m_timeLeft += Time.deltaTime;
         }
         else
         {
-            if (m_fakeBallCollider.activeSelf != false)
-                m_fakeBallCollider.SetActive(false);
+            if (m_fakeBallCollider != null)
+            {
+                if (m_fakeBallCollider.activeSelf != false)
+                    m_fakeBallCollider.SetActive(false);
+            }
             m_timeLeft = 0.0f;
         }
 
         if ((Input.GetKeyDown(KeyCode.Space) || XCI.GetAxis(XboxAxis.LeftTrigger, m_controller) > 0) && !m_dashCooldown)
         {
             StartCoroutine(Dash());
+            if (playerAnim != null)
+            {
+                playerAnim.SetTrigger("Dash");
+                Debug.Log("Dash");
+            }
         }
         /*
          Only runs if a ball is being held and cooldown is off
@@ -231,6 +266,11 @@ public class Player : MonoBehaviour
             if ((m_MaxTriggerScale * (1.0f - XCI.GetAxis(XboxAxis.RightTrigger, m_controller)) == 0 && m_useXboxController) || Input.GetKeyUp(KeyCode.Mouse0))
             {
                 StartCoroutine(Throw());
+                if (playerAnim != null)
+                {
+                    playerAnim.SetTrigger("Throw");
+                    Debug.Log("Throw");
+                }
             }
         }
     }
@@ -239,6 +279,11 @@ public class Player : MonoBehaviour
     {
         m_isAlive = false;
         m_catchRange.GetComponent<CatchCollide>().ResetCooldown();
+
+        if (deathParticle != null)
+        {
+            Instantiate(deathParticle, transform.position + Vector3.up, transform.rotation);
+        }
 
         m_holdingBall = false;
         m_onCoolDown = false;
@@ -266,6 +311,7 @@ public class Player : MonoBehaviour
         {
             case "Blue Ball":
                 BallCollide(PLAYER_TEAM.TEAM_BLUE);
+
                 break;
 
             case "Red Ball":
