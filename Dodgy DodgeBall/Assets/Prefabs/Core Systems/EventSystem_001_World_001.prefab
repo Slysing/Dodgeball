@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 5683059578573879304}
   - component: {fileID: 5683059578573879413}
   - component: {fileID: 5683059578573879306}
-  - component: {fileID: 5683059578573879412}
   - component: {fileID: 5683059578573879415}
   m_Layer: 0
   m_Name: EventSystem_001_World_001
@@ -28,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5683059578573879305}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -27.40799, y: -10.611485, z: 59.631516}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -50,7 +49,10 @@ MonoBehaviour:
   m_active: 1
   m_spawnInterval: 10
   m_ball: {fileID: 49656010319241163, guid: c62807ad30f0b5342a537de37c33b028, type: 3}
-  m_spawnPoints: []
+  m_spawnPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   m_redMaterial: {fileID: 2100000, guid: cc19ad3ba368b4f438eb46f8a62de321, type: 2}
   m_blueMaterial: {fileID: 2100000, guid: 1129a4e4e3152cb4084179a9554aaad8, type: 2}
   m_greenMaterial: {fileID: 2100000, guid: 3816b83c9ac362c4bb04aceb50e89420, type: 2}
@@ -107,19 +109,6 @@ MonoBehaviour:
   m_RoundMinutes: {fileID: 0}
   m_RoundTens: {fileID: 0}
   m_RoundSeconds: {fileID: 0}
---- !u!114 &5683059578573879412
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5683059578573879305}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ca9866f8ac549c4682e25209d0c9d0f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timerText: {fileID: 0}
 --- !u!114 &5683059578573879415
 MonoBehaviour:
   m_ObjectHideFlags: 0

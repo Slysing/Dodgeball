@@ -7275,11 +7275,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5480041348919417708, guid: e98b7815b7f35854c9f771b165933548,
-        type: 3}
-      propertyPath: m_Name
-      value: Industrial_Light (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 5480041348919510860, guid: e98b7815b7f35854c9f771b165933548,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7344,6 +7339,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.9999999
+      objectReference: {fileID: 0}
+    - target: {fileID: 5480041348919417708, guid: e98b7815b7f35854c9f771b165933548,
+        type: 3}
+      propertyPath: m_Name
+      value: Industrial_Light (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e98b7815b7f35854c9f771b165933548, type: 3}
@@ -8040,6 +8040,7 @@ GameObject:
   - component: {fileID: 1032035648}
   - component: {fileID: 1032035647}
   - component: {fileID: 1032035649}
+  - component: {fileID: 1032035650}
   m_Layer: 0
   m_Name: EventSystem_001_World_001
   m_TagString: Untagged
@@ -8154,6 +8155,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 2030716577}
+--- !u!114 &1032035650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1032035644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b263fd392d7ee0748a91ab5219b8c6ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_pistonControl: {fileID: 0}
+  m_audioControl: {fileID: 1724338492}
 --- !u!1 &1045305870
 GameObject:
   m_ObjectHideFlags: 0
@@ -12458,7 +12473,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1322241810
 Transform:
   m_ObjectHideFlags: 0
@@ -36742,11 +36757,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5480041348919417708, guid: e98b7815b7f35854c9f771b165933548,
-        type: 3}
-      propertyPath: m_Name
-      value: Industrial_Light
-      objectReference: {fileID: 0}
     - target: {fileID: 5480041348919510860, guid: e98b7815b7f35854c9f771b165933548,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -36811,6 +36821,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.9999999
+      objectReference: {fileID: 0}
+    - target: {fileID: 5480041348919417708, guid: e98b7815b7f35854c9f771b165933548,
+        type: 3}
+      propertyPath: m_Name
+      value: Industrial_Light
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e98b7815b7f35854c9f771b165933548, type: 3}

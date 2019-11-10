@@ -2,7 +2,7 @@
  * Authors: Boran Baykan, Leith Merrifield
  * Description: Handles the movement/catch of a player using keyboard or Controoler
  * Creation: 07/10/2019
- * Modifield: 09/10/2019
+ * Modifield: 11/11/2019
  */
 
 using System.Collections;
@@ -209,7 +209,7 @@ public class Player : MonoBehaviour
             if (playerAnim != null)
             {
                 playerAnim.SetBool("Walking", true);
-                Debug.Log("Walking");
+                //Debug.Log("Walking");
             }
         }
         else
@@ -217,7 +217,7 @@ public class Player : MonoBehaviour
             if (playerAnim != null)
             {
                 playerAnim.SetBool("Walking", false);
-                Debug.Log("Walking");
+                //Debug.Log("Walking");
             }
         }
     }
@@ -226,20 +226,12 @@ public class Player : MonoBehaviour
     {
         if (m_holdingBall == true)
         {
-            if (m_fakeBallCollider != null)
-            {
             if (m_fakeBallCollider.activeSelf != true)
                 m_fakeBallCollider.SetActive(true);
-            }
             m_timeLeft += Time.deltaTime;
         }
         else
         {
-            if (m_fakeBallCollider != null)
-            {
-                if (m_fakeBallCollider.activeSelf != false)
-                    m_fakeBallCollider.SetActive(false);
-            }
             m_timeLeft = 0.0f;
         }
 
@@ -369,7 +361,6 @@ public class Player : MonoBehaviour
 
     private IEnumerator Dash()
     {
-        var x = 1.20f;
         m_moveSpeed_Xbox = m_dashSpeed;
         yield return new WaitForSeconds(.15f);
         m_moveSpeed_Xbox = m_speed;
