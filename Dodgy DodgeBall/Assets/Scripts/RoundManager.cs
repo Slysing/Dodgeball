@@ -31,7 +31,7 @@ public class RoundManager : MonoBehaviour
     public bool m_isGameOver = false;
 
     private bool m_roundStart = false;
-    public static float m_roundDuration;
+    public float m_roundDuration;
     public static bool m_isPlaying = false; // static bool to be used globally to pause the game
     private bool m_gameStart = true; // Used to run the initial timer once
 
