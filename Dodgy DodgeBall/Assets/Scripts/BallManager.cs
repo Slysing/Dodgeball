@@ -1,4 +1,10 @@
-﻿using System.Collections;
+﻿/* BallManager.cs
+ * Authors: Leith Merrifield
+ * Description: Controls the spawing of balls on specific spawn points
+ * Modified: 10/11/2019
+ */
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,63 +18,62 @@ public class BallManager : MonoBehaviour
     private bool m_isSpawning = false;
     private int m_currentBallCount = 0;
     private List<GameObject> m_ballPool = new List<GameObject>();
-    private Vector3 m_ballPoolPosition = new Vector3(999f,999f,999f);
+    private Vector3 m_ballPoolPosition = new Vector3(999f, 999f, 999f);
     private int m_ballPoolSize = 200;
 
     public Material m_redMaterial = null;
     public Material m_blueMaterial = null;
     public Material m_greenMaterial = null;
 
-
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         Debug.Assert(m_ball, "Ball prefab needed in BallManager Script");
         GameObject pool = new GameObject();
         pool.name = "Ball Pool";
 
-        for(int i = 0; i < m_ballPoolSize; ++i)
+        for (int i = 0; i < m_ballPoolSize; ++i)
         {
-            var newBall = Instantiate(m_ball,pool.transform,false);
+            var newBall = Instantiate(m_ball, pool.transform, false);
             newBall.SetActive(false);
             m_ballPool.Add(newBall);
         }
-        if(m_active)
+        if (m_active)
         {
-         StartCoroutine("BallSpawner");
+            StartCoroutine("BallSpawner");
         }
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if(!m_active && m_isSpawning)
+        if (!m_active && m_isSpawning)
         {
             StopCoroutine("BallSpawner");
         }
-        else if(m_active && !m_isSpawning)
+        else if (m_active && !m_isSpawning)
         {
             StartCoroutine("BallSpawner");
         }
 
-        if(Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.P))
         {
             RemoveBall(m_ballPool[2]);
         }
     }
 
     // removes specific ball and reorganises the pool
-    void RemoveBall(GameObject ball)
+    private void RemoveBall(GameObject ball)
     {
         ball.SetActive(false);
         m_currentBallCount--;
 
-        for(int i = 0; i < m_currentBallCount; ++i)
+        for (int i = 0; i < m_currentBallCount; ++i)
         {
-            if(!m_ballPool[i].activeSelf)
+            if (!m_ballPool[i].activeSelf)
             {
                 int count = i;
-                while(m_ballPool[count + 1].activeSelf)
+                while (m_ballPool[count + 1].activeSelf)
                 {
                     var temp = m_ballPool[count + 1];
                     m_ballPool[count + 1] = m_ballPool[count];
@@ -81,7 +86,7 @@ public class BallManager : MonoBehaviour
 
     public void ResetBalls()
     {
-        foreach(GameObject ball in m_ballPool)
+        foreach (GameObject ball in m_ballPool)
         {
             ball.SetActive(false);
             ball.transform.position = m_ballPoolPosition;
@@ -96,13 +101,13 @@ public class BallManager : MonoBehaviour
 
     // ball spawner will spawn a set of balls every m_spawnInterval and only spawn if there is no player or ball in the way
     // instead of instantiating and destroy setup an object pool
-    IEnumerator BallSpawner()
+    private IEnumerator BallSpawner()
     {
         m_isSpawning = true;
-        while(true)
+        while (true)
         {
             // loops through all the spawn points
-            foreach(var point in m_spawnPoints)
+            foreach (var point in m_spawnPoints)
             {
                 // activates the ball
                 var tempBall = m_ballPool[m_currentBallCount];
@@ -112,56 +117,54 @@ public class BallManager : MonoBehaviour
 
                 // Checks if there is already a ball or player
                 // on the spawn point
-                var colliders = Physics.OverlapSphere(point.transform.position,.5f);
+                var colliders = Physics.OverlapSphere(point.transform.position, .5f);
                 int ballCount = 0; // used to grab whats inside the sphere
-                foreach(var obj in colliders)
+                foreach (var obj in colliders)
                 {
-                    if(obj.tag == "Neutral Ball")
+                    if (obj.tag == "Neutral Ball")
                     {
                         ballCount++;
                     }
-                    else if(obj.gameObject.layer == 10)
+                    else if (obj.gameObject.layer == 10)
                     {
                         ballCount++;
                     }
                 }
 
                 // sends the ball back to the pool
-                if(ballCount > 1)
+                if (ballCount > 1)
                 {
                     tempBall.transform.position = m_ballPoolPosition;
                     tempBall.SetActive(false);
                     m_currentBallCount--;
                 }
             }
-            for(int i = m_spawnInterval; i > 0; i--)
+            for (int i = m_spawnInterval; i > 0; i--)
             {
                 // if the game is in a paused state then this will run
                 // basically resuming the corroutine every 1 second
                 // to check if the game has started yet
-                if(!RoundManager.m_isPlaying)
+                if (!RoundManager.m_isPlaying)
                 {
                     i++;
                     yield return new WaitForSeconds(1f);
                     continue;
                 }
-                Debug.Log(i);
                 yield return new WaitForSeconds(1f);
             }
 
-            if(m_spawnInterval == 0)
+            if (m_spawnInterval == 0)
             {
                 yield return new WaitForSeconds(m_spawnInterval);
             }
         }
     }
 
-    void OnDrawGizmos()
+    private void OnDrawGizmos()
     {
-        foreach(var point in m_spawnPoints)
+        foreach (var point in m_spawnPoints)
         {
-            Gizmos.DrawWireSphere(point.transform.position,.5f);
+            Gizmos.DrawWireSphere(point.transform.position, .5f);
         }
     }
-
 }

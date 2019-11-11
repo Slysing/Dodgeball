@@ -1,30 +1,29 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿/* Heading.cs
+ * Authors: Connor Young
+ * Description: Changes the colour of the background and heading
+ * Creation: 07/09/2019
+ * Modified: 08/09/2019
+ */
+
 using UnityEngine;
 using UnityEngine.UI;
 
-/// <summary>
-/// Description:    Changes the color of the back ground and heading 
-/// Author:         Connor Young
-/// Creation Date:  07/09/19
-/// Modified:       08/09/19
-/// </summary>
-/// 
+/// <summary> Changes the color of the back ground and heading </summary>
 public class Heading : MonoBehaviour
 {
     public Image HeadingImage;
-    float TimeLeft;
-    Color TargetColour; 
-    
+    private float TimeLeft;
+    private Color TargetColour;
+
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         //The initial color the image will be
         TargetColour = new Color(1.0f, 0.0f, 0.0f); //Set to red
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (TimeLeft <= Time.deltaTime)
         {

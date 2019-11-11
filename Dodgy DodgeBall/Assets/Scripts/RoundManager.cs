@@ -1,53 +1,91 @@
-﻿using System.Collections;
-using System;
-using System.Collections.Generic;
+﻿/* RoundManager.cs
+ * Authors: Leith Merrifield
+ * Description: Handles the score needed to win the game and round duration
+ * Creation: 15/10/2019
+ * Modified: 10/11/2019
+ */
+
+using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-///<summary>
-/// Description: Handles the Score needed to win the game, round duration
-/// Authors Leith Merrifield
-/// Creation Date: 15/10/2019
-/// Modified: 15/10/2019
-///</summary>
 
 public class RoundManager : MonoBehaviour
 {
     [Header("Config")]
     public int m_roundsToWin = 3;
+
     public int m_roundCooldown = 5;
     public int m_startCooldown = 5;
 
     [Header("Status")]
     public int m_currentRound = 1;
-    public double m_duration = 0.0;
+
+    public int m_duration = 0;
     public int m_blueScore = 0;
     public int m_redScore = 0;
-    public bool m_redTeamAlive = true;
-    public bool m_blueTeamAlive = true;
+    public static bool m_redTeamAlive = true;
+    public static bool m_blueTeamAlive = true;
     public bool m_isGameOver = false;
 
     private bool m_roundStart = false;
-    private double m_roundDuration;
+    public static float m_roundDuration;
     public static bool m_isPlaying = false; // static bool to be used globally to pause the game
     private bool m_gameStart = true; // Used to run the initial timer once
 
-    public Text m_redScoreText;
-    public Text m_blueScoreText;
-    public Text m_RoundTimer; 
+    public TextMeshProUGUI m_redScoreText;
+    public TextMeshProUGUI m_blueScoreText;
+    public TextMeshProUGUI m_RoundTimer;
+    
 
-    void Start()
+    public Image m_RoundBeginImage;
+
+    public Sprite m_RoundBeginSprint3;
+    public Sprite m_RoundBeginSprint2;
+    public Sprite m_RoundBeginSprint1;
+
+
+    float m_gameStartTimer = 3;
+
+    private void Start()
     {
         m_gameStart = true; // temp, but the variable will the entry point of a round
+        m_isPlaying = false;
+        m_RoundBeginImage.enabled = true;
+        m_gameStartTimer = m_startCooldown;
     }
 
-    void Update()
+    private void Update()
     {
-        if(m_gameStart)
+        if (m_gameStart)
         {
-            StartCoroutine(Cooldown(m_startCooldown));
-            m_gameStart = false;
+            m_gameStartTimer -= Time.deltaTime;
+            // m_RoundTimer.text = Mathf.Floor(m_gameStartTimer).ToString();
+            m_RoundTimer.text = "0:00";
+
+            switch (Mathf.CeilToInt(m_gameStartTimer))
+            {
+                case 1:
+                    m_RoundBeginImage.sprite = m_RoundBeginSprint1;
+                    break;
+                case 2:
+                    m_RoundBeginImage.sprite = m_RoundBeginSprint2;
+                    break;
+                case 3:
+                    m_RoundBeginImage.sprite = m_RoundBeginSprint3;
+                    break;
+            }
+
+
+            if (m_gameStartTimer <= 0)
+            {
+
+                m_isPlaying = true;
+                m_gameStart = false;
+                m_RoundBeginImage.enabled = false;
+            }
         }
 
         if (m_isGameOver)
@@ -60,44 +98,50 @@ public class RoundManager : MonoBehaviour
             return;
         }
 
-        if(m_isPlaying)
+        if (m_isPlaying)
         {
-            if(!m_roundStart)
+            if (!m_roundStart)
             {
                 m_roundDuration = 0;
                 m_roundStart = true;
             }
             m_roundDuration += Time.deltaTime;
-            m_duration = (Math.Floor(m_roundDuration));
-            m_RoundTimer.text = m_duration.ToString(); 
+
+
+            float t = m_roundDuration;
+            string minutes = ((int)t / 60).ToString();
+            string seconds = (t % 60).ToString("00");
+
+            //m_RoundTimer.text = String.Format("0:{00}", m_duration.ToString());
+            m_RoundTimer.text = minutes + ":" + seconds;
+
             // Checks if a member of the team are still alive
-            foreach(var player in TeamManager.m_blueTeam)
+            foreach (var player in TeamManager.m_blueTeam)
             {
-                if(player.GetComponent<Player>().m_isAlive)
+                if (player.GetComponent<Player>().m_isAlive)
                 {
                     m_blueTeamAlive = true;
                     break;
                 }
                 else
-                    m_blueTeamAlive  = false;
+                    m_blueTeamAlive = false;
             }
-            foreach(var player in TeamManager.m_redTeam)
+            foreach (var player in TeamManager.m_redTeam)
             {
-
-                if(player.GetComponent<Player>().m_isAlive)
+                if (player.GetComponent<Player>().m_isAlive)
                 {
                     m_redTeamAlive = true;
                     break;
                 }
                 else
-                    m_redTeamAlive  = false;
+                    m_redTeamAlive = false;
             }
 
-            if(!m_blueTeamAlive)
+            if (!m_blueTeamAlive)
             {
                 m_redScore++;
-                m_redScoreText.text = m_redScore.ToString(); 
-                if(m_redScore == m_roundsToWin)
+                m_redScoreText.text = m_redScore.ToString();
+                if (m_redScore == m_roundsToWin)
                 {
                     EndGame();
                     Debug.Log("Red Wins");
@@ -108,11 +152,11 @@ public class RoundManager : MonoBehaviour
                 // restart round
                 RestartRound();
             }
-            else if(!m_redTeamAlive)
+            else if (!m_redTeamAlive)
             {
                 m_blueScore++;
-                m_blueScoreText.text = m_blueScore.ToString(); 
-                if(m_blueScore == m_roundsToWin)
+                m_blueScoreText.text = m_blueScore.ToString();
+                if (m_blueScore == m_roundsToWin)
                 {
                     EndGame();
                     Debug.Log("Blue Wins");
@@ -126,36 +170,70 @@ public class RoundManager : MonoBehaviour
         }
     }
 
-    void EndGame()
+    private void EndGame()
     {
         m_isGameOver = true;
         m_isPlaying = false;
+
+        foreach (var player in TeamManager.m_redTeam)
+        {
+            player.GetComponent<Player>().DropBall();
+            player.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        }
+        foreach (var player in TeamManager.m_blueTeam)
+        {
+            player.GetComponent<Player>().DropBall();
+            player.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        }
+
         GetComponent<TeamManager>().Reset();
-        GetComponent<BallManager>().ResetBalls();        
+        GetComponent<BallManager>().ResetBalls();
     }
 
-    void RestartRound()
+    private void RestartRound()
     {
         // m_isPlayer determines if the scoring/duration system runs
         m_isPlaying = false;
-        StartCoroutine(Cooldown(m_roundCooldown));
+        // StartCoroutine(Cooldown(m_roundCooldown));
         m_currentRound++;
         // duration reset
         m_roundStart = false;
+
+        m_gameStart = true; // temp, but the variable will the entry point of a round
+        m_isPlaying = false;
+        m_RoundBeginImage.enabled = true;
+        m_gameStartTimer = m_startCooldown;
+
+        foreach (var player in TeamManager.m_redTeam)
+        {
+            player.GetComponent<Player>().DropBall();
+            player.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        }
+        foreach (var player in TeamManager.m_blueTeam)
+        {
+            player.GetComponent<Player>().DropBall();
+            player.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        }
+
         GetComponent<TeamManager>().Reset();
-        GetComponent<BallManager>().ResetBalls();        
+        GetComponent<BallManager>().ResetBalls();
     }
 
-    IEnumerator Cooldown(int seconds)
+    private IEnumerator Cooldown(int seconds)
     {
-        for(int i = seconds; i > 0 ; --i)
+        for (int i = seconds; i > 0; --i)
         {
-            m_RoundTimer.text = String.Format("0:{00}", i.ToString());
-            Debug.Log("Starts in: " +  i);
+            int smollseconds = i % 10;
+            int tenSeconds = i / 10;
+            int minutes = i / 60;
+
+         //  m_RoundMinutes.text = minutes.ToString();
+         //  m_RoundTens.text = tenSeconds.ToString();
+         //  m_RoundSeconds.text = smollseconds.ToString();
             yield return new WaitForSeconds(1.0f);
         }
-        Debug.Log("Go!");
+        //m_RoundTimer.text = "Begin!";
+        //yield return new WaitForSeconds(.5f);
         m_isPlaying = true;
     }
 }
-

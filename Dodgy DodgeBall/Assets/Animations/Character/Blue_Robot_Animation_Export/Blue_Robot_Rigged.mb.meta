@@ -1,0 +1,180 @@
+fileFormatVersion: 2
+guid: d769e8d62371fd647a1ba440b2044e80
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Blue
+    100002: Blue_Robot_Low
+    100004: //RootNode
+    100006: Chest
+    100008: group
+    100010: group1
+    100012: Head
+    100014: L_Clav
+    100016: L_Elbow
+    100018: L_Fingers
+    100020: L_Fingertips
+    100022: L_Foot
+    100024: L_Hip
+    100026: L_Knee
+    100028: L_Shoulder
+    100030: L_Thumb
+    100032: L_Thumbtip
+    100034: L_Wrist
+    100036: nurbsCircle1
+    100038: pasted__Blue
+    100040: pasted__Blue 1
+    100042: Pelvis
+    100044: persp1
+    100046: R_Clav
+    100048: R_Elbow
+    100050: R_Fingers
+    100052: R_Fingertips
+    100054: R_Foot
+    100056: R_Hip
+    100058: R_Knee
+    100060: R_Shoulder
+    100062: R_Thumb
+    100064: R_Thumbtip
+    100066: R_Wrist
+    100068: Red
+    100070: Waist
+    400000: Blue
+    400002: Blue_Robot_Low
+    400004: //RootNode
+    400006: Chest
+    400008: group
+    400010: group1
+    400012: Head
+    400014: L_Clav
+    400016: L_Elbow
+    400018: L_Fingers
+    400020: L_Fingertips
+    400022: L_Foot
+    400024: L_Hip
+    400026: L_Knee
+    400028: L_Shoulder
+    400030: L_Thumb
+    400032: L_Thumbtip
+    400034: L_Wrist
+    400036: nurbsCircle1
+    400038: pasted__Blue
+    400040: pasted__Blue 1
+    400042: Pelvis
+    400044: persp1
+    400046: R_Clav
+    400048: R_Elbow
+    400050: R_Fingers
+    400052: R_Fingertips
+    400054: R_Foot
+    400056: R_Hip
+    400058: R_Knee
+    400060: R_Shoulder
+    400062: R_Thumb
+    400064: R_Thumbtip
+    400066: R_Wrist
+    400068: Red
+    400070: Waist
+    2000000: persp1
+    2100000: pasted__lambert2
+    2100002: lambert1
+    2300000: Blue
+    2300002: pasted__Blue
+    2300004: pasted__Blue 1
+    3300000: Blue
+    3300002: pasted__Blue
+    3300004: pasted__Blue 1
+    4300000: Red
+    4300002: Blue
+    4300004: pasted__Blue
+    4300006: pasted__Blue
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: Red
+    2186277476908879412: ImportLogs
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,31 +1,33 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿/*   CatchCollide.cs
+ *   Authors: Leith Merrifield, Boran Baykan
+ *   Description: Handles ball entering player catch range
+ *   Creation: 07/10/2019
+ */
+
+using System.Collections;
 using UnityEngine;
 using XboxCtrlrInput;
-
-///<summary>
-/// Description: Handles ball entering player catch range
-/// Authors Leith Merrifield
-/// Creation Date: 07/10/2019
-/// Modified: 07/10/2019
-///</summary>
-
 
 public class CatchCollide : MonoBehaviour
 {
     public GameObject m_player = null;
     private GameObject m_lastBall = null;
-    private bool m_cooldown = false;
+    [SerializeField] private bool m_cooldown = false;
 
     public bool m_countDown = false;
+
     public XboxController m_controller;
+
+    public Material m_redMaterial = null;
+    public Material m_blueMaterial = null;
+    public Material m_greenMaterial = null;
+
     public PLAYER_TEAM m_team;
-    
+
     private Color m_testColour = Color.green;
 
-    void Start()
+    private void Start()
     {
-
         if (m_player == null)
         {
             Debug.LogAssertion("You need to set a player for the Catch Collide script \n" +
@@ -36,43 +38,46 @@ public class CatchCollide : MonoBehaviour
 
     public void Update()
     {
-
         m_team = gameObject.transform.parent.GetComponent<Player>().m_currentTeam;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+    }
+
     // When an object is colliding with the catch range
-    void OnTriggerStay(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (m_cooldown)
             return;
-        if(other.tag == "Red Ball" ||
+        if (other.tag == "Red Ball" ||
            other.tag == "Blue Ball" ||
            other.tag == "Neutral Ball")
         {
             // Set timer from 0 seconds upto 5 seconds then set the ball back to Neutral and Have the ball leave the collider
-            
 
             MeshRenderer ballMesh = other.GetComponent<MeshRenderer>();
             // sets the ball's team accordinly and if the ball is of the opposing colour dont pick up
-            switch(m_team)
+            switch (m_team)
             {
                 case PLAYER_TEAM.TEAM_BLUE:
-                    if(other.tag == "Red Ball")
+                    if (other.tag == "Red Ball")
                         return;
                     other.tag = "Blue Ball";
                     m_testColour = Color.blue;
                     break;
+
                 case PLAYER_TEAM.TEAM_RED:
-                    if(other.tag == "Blue Ball")
+                    if (other.tag == "Blue Ball")
                         return;
                     other.tag = "Red Ball";
                     m_testColour = Color.red;
                     break;
-            }            
-            
+            }
+
             // checks the colour and sets if the colour is different
             // prevents setting the colour every loop
-            if(ballMesh.material.color != m_testColour)
+            if (ballMesh.material.color != m_testColour)
                 ballMesh.material.color = m_testColour;
 
             m_player.GetComponent<Player>().SetBall(other.gameObject);
@@ -86,7 +91,12 @@ public class CatchCollide : MonoBehaviour
         }
     }
 
-    IEnumerator cooldown()
+    public void ResetCooldown()
+    {
+        m_cooldown = false;
+    }
+
+    private IEnumerator cooldown()
     {
         m_cooldown = true;
         yield return new WaitForSeconds(.5f);

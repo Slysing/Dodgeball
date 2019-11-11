@@ -1,0 +1,127 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5683059578573879305
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5683059578573879307}
+  - component: {fileID: 5683059578573879304}
+  - component: {fileID: 5683059578573879413}
+  - component: {fileID: 5683059578573879306}
+  - component: {fileID: 5683059578573879415}
+  m_Layer: 0
+  m_Name: EventSystem_001_World_001
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5683059578573879307
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5683059578573879305}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -27.40799, y: -10.611485, z: 59.631516}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5683059578573879304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5683059578573879305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f88aa3a0213fc74388767a2afabc15b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_active: 1
+  m_spawnInterval: 10
+  m_ball: {fileID: 49656010319241163, guid: c62807ad30f0b5342a537de37c33b028, type: 3}
+  m_spawnPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  m_redMaterial: {fileID: 2100000, guid: cc19ad3ba368b4f438eb46f8a62de321, type: 2}
+  m_blueMaterial: {fileID: 2100000, guid: 1129a4e4e3152cb4084179a9554aaad8, type: 2}
+  m_greenMaterial: {fileID: 2100000, guid: 3816b83c9ac362c4bb04aceb50e89420, type: 2}
+--- !u!114 &5683059578573879413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5683059578573879305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22280a89217a0de4b94ce72f94d07e1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_redplayer1Prefab: {fileID: 3723419903023742563, guid: c88ea008e9eb86342986b0759be432ae,
+    type: 3}
+  m_redplayer2Prefab: {fileID: 3723419903023742563, guid: 48b0a430b9d8b4d41a43108b53176665,
+    type: 3}
+  m_blueplayer1Prefab: {fileID: 3723419903023742563, guid: 0acf4c8cb65d30e4baa27bbc12cf0428,
+    type: 3}
+  m_blueplayer2Prefab: {fileID: 3723419903023742563, guid: 4ec199ac3eb5e624da7cf78d2634120e,
+    type: 3}
+  m_blueSpawns:
+  - {fileID: 0}
+  - {fileID: 0}
+  m_redSpawns:
+  - {fileID: 0}
+  - {fileID: 0}
+  m_redMaterial: {fileID: 2100000, guid: 1d7a7ae2a705dc743b9e0dcb5f355a4e, type: 2}
+  m_blueMaterial: {fileID: 2100000, guid: 0f3b801a12a2212458327ba61ab4d457, type: 2}
+--- !u!114 &5683059578573879306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5683059578573879305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d747d5fc9dd3be49a1bf275a93521b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_roundsToWin: 5
+  m_roundCooldown: 5
+  m_startCooldown: 5
+  m_currentRound: 1
+  m_duration: 0
+  m_blueScore: 0
+  m_redScore: 0
+  m_isGameOver: 0
+  m_redScoreText: {fileID: 0}
+  m_blueScoreText: {fileID: 0}
+  m_RoundMinutes: {fileID: 0}
+  m_RoundTens: {fileID: 0}
+  m_RoundSeconds: {fileID: 0}
+--- !u!114 &5683059578573879415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5683059578573879305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7567137aca89d3f40869d64b90113afd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 0}
+  m_interval: 5
+  m_holdInterval: 10
+  m_togglePistons: 1
