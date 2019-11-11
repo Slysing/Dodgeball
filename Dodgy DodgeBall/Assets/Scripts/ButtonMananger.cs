@@ -37,6 +37,8 @@ public class ButtonMananger : MonoBehaviour
 
     [Header("Controls Menu")]
     [SerializeField] private Button m_controlButton;
+    [SerializeField] private GameObject m_controlPanel = null;
+    [SerializeField] private Button m_controlBackButton = null;
 
     [Header("Exit Button")]
     [SerializeField] private Button m_exitButton;
@@ -49,6 +51,8 @@ public class ButtonMananger : MonoBehaviour
         m_settingsButton.onClick.AddListener(SettingsClick);
         m_settingsBackButton.onClick.AddListener(SettingsBackClick);
         m_startButton.onClick.AddListener(StartGameClick);
+        m_controlButton.onClick.AddListener(ControlsClick);
+        m_controlBackButton.onClick.AddListener(ControlBackClick);
 
         // runs for the first ever launch of the game on the device
         // otherwise load previous settings
@@ -128,6 +132,41 @@ public class ButtonMananger : MonoBehaviour
         PlayerPrefs.SetInt("PistonToggle", piston);
         PlayerPrefs.SetInt("MusicToggle", music);
         PlayerPrefs.SetFloat("Volume", volume);
+    }
+
+
+    private void ControlsClick()
+    {
+        if (!m_isTranslating)
+        {
+            m_menuAnim.SetTrigger("ToggleSettings");
+            for (int i = 0; i < m_animationClips.Count; i++)
+            {
+                if (m_animationClips[i].name == "Settings")
+                {
+                    StartCoroutine(CameraTranslate(m_animationClips[i]));
+                    m_isTranslating = true;
+                    m_controlPanel.SetActive(true);
+                    m_controlBackButton.Select();
+                    break;
+                }
+            }
+        }
+    }
+
+    private void ControlBackClick()
+    {
+        if (!m_isTranslating)
+        {
+            m_isTranslating = true;
+
+            ApplySettings();
+
+            StartCoroutine(CameraTranslate(m_animationClips[m_settingsClipIndex]));
+            m_menuAnim.SetTrigger("ToggleSettings");
+            m_controlPanel.SetActive(false);
+            m_controlButton.Select();
+        }
     }
 
     private void StartGameClick()
