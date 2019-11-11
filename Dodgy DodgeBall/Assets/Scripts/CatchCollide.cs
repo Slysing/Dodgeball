@@ -34,21 +34,13 @@ public class CatchCollide : MonoBehaviour
                                 "Name: " + gameObject.name +
                                 ", Parent: " + transform.parent.name);
         }
-    }
-
-    public void Update()
-    {
         m_team = gameObject.transform.parent.GetComponent<Player>().m_currentTeam;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
     }
 
     // When an object is colliding with the catch range
     private void OnTriggerStay(Collider other)
     {
-        if (m_cooldown)
+        if (m_cooldown || RoundManager.m_pauseGame)
             return;
         if (other.tag == "Red Ball" ||
            other.tag == "Blue Ball" ||

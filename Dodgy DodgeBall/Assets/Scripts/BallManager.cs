@@ -47,6 +47,9 @@ public class BallManager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if(RoundManager.m_pauseGame)
+            return;
+
         if (!m_active && m_isSpawning)
         {
             StopCoroutine("BallSpawner");
@@ -54,11 +57,6 @@ public class BallManager : MonoBehaviour
         else if (m_active && !m_isSpawning)
         {
             StartCoroutine("BallSpawner");
-        }
-
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            RemoveBall(m_ballPool[2]);
         }
     }
 
@@ -144,6 +142,10 @@ public class BallManager : MonoBehaviour
                 // if the game is in a paused state then this will run
                 // basically resuming the corroutine every 1 second
                 // to check if the game has started yet
+                while(RoundManager.m_pauseGame)
+                {
+                    yield return null;
+                }
                 if (!RoundManager.m_isPlaying)
                 {
                     i++;

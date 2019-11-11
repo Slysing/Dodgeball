@@ -14,6 +14,8 @@ public class BallIncrease : MonoBehaviour
     public float m_mininumSpeed = 15.0f;
     private Rigidbody m_rb;
     private float m_bounceSpeedMultiplier = 20.0f; // constant multiplier for force
+    private Vector3 m_tempVelocity;
+    private bool m_runOnce = false;
 
     private void Start()
     {
@@ -21,18 +23,42 @@ public class BallIncrease : MonoBehaviour
         m_rb = GetComponent<Rigidbody>();
     }
 
+    void Update()
+    {
+
+        if(RoundManager.m_pauseGame)
+        {
+            if(!m_runOnce)
+            {
+                if(m_rb.velocity.magnitude > 0)
+                    m_tempVelocity = m_rb.velocity;
+                m_rb.isKinematic = true;
+                m_rb.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
+                m_runOnce = true;
+            }
+        }
+        else
+        {
+            if(m_rb.isKinematic)
+            {
+                m_rb.isKinematic = false;
+                m_rb.velocity = m_tempVelocity;
+                m_runOnce = false;
+                m_rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
+            }
+        }
+    }
+
     private void OnCollisionExit(Collision collider)
     {
-        if (collider.gameObject.tag == "Wall")
-        {
-            m_audioSource.PlayOneShot(m_collisionSound);
-            Debug.Log("testbounce " + m_rb.velocity.magnitude);
 
-            // If magnitude is less then m_mininumSpeed then apply force using m_bounceAmount
-            if (m_rb.velocity.magnitude < m_mininumSpeed)
-            {
-                m_rb.AddForce(m_rb.velocity * (Time.deltaTime * m_bounceAmount * 20.0f), ForceMode.Impulse);
-            }
+        m_audioSource.PlayOneShot(m_collisionSound);
+        Debug.Log("testbounce " + m_rb.velocity.magnitude);
+
+        // If magnitude is less then m_mininumSpeed then apply force using m_bounceAmount
+        if (m_rb.velocity.magnitude < m_mininumSpeed)
+        {
+            m_rb.AddForce(m_rb.velocity * (Time.deltaTime * m_bounceAmount * 20.0f), ForceMode.Impulse);
         }
     }
 }

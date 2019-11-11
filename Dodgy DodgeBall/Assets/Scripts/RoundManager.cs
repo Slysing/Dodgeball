@@ -10,10 +10,12 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using XboxCtrlrInput;
 
 
 public class RoundManager : MonoBehaviour
 {
+    public static bool m_pauseGame = false;
     [Header("Config")]
     public int m_roundsToWin = 3;
 
@@ -38,6 +40,7 @@ public class RoundManager : MonoBehaviour
     public TextMeshProUGUI m_redScoreText;
     public TextMeshProUGUI m_blueScoreText;
     public TextMeshProUGUI m_RoundTimer;
+    public GameObject m_pausePanel;
     
 
     public Image m_RoundBeginImage;
@@ -59,6 +62,24 @@ public class RoundManager : MonoBehaviour
 
     private void Update()
     {
+        // If the game is paused dont run the update
+        if(Input.GetKeyDown(KeyCode.P) || XCI.GetButtonDown(XboxButton.Start) )
+        {
+            m_pauseGame = m_pauseGame == true ? false : true;
+        }
+
+        if(m_pauseGame)
+        {
+            m_pausePanel.SetActive(true);
+            return;
+        }
+        else
+        {
+            if(m_pausePanel.activeSelf)
+                m_pausePanel.SetActive(false);
+        }
+
+
         if (m_gameStart)
         {
             m_gameStartTimer -= Time.deltaTime;

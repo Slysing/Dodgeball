@@ -17,6 +17,6 @@ public class PistonPosition : MonoBehaviour
     void Update()
     {
         transform.position = new Vector3(xPos,transform.position.y,zPos);
-        print(transform.position.x);
+        //print(transform.position.x);
     }
 }
