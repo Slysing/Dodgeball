@@ -64,21 +64,21 @@ public class CatchCollide : MonoBehaviour
                     if (other.tag == "Red Ball")
                         return;
                     other.tag = "Blue Ball";
-                    m_testColour = Color.blue;
+                    other.GetComponent<MeshRenderer>().material = m_blueMaterial;
                     break;
 
                 case PLAYER_TEAM.TEAM_RED:
                     if (other.tag == "Blue Ball")
                         return;
                     other.tag = "Red Ball";
-                    m_testColour = Color.red;
+                    other.GetComponent<MeshRenderer>().material = m_redMaterial;
                     break;
             }
 
             // checks the colour and sets if the colour is different
             // prevents setting the colour every loop
-            if (ballMesh.material.color != m_testColour)
-                ballMesh.material.color = m_testColour;
+            //if (ballMesh.material != m_testColour)
+            //    ballMesh.material = m_testColour;
 
             m_player.GetComponent<Player>().SetBall(other.gameObject);
 
