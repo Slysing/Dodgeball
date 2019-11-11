@@ -109,9 +109,9 @@ MonoBehaviour:
   m_cooldown: 0
   m_countDown: 0
   m_controller: 1
-  m_redMaterial: {fileID: 2100000, guid: cc19ad3ba368b4f438eb46f8a62de321, type: 2}
-  m_blueMaterial: {fileID: 2100000, guid: 1129a4e4e3152cb4084179a9554aaad8, type: 2}
-  m_greenMaterial: {fileID: 2100000, guid: 3816b83c9ac362c4bb04aceb50e89420, type: 2}
+  m_redMaterial: {fileID: 2100000, guid: 23a8616c26cda6b42a0f0c7addb25bcd, type: 2}
+  m_blueMaterial: {fileID: 2100000, guid: 9f3c0d71726640048a75596d79f60dcd, type: 2}
+  m_greenMaterial: {fileID: 2100000, guid: 08afbba01bab0b8439deddf0ba38b113, type: 2}
   m_team: 1
 --- !u!1 &3723419903023742465
 GameObject:
