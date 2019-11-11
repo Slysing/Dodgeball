@@ -199,7 +199,7 @@ MonoBehaviour:
   m_speed: 10
   m_dashSpeed: 50
   m_pickupRadius: 5
-  m_throwStrength: 50
+  m_throwStrength: 49.5
   m_hand: {fileID: 8492107111815941031}
   m_catchRange: {fileID: 1293799509910723319}
   m_fakeBallCollider: {fileID: 2270695020530039279}
@@ -212,9 +212,9 @@ MonoBehaviour:
   matBlue: {fileID: 0}
   matYellow: {fileID: 0}
   m_timeLeft: 0
-  m_redMaterial: {fileID: 2100000, guid: cc19ad3ba368b4f438eb46f8a62de321, type: 2}
-  m_blueMaterial: {fileID: 2100000, guid: 1129a4e4e3152cb4084179a9554aaad8, type: 2}
-  m_greenMaterial: {fileID: 2100000, guid: 3816b83c9ac362c4bb04aceb50e89420, type: 2}
+  m_redMaterial: {fileID: 2100000, guid: fc3e72c280fd37c409d72d845b5edaac, type: 2}
+  m_blueMaterial: {fileID: 2100000, guid: 9f3c0d71726640048a75596d79f60dcd, type: 2}
+  m_greenMaterial: {fileID: 2100000, guid: 58d38782de18caf41a9364100971f621, type: 2}
   playerAnim: {fileID: 7992381660871935509}
   deathParticle: {fileID: 8954288908535567504, guid: 8fd53a05fe746984b9752b2840cb0c1b,
     type: 3}
@@ -778,10 +778,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3723419903024095747}
     m_Modifications:
-    - target: {fileID: 100056, guid: 5e17f6c5b2814e54e8eb136e87933e07, type: 3}
-      propertyPath: m_Name
-      value: Walk_Animation
-      objectReference: {fileID: 0}
     - target: {fileID: 400056, guid: 5e17f6c5b2814e54e8eb136e87933e07, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -825,6 +821,10 @@ PrefabInstance:
     - target: {fileID: 400056, guid: 5e17f6c5b2814e54e8eb136e87933e07, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100056, guid: 5e17f6c5b2814e54e8eb136e87933e07, type: 3}
+      propertyPath: m_Name
+      value: Walk_Animation
       objectReference: {fileID: 0}
     - target: {fileID: 9500000, guid: 5e17f6c5b2814e54e8eb136e87933e07, type: 3}
       propertyPath: m_Controller
