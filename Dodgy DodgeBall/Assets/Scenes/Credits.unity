@@ -5665,7 +5665,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -134.7, y: -33.06}
-  m_SizeDelta: {x: 12, y: 12}
+  m_SizeDelta: {x: 16.6, y: 12}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &745606902
 MonoBehaviour:
@@ -14691,6 +14691,8 @@ MonoBehaviour:
   m_musicToggle: {fileID: 0}
   m_volumeSlider: {fileID: 0}
   m_controlButton: {fileID: 0}
+  m_controlPanel: {fileID: 0}
+  m_controlBackButton: {fileID: 0}
   m_exitButton: {fileID: 0}
   m_currentEventSystem: {fileID: 0}
 --- !u!114 &7647150198359778696

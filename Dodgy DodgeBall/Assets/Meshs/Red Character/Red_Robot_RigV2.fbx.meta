@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b884be5f5d2fab247a3d192c4375fb74
+guid: 4391e86c3c86d4646b0edf39704f4e99
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -16,22 +16,21 @@ ModelImporter:
     100020: L_Thumb
     100022: L_Thumbtip
     100024: L_Wrist
-    100026: nurbsCircle1
-    100028: Pelvis
-    100030: R_Clav
-    100032: R_Elbow
-    100034: R_Fingers
-    100036: R_Fingertips
-    100038: R_Foot
-    100040: R_Hip
-    100042: R_Knee
-    100044: R_Shoulder
-    100046: R_Thumb
-    100048: R_Thumbtip
-    100050: R_Wrist
-    100052: //RootNode
-    100054: RedCharLP:polySurface6
-    100056: Waist
+    100026: Pelvis
+    100028: R_Clav
+    100030: R_Elbow
+    100032: R_Fingers
+    100034: R_Fingertips
+    100036: R_Foot
+    100038: R_Hip
+    100040: R_Knee
+    100042: R_Shoulder
+    100044: R_Thumb
+    100046: R_Thumbtip
+    100048: R_Wrist
+    100050: //RootNode
+    100052: RedCharLP:polySurface6
+    100054: Waist
     400000: Chest
     400002: Head
     400004: L_Clav
@@ -45,25 +44,23 @@ ModelImporter:
     400020: L_Thumb
     400022: L_Thumbtip
     400024: L_Wrist
-    400026: nurbsCircle1
-    400028: Pelvis
-    400030: R_Clav
-    400032: R_Elbow
-    400034: R_Fingers
-    400036: R_Fingertips
-    400038: R_Foot
-    400040: R_Hip
-    400042: R_Knee
-    400044: R_Shoulder
-    400046: R_Thumb
-    400048: R_Thumbtip
-    400050: R_Wrist
-    400052: //RootNode
-    400054: RedCharLP:polySurface6
-    400056: Waist
+    400026: Pelvis
+    400028: R_Clav
+    400030: R_Elbow
+    400032: R_Fingers
+    400034: R_Fingertips
+    400036: R_Foot
+    400038: R_Hip
+    400040: R_Knee
+    400042: R_Shoulder
+    400044: R_Thumb
+    400046: R_Thumbtip
+    400048: R_Wrist
+    400050: //RootNode
+    400052: RedCharLP:polySurface6
+    400054: Waist
     2100000: RedCharLP_initialShadingGroup1
     4300000: RedCharLP:polySurface6
-    7400000: Walk
     9500000: //RootNode
     13700000: RedCharLP:polySurface6
   externalObjects: {}
@@ -93,35 +90,7 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations:
-    - serializedVersion: 16
-      name: Walk
-      takeName: Take 001
-      firstFrame: 1
-      lastFrame: 25
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+    clipAnimations: []
     isReadable: 1
   meshes:
     lODScreenPercentages: []
@@ -146,7 +115,7 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 1
+    previousCalculatedGlobalScale: 0.01
     hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60

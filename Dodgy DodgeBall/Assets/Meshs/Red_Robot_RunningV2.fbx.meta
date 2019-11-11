@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b884be5f5d2fab247a3d192c4375fb74
+guid: 6a21470d52c4cf9439a703ff57e2bd2b
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -61,9 +61,9 @@ ModelImporter:
     400052: //RootNode
     400054: RedCharLP:polySurface6
     400056: Waist
-    2100000: RedCharLP_initialShadingGroup1
+    2100000: RedCharLP_initialShadingGroup2
     4300000: RedCharLP:polySurface6
-    7400000: Walk
+    7400000: Take 001
     9500000: //RootNode
     13700000: RedCharLP:polySurface6
   externalObjects: {}
@@ -93,35 +93,7 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations:
-    - serializedVersion: 16
-      name: Walk
-      takeName: Take 001
-      firstFrame: 1
-      lastFrame: 25
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+    clipAnimations: []
     isReadable: 1
   meshes:
     lODScreenPercentages: []
