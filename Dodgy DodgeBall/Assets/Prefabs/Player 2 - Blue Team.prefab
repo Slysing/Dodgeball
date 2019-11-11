@@ -526,18 +526,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3723419903024095747}
     m_Modifications:
-    - target: {fileID: 100000, guid: 72be7f74bc28ac746840cf06687d729a, type: 3}
-      propertyPath: m_Name
-      value: Blue_Player_Low
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: 72be7f74bc28ac746840cf06687d729a, type: 3}
-      propertyPath: m_Layer
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: 72be7f74bc28ac746840cf06687d729a, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 72be7f74bc28ac746840cf06687d729a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -580,6 +568,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 72be7f74bc28ac746840cf06687d729a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 72be7f74bc28ac746840cf06687d729a, type: 3}
+      propertyPath: m_Name
+      value: Blue_Player_Low
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 72be7f74bc28ac746840cf06687d729a, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 72be7f74bc28ac746840cf06687d729a, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: 72be7f74bc28ac746840cf06687d729a, type: 3}
@@ -803,10 +803,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3723419903024095747}
     m_Modifications:
-    - target: {fileID: 100056, guid: 5e17f6c5b2814e54e8eb136e87933e07, type: 3}
-      propertyPath: m_Name
-      value: Walk_Animation
-      objectReference: {fileID: 0}
     - target: {fileID: 400056, guid: 5e17f6c5b2814e54e8eb136e87933e07, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -855,10 +851,14 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 4d207cbb2c9e25745a4e17d2ddad34e8, type: 2}
+    - target: {fileID: 100056, guid: 5e17f6c5b2814e54e8eb136e87933e07, type: 3}
+      propertyPath: m_Name
+      value: Walk_Animation
+      objectReference: {fileID: 0}
     - target: {fileID: 13700000, guid: 5e17f6c5b2814e54e8eb136e87933e07, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 7593dd154fde2fc41a5dddbba2a9505d, type: 2}
+      objectReference: {fileID: 2100000, guid: cadb4050f8fa19540a06b213a42f9f1f, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e17f6c5b2814e54e8eb136e87933e07, type: 3}
 --- !u!4 &7992381660862130637 stripped
