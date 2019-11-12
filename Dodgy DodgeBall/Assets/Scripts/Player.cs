@@ -141,6 +141,13 @@ public class Player : MonoBehaviour
     // Fixed update is general used for anything physics related
     public void FixedUpdate()
     {
+        // If the game is paused dont run the update
+        if(RoundManager.m_pauseGame)
+        {
+            m_rb.velocity = Vector3.zero;
+            return;
+        }
+
         Vector3 moveVelocity = Vector3.zero;
 
         if (!m_useXboxController)
@@ -232,6 +239,10 @@ public class Player : MonoBehaviour
 
     public void Update()
     {
+        // If the game is paused dont run the update
+        if(RoundManager.m_pauseGame)
+            return;
+
         if (m_holdingBall == true)
         {
             if (m_fakeBallCollider.activeSelf != true)
