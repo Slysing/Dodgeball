@@ -39,7 +39,7 @@ public class Player : MonoBehaviour
     [Header("Catch and Throw")]
     public float m_pickupRadius = 5f;
 
-    public float m_throwStrength = 5f;
+    public float m_throwStrength = 3f;
     public GameObject m_hand = null;
     public GameObject m_catchRange = null;
     public GameObject m_fakeBallCollider = null;
