@@ -44,7 +44,7 @@ public class ButtonMananger : MonoBehaviour
     [SerializeField] private Button m_exitButton;
 
     public EventSystem m_currentEventSystem;
-
+    [HideInInspector]public bool m_startClicked; 
     private void Start()
     {
         m_currentEventSystem.GetComponent<EventSystem>();
@@ -171,7 +171,20 @@ public class ButtonMananger : MonoBehaviour
 
     private void StartGameClick()
     {
-        SceneManager.LoadScene(1);
+        if (!m_isTranslating)
+        {
+            m_menuAnim.SetTrigger("ToggleStart");
+            for (int i = 0; i < m_animationClips.Count; i++)
+            {
+                if (m_animationClips[i].name == "CharacterSelect")
+                {
+                    StartCoroutine(CameraTranslate(m_animationClips[i]));
+                    m_isTranslating = true;
+
+                    break;
+                }
+            }
+        };
     }
 
     // Update is called once per frame

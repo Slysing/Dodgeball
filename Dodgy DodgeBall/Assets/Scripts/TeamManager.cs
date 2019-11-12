@@ -67,14 +67,14 @@ public class TeamManager : MonoBehaviour
         }
     }
 
-    private void Start()
+ private void Start()
     {
         // This only here in place of a team select
-        m_redTeam.Add(Instantiate(m_redplayer1Prefab, m_redSpawns[0].transform.position, Quaternion.identity));
-        m_redTeam.Add(Instantiate(m_redplayer2Prefab, m_redSpawns[1].transform.position, Quaternion.identity));
+        //m_redTeam.Add(Instantiate(m_redplayer1Prefab, m_redSpawns[0].transform.position, Quaternion.identity));
+        //m_redTeam.Add(Instantiate(m_redplayer2Prefab, m_redSpawns[1].transform.position, Quaternion.identity));
 
-        m_blueTeam.Add(Instantiate(m_blueplayer1Prefab, m_blueSpawns[0].transform.position, Quaternion.identity));
-        m_blueTeam.Add(Instantiate(m_blueplayer2Prefab, m_blueSpawns[1].transform.position, Quaternion.identity));
+        //m_blueTeam.Add(Instantiate(m_blueplayer1Prefab, m_blueSpawns[0].transform.position, Quaternion.identity));
+        //m_blueTeam.Add(Instantiate(m_blueplayer2Prefab, m_blueSpawns[1].transform.position, Quaternion.identity));
 
         //m_blueTeam[0].GetComponent<Player>().m_PlayerControllerNumber = 2;
         ////m_blueTeam[0].GetComponent<Player>().gameObject.tag = "BlueTeam";
@@ -86,5 +86,70 @@ public class TeamManager : MonoBehaviour
         //m_redTeam[1].GetComponent<Player>().m_PlayerControllerNumber = 4;
         //m_blueTeam[0].GetComponent<MeshRenderer>().material = m_blueMaterial;
         //m_redTeam[0].GetComponent<MeshRenderer>().material = m_redMaterial;
+
+        bool foundBlue = false;
+        bool foundRed = false;
+        for (int i = 0; i < StaticVariables.m_playerStates.Length; i++)
+        {
+            if (StaticVariables.m_playerStates[i] == State.LEFT)
+            {
+                if (!foundBlue)
+                {
+                    m_redTeam.Add(Instantiate(m_blueplayer1Prefab, m_blueSpawns[i].transform.position, Quaternion.identity));
+                    foundRed = true;
+                }
+                else
+                    m_redTeam.Add(Instantiate(m_blueplayer2Prefab, m_blueSpawns[1].transform.position, Quaternion.identity));
+            }
+            if (StaticVariables.m_playerStates[i] == State.RIGHT)
+            {
+                if (!foundRed)
+                {
+                    m_blueTeam.Add(Instantiate(m_redplayer1Prefab, m_redSpawns[0].transform.position, Quaternion.identity));
+                    foundRed = true;  ;
+                }
+                else
+                    m_blueTeam.Add(Instantiate(m_redplayer2Prefab, m_redSpawns[1].transform.position, Quaternion.identity));
+
+            }
+        }
+        //{
+        //    if(playerlist[i] == LEFT) //blue
+        //    {
+        //        if (!foundBlue)
+        //        {
+        //            m_blueTeam.Add(Instantiate(m_blueplayer1Prefab, m_blueSpawns[i].transform.position, Quaternion.identity));
+        //            foundBlue = true;
+        //        }
+        //        else
+        //        {
+        //            //other prefab
+        //        }
+        //    }
+
+        //    if (playerlist[i] == Right) //red
+        //    {
+        //        if (!foundBlue)
+        //        {
+        //            m_blueTeam.Add(Instantiate(m_blueplayer1Prefab, m_blueSpawns[i].transform.position, Quaternion.identity));
+        //            foundBlue = true;
+        //        }
+        //        else
+        //        {
+        //            //other prefab
+        //        }
+        //    }
+        //}
+
+        //if (StaticVariables.m_p1Blue)
+        //    m_blueTeam.Add(Instantiate(m_blueplayer1Prefab, m_blueSpawns[0].transform.position, Quaternion.identity));
+        //else
+        //    m_redTeam.Add(Instantiate(m_redplayer1Prefab, m_redSpawns[0].transform.position, Quaternion.identity));
+        //if (StaticVariables.m_p2Blue)
+        //    m_blueTeam.Add(Instantiate(m_blueplayer2Prefab, m_blueSpawns[1].transform.position, Quaternion.identity));
+        //else
+        //    m_redTeam.Add(Instantiate(m_redplayer2Prefab, m_redSpawns[1].transform.position, Quaternion.identity));
+
+
     }
 }
