@@ -18,9 +18,9 @@ public class Pitch_Slider : MonoBehaviour
     private void Update()
     {
         // If the game is paused dont run the update
-        if(RoundManager.m_pauseGame)
+        if (RoundManager.m_pauseGame)
             return;
-            //While the pitch is over 0, increases it as time passes.
+        //While the pitch is over 0, increases it as time passes.
         if (audioSource.pitch > 0)
         {
             audioSource.pitch += Time.deltaTime * startingPitch / timeToIncrease;

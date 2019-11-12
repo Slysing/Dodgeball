@@ -5,10 +5,8 @@
  * Modified: 10/11/2019
  */
 
-using UnityEngine;
 using System.Collections.Generic;
-using System.Collections;
-using System;
+using UnityEngine;
 
 public class PistonControl : MonoBehaviour
 {
@@ -31,10 +29,10 @@ public class PistonControl : MonoBehaviour
     private void Update()
     {
         // If the game is paused dont run the update
-        if(RoundManager.m_pauseGame)
+        if (RoundManager.m_pauseGame)
         {
             m_anim.enabled = false;
-            foreach(Animator light in  m_animLights)
+            foreach (Animator light in m_animLights)
             {
                 light.enabled = false;
             }
@@ -43,9 +41,9 @@ public class PistonControl : MonoBehaviour
         }
         else
         {
-            if(m_runOnce)
+            if (m_runOnce)
             {
-                foreach(Animator light in  m_animLights)
+                foreach (Animator light in m_animLights)
                 {
                     light.enabled = true;
                 }
@@ -54,12 +52,12 @@ public class PistonControl : MonoBehaviour
             }
         }
 
-        if(m_extend && (Time.time - m_time) > m_timeBetweenAnims)
+        if (m_extend && (Time.time - m_time) > m_timeBetweenAnims)
         {
             m_anim.SetTrigger("Extend");
-            m_extend = false;    
+            m_extend = false;
         }
-        else if(m_lower && (Time.time - m_time) > m_timeBetweenAnims)
+        else if (m_lower && (Time.time - m_time) > m_timeBetweenAnims)
         {
             m_anim.SetTrigger("Retract");
             m_lower = false;
@@ -77,10 +75,10 @@ public class PistonControl : MonoBehaviour
                     //StartCoroutine(m_raiseCo);
                     //m_anim.SetTrigger("Extend");
 
-                    foreach(Animator piston in m_animLights)
+                    foreach (Animator piston in m_animLights)
                     {
-                        piston.SetTrigger("Lights");     
-                    }     
+                        piston.SetTrigger("Lights");
+                    }
                     m_extend = true;
                     m_playingBool = true;
                     m_count = 0.0f;
@@ -93,10 +91,10 @@ public class PistonControl : MonoBehaviour
                 {
                     m_time = Time.time;
                     //StartCoroutine(m_lowerCo);
-                    foreach(Animator piston in m_animLights)
+                    foreach (Animator piston in m_animLights)
                     {
-                        piston.SetTrigger("Lights");     
-                    }                   
+                        piston.SetTrigger("Lights");
+                    }
                     m_lower = true;
                     m_playingBool = false;
                     m_count = 0.0f;
@@ -108,7 +106,7 @@ public class PistonControl : MonoBehaviour
     // If the pistons are up and a round has ended then play the down anim
     private void LateUpdate()
     {
-        if(RoundManager.m_pauseGame)
+        if (RoundManager.m_pauseGame)
             return;
     }
 
@@ -118,9 +116,9 @@ public class PistonControl : MonoBehaviour
         if (m_playingBool == true)
         {
             m_anim.SetTrigger("Retract");
-            foreach(Animator piston in m_animLights)
+            foreach (Animator piston in m_animLights)
             {
-                piston.SetTrigger("Lights");     
+                piston.SetTrigger("Lights");
             }
 
             m_playingBool = false;

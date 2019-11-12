@@ -1,29 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
-
 
 public class StaticVariables : MonoBehaviour
 {
     public SelectManager m_smRefernce;
 
-    public static bool m_p1Blue; 
-    public static bool m_p2Blue; 
-    public static bool m_p3Blue; 
+    public static bool m_p1Blue;
+    public static bool m_p2Blue;
+    public static bool m_p3Blue;
     public static bool m_p4Blue;
 
     public static State[] m_playerStates = new State[4];
 
-
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (m_smRefernce.m_startGame)
         {

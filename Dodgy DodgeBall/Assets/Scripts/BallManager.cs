@@ -47,7 +47,7 @@ public class BallManager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if(RoundManager.m_pauseGame)
+        if (RoundManager.m_pauseGame)
             return;
 
         if (!m_active && m_isSpawning)
@@ -142,7 +142,7 @@ public class BallManager : MonoBehaviour
                 // if the game is in a paused state then this will run
                 // basically resuming the corroutine every 1 second
                 // to check if the game has started yet
-                while(RoundManager.m_pauseGame)
+                while (RoundManager.m_pauseGame)
                 {
                     yield return null;
                 }

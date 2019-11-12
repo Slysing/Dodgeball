@@ -23,14 +23,13 @@ public class BallIncrease : MonoBehaviour
         m_rb = GetComponent<Rigidbody>();
     }
 
-    void Update()
+    private void Update()
     {
-
-        if(RoundManager.m_pauseGame)
+        if (RoundManager.m_pauseGame)
         {
-            if(!m_runOnce)
+            if (!m_runOnce)
             {
-                if(m_rb.velocity.magnitude > 0)
+                if (m_rb.velocity.magnitude > 0)
                     m_tempVelocity = m_rb.velocity;
                 m_rb.isKinematic = true;
                 m_rb.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
@@ -39,7 +38,7 @@ public class BallIncrease : MonoBehaviour
         }
         else
         {
-            if(m_rb.isKinematic)
+            if (m_rb.isKinematic)
             {
                 m_rb.isKinematic = false;
                 m_rb.velocity = m_tempVelocity;
@@ -51,7 +50,6 @@ public class BallIncrease : MonoBehaviour
 
     private void OnCollisionExit(Collision collider)
     {
-
         m_audioSource.PlayOneShot(m_collisionSound);
         //Debug.Log("testbounce " + m_rb.velocity.magnitude);
 

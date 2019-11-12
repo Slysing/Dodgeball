@@ -79,9 +79,14 @@ public class Player : MonoBehaviour
     // Ball
     public float m_timeLeft;
 
-    public TextMeshProUGUI m_countDownText;
-    public int m_countDownBall = 5;
-    private bool m_countDownFlag = false;
+    //TESTING PURPOSE
+    private float currentTime = 0f;
+    private float startingTime = 5f;
+    [SerializeField] private TextMeshProUGUI countdownText;
+
+    //public TextMeshProUGUI m_countDownText;
+    //public int m_countDownBall = 5;
+    //private bool m_countDownFlag = false;
 
     public float m_ballCountdown = 1.2f;
     private bool m_flashing = false;
@@ -93,18 +98,19 @@ public class Player : MonoBehaviour
     public Animator playerAnim;
     public GameObject deathParticle;
 
-
     public void Start()
     {
-        m_timeLeft = 5.0f;
+        currentTime = startingTime;
 
-     //  switch (m_controller)
-     //  {
-     //      case XboxController.First: GetComponent<Renderer>().material = matRed; break;
-     //      case XboxController.Second: GetComponent<Renderer>().material = matBlue; break;
-     //      case XboxController.Third: GetComponent<Renderer>().material = matGreen; break;
-     //      case XboxController.Fourth: GetComponent<Renderer>().material = matYellow; break;
-     //  }
+        #region Switch for Controllers
+        //  switch (m_controller)
+        //  {
+        //      case XboxController.First: GetComponent<Renderer>().material = matRed; break;
+        //      case XboxController.Second: GetComponent<Renderer>().material = matBlue; break;
+        //      case XboxController.Third: GetComponent<Renderer>().material = matGreen; break;
+        //      case XboxController.Fourth: GetComponent<Renderer>().material = matYellow; break;
+        //  }
+        #endregion
 
         m_newPosition = transform.position;
 
@@ -142,7 +148,7 @@ public class Player : MonoBehaviour
     public void FixedUpdate()
     {
         // If the game is paused dont run the update
-        if(RoundManager.m_pauseGame)
+        if (RoundManager.m_pauseGame)
         {
             m_rb.velocity = Vector3.zero;
             return;
@@ -178,6 +184,7 @@ public class Player : MonoBehaviour
         }
         else
         {
+            #region Old Movement
             /*
                 This movement works if you only want one type selected (E.g. only controller moving the character if ticked in public bool)
             */
@@ -192,6 +199,7 @@ public class Player : MonoBehaviour
             //    transform.rotation = Quaternion.LookRotation(playerDirection, Vector3.up);
             //    m_lastLookDirection = playerDirection - transform.position;
             //}
+            #endregion
 
             // -New- Left Stick Movement
             m_newPosition = transform.position;
@@ -218,7 +226,6 @@ public class Player : MonoBehaviour
         if (RoundManager.m_isPlaying)
             m_rb.velocity = moveVelocity * Time.fixedDeltaTime * 50.0f;
 
-
         if (moveVelocity.magnitude > 0)
         {
             if (playerAnim != null)
@@ -239,8 +246,10 @@ public class Player : MonoBehaviour
 
     public void Update()
     {
+        Countdown();
+
         // If the game is paused dont run the update
-        if(RoundManager.m_pauseGame)
+        if (RoundManager.m_pauseGame)
             return;
 
         if (m_holdingBall == true)
@@ -250,38 +259,40 @@ public class Player : MonoBehaviour
             m_timeLeft -= Time.deltaTime;
             m_moveSpeed_Xbox = 10.0f;
 
-            if (!m_flashing)
-            {
-                //StartCoroutine(FlashCountdown());
-                //StartCoroutine(FlashCoroutine());
-                m_flashing = true;
-            }
 
-            if (!m_countDownFlag)
-            {
-                m_countDownText.gameObject.SetActive(true);
-                StartCoroutine(BallCountDown());
-                m_countDownFlag = true;
-            }
 
+
+            //if (!m_flashing)
+            //{
+            //    //StartCoroutine(FlashCountdown());
+            //    //StartCoroutine(FlashCoroutine());
+            //    m_flashing = true;
+            //}
+
+            //if (!m_countDownFlag)
+            //{
+            //    m_countDownText.gameObject.SetActive(true);
+            //    StartCoroutine(BallCountDown());
+            //    m_countDownFlag = true;
+            //}
         }
         else
         {
             //Debug.Log("not active");
-            m_countDownBall = 5;
-            m_countDownText.gameObject.SetActive(false);
-            if (m_countDownFlag)
-            {
-                //StopCoroutine(BallCountDown());
-                m_countDownFlag = false;
-            }
+            //m_countDownBall = 5;
+            //m_countDownText.gameObject.SetActive(false);
+            //if (m_countDownFlag)
+            //{
+            //    //StopCoroutine(BallCountDown());
+            //    m_countDownFlag = false;
+            //}
 
-            if (m_flashing)
-            {
-                //StopCoroutine(FlashCoroutine());
-                //StopCoroutine(FlashCountdown());
-                m_flashing = false; 
-            }
+            //if (m_flashing)
+            //{
+            //    //StopCoroutine(FlashCoroutine());
+            //    //StopCoroutine(FlashCountdown());
+            //    m_flashing = false;
+            //}
             m_timeLeft = 5.0f;
             m_moveSpeed_Xbox = 15.0f;
             m_ballCountdown = 1.2f;
@@ -376,23 +387,33 @@ public class Player : MonoBehaviour
     {
         m_ball = ball;
         m_holdingBall = true;
+    }
 
+    public void ResetBallCountDownUI()
+    {
+        startingTime = 5f;
+        currentTime = 0f;
+    }
+
+    public void Countdown()
+    {
         if (m_holdingBall == true)
         {
-            if (m_timeLeft < 0)
+            countdownText.gameObject.SetActive(true);
+            currentTime -= 1 * Time.deltaTime;
+            countdownText.text = currentTime.ToString("0");
+
+            if ((int)currentTime == 0)
             {
-                m_ballCountdown = 1.2f;
-                m_ball = null;
-                m_holdingBall = false;
-                m_onCoolDown = false;
-
-                ball.tag = "Neutral Ball";
-                ball.GetComponent<MeshRenderer>().material = m_greenMaterial;
-                ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
-
-                StartCoroutine(WaitPickUp());
+                Death();
             }
         }
+        else
+        {
+            countdownText.gameObject.SetActive(false);
+            currentTime = startingTime;
+        }
+
     }
 
     // Thowing function with a cooldown
@@ -423,66 +444,59 @@ public class Player : MonoBehaviour
         m_dashCooldown = false;
     }
 
-    private IEnumerator WaitPickUp()
-    {
-        yield return new WaitForSeconds(2.5f);
-    }
+    //private IEnumerator FlashCoroutine()
+    //{
+    //    while (m_holdingBall)
+    //    {
+    //        print(m_ballCountdown);
+    //        // flashing code goes here
+    //        Renderer renderer = m_ball.GetComponent<MeshRenderer>();
+    //        Material mat = renderer.material;
 
-    private IEnumerator FlashCoroutine()
-    {
-        while (m_holdingBall)
-        {
-            print(m_ballCountdown);
-            // flashing code goes here
-            Renderer renderer = m_ball.GetComponent<MeshRenderer>();
-            Material mat = renderer.material;
+    //        float emission = Mathf.PingPong(Time.time, m_ballCountdown);
+    //        Color baseColor = Color.red; //Replace this with whatever you want for your base color at emission level '1'
 
-            float emission = Mathf.PingPong(Time.time, m_ballCountdown);
-            Color baseColor = Color.red; //Replace this with whatever you want for your base color at emission level '1'
+    //        Color finalColor = baseColor * Mathf.LinearToGammaSpace(emission);
 
-            Color finalColor = baseColor * Mathf.LinearToGammaSpace(emission);
+    //        mat.SetColor("_EmissionColor", finalColor);
 
-            mat.SetColor("_EmissionColor", finalColor);
+    //        yield return new WaitForSeconds(m_ballCountdown);
+    //    }
+    //    print("Flash");
+    //}
 
+    //private IEnumerator FlashCountdown()
+    //{
+    //    while (true)
+    //    {
+    //        m_ballCountdown -= 0.2f;
+    //        if (m_ballCountdown <= 0)
+    //        {
+    //            m_ballCountdown = 0.2f;
+    //        }
+    //        yield return new WaitForSeconds(1.0f);
+    //    }
+    //}
 
-            yield return new WaitForSeconds(m_ballCountdown);
-        }
-                print("Flash"); 
-    }
+    //private IEnumerator BallCountDown()
+    //{
+    //    while (m_holdingBall)
+    //    {
+    //        m_countDownText.text = m_countDownBall.ToString();
+    //        if (m_countDownBall == 0)
+    //        {
+    //            Death();
 
-    private IEnumerator FlashCountdown()
-    {
-        while(true)
-        {
-            m_ballCountdown -= 0.2f;
-            if (m_ballCountdown <= 0)
-            {
-                m_ballCountdown = 0.2f;
-            }
-            yield return new WaitForSeconds(1.0f);
-        }
-    }
+    //            m_ball = null;
+    //            m_holdingBall = false;
 
-    private IEnumerator BallCountDown()
-    {
-        while (m_holdingBall)
-        {
-            
-            m_countDownText.text = m_countDownBall.ToString();
-            if (m_countDownBall == 0)
-            {
-                Death();
-                
-                m_ball = null;
-                m_holdingBall = false;
-
-                Debug.Log("CountDown = 0");
-                break;
-            }
-            yield return new WaitForSeconds(1.0f);
-            m_countDownBall--;
-        }
-    }
+    //            Debug.Log("CountDown = 0");
+    //            break;
+    //        }
+    //        yield return new WaitForSeconds(1.0f);
+    //        m_countDownBall--;
+    //    }
+    //}
 
     private void OnDrawGizmos()
     {

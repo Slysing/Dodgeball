@@ -12,10 +12,10 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using XboxCtrlrInput;
 
-
 public class RoundManager : MonoBehaviour
 {
     public static bool m_pauseGame = false;
+
     [Header("Config")]
     public int m_roundsToWin = 3;
 
@@ -42,7 +42,7 @@ public class RoundManager : MonoBehaviour
     public TextMeshProUGUI m_blueScoreText;
     public TextMeshProUGUI m_RoundTimer;
     public GameObject m_pausePanel;
-    
+
     public GameObject m_endPanel;
     public TextMeshProUGUI m_endText;
 
@@ -52,8 +52,7 @@ public class RoundManager : MonoBehaviour
     public Sprite m_RoundBeginSprint2;
     public Sprite m_RoundBeginSprint1;
 
-
-    float m_gameStartTimer = 3;
+    private float m_gameStartTimer = 3;
 
     private void Start()
     {
@@ -66,22 +65,21 @@ public class RoundManager : MonoBehaviour
     private void Update()
     {
         // If the game is paused dont run the update
-        if(Input.GetKeyDown(KeyCode.P) || XCI.GetButtonDown(XboxButton.Start) )
+        if (Input.GetKeyDown(KeyCode.P) || XCI.GetButtonDown(XboxButton.Start))
         {
             m_pauseGame = m_pauseGame == true ? false : true;
         }
 
-        if(m_pauseGame)
+        if (m_pauseGame)
         {
             m_pausePanel.SetActive(true);
             return;
         }
         else
         {
-            if(m_pausePanel.activeSelf)
+            if (m_pausePanel.activeSelf)
                 m_pausePanel.SetActive(false);
         }
-
 
         if (m_gameStart)
         {
@@ -94,25 +92,25 @@ public class RoundManager : MonoBehaviour
                 case 1:
                     m_RoundBeginImage.sprite = m_RoundBeginSprint1;
                     break;
+
                 case 2:
                     m_RoundBeginImage.sprite = m_RoundBeginSprint2;
                     break;
+
                 case 3:
                     m_RoundBeginImage.sprite = m_RoundBeginSprint3;
                     break;
             }
 
-
             if (m_gameStartTimer <= 0)
             {
-
                 m_isPlaying = true;
                 m_gameStart = false;
                 m_RoundBeginImage.enabled = false;
             }
         }
 
-        if(m_isGameOver)
+        if (m_isGameOver)
             return;
 
         if (m_isPlaying)
@@ -123,7 +121,6 @@ public class RoundManager : MonoBehaviour
                 m_roundStart = true;
             }
             m_roundDuration += Time.deltaTime;
-
 
             float t = m_roundDuration;
             string minutes = ((int)t / 60).ToString();
@@ -237,6 +234,8 @@ public class RoundManager : MonoBehaviour
         GetComponent<TeamManager>().Reset();
         GetComponent<BallManager>().ResetBalls();
         GetComponent<PistonControl>().Reset();
+
+
     }
 
     private IEnumerator Cooldown(int seconds)
@@ -247,9 +246,9 @@ public class RoundManager : MonoBehaviour
             int tenSeconds = i / 10;
             int minutes = i / 60;
 
-         //  m_RoundMinutes.text = minutes.ToString();
-         //  m_RoundTens.text = tenSeconds.ToString();
-         //  m_RoundSeconds.text = smollseconds.ToString();
+            //  m_RoundMinutes.text = minutes.ToString();
+            //  m_RoundTens.text = tenSeconds.ToString();
+            //  m_RoundSeconds.text = smollseconds.ToString();
             yield return new WaitForSeconds(1.0f);
         }
         //m_RoundTimer.text = "Begin!";
@@ -259,10 +258,9 @@ public class RoundManager : MonoBehaviour
 
     private IEnumerator EndGameScreen()
     {
-
         m_endPanel.SetActive(true);
-        
-        if(m_blueTeamAlive)
+
+        if (m_blueTeamAlive)
             m_endText.text = "Blue Wins!";
         else
             m_endText.text = "Red Wins!";

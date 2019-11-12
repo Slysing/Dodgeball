@@ -9,7 +9,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ButtonMananger : MonoBehaviour
@@ -37,6 +36,7 @@ public class ButtonMananger : MonoBehaviour
 
     [Header("Controls Menu")]
     [SerializeField] private Button m_controlButton;
+
     [SerializeField] private GameObject m_controlPanel = null;
     [SerializeField] private Button m_controlBackButton = null;
 
@@ -47,7 +47,8 @@ public class ButtonMananger : MonoBehaviour
     [SerializeField] private Button m_exitButton;
 
     public EventSystem m_currentEventSystem;
-    [HideInInspector]public bool m_startClicked; 
+    [HideInInspector] public bool m_startClicked;
+
     private void Start()
     {
         m_currentEventSystem.GetComponent<EventSystem>();
@@ -137,7 +138,6 @@ public class ButtonMananger : MonoBehaviour
         PlayerPrefs.SetInt("MusicToggle", music);
         PlayerPrefs.SetFloat("Volume", volume);
     }
-
 
     private void ControlsClick()
     {
