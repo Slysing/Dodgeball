@@ -37,11 +37,14 @@ public class RoundManager : MonoBehaviour
     public static bool m_isPlaying = false; // static bool to be used globally to pause the game
     private bool m_gameStart = true; // Used to run the initial timer once
 
+    public float m_endScreenTimer = 5.0f;
     public TextMeshProUGUI m_redScoreText;
     public TextMeshProUGUI m_blueScoreText;
     public TextMeshProUGUI m_RoundTimer;
     public GameObject m_pausePanel;
     
+    public GameObject m_endPanel;
+    public TextMeshProUGUI m_endText;
 
     public Image m_RoundBeginImage;
 
@@ -109,15 +112,8 @@ public class RoundManager : MonoBehaviour
             }
         }
 
-        if (m_isGameOver)
-        {
-            TeamManager.m_blueTeam.Clear();
-            TeamManager.m_redTeam.Clear();
-            SceneManager.LoadScene("MainMenuScene");
-            // anything relating to the game being over
-            // can go here
+        if(m_isGameOver)
             return;
-        }
 
         if (m_isPlaying)
         {
@@ -196,6 +192,8 @@ public class RoundManager : MonoBehaviour
         m_isGameOver = true;
         m_isPlaying = false;
 
+        StartCoroutine(EndGameScreen());
+
         foreach (var player in TeamManager.m_redTeam)
         {
             player.GetComponent<Player>().DropBall();
@@ -238,6 +236,7 @@ public class RoundManager : MonoBehaviour
 
         GetComponent<TeamManager>().Reset();
         GetComponent<BallManager>().ResetBalls();
+        GetComponent<PistonControl>().Reset();
     }
 
     private IEnumerator Cooldown(int seconds)
@@ -256,5 +255,19 @@ public class RoundManager : MonoBehaviour
         //m_RoundTimer.text = "Begin!";
         //yield return new WaitForSeconds(.5f);
         m_isPlaying = true;
+    }
+
+    private IEnumerator EndGameScreen()
+    {
+
+        m_endPanel.SetActive(true);
+        
+        if(m_blueTeamAlive)
+            m_endText.text = "Blue Wins!";
+        else
+            m_endText.text = "Red Wins!";
+
+        yield return new WaitForSeconds(m_endScreenTimer);
+        SceneManager.LoadScene(0);
     }
 }

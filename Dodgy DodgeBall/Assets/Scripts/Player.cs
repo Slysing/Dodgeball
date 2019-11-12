@@ -252,8 +252,8 @@ public class Player : MonoBehaviour
 
             if (!m_flashing)
             {
-                StartCoroutine(FlashCountdown());
-                StartCoroutine(FlashCoroutine());
+                //StartCoroutine(FlashCountdown());
+                //StartCoroutine(FlashCoroutine());
                 m_flashing = true;
             }
 
@@ -267,19 +267,19 @@ public class Player : MonoBehaviour
         }
         else
         {
-            Debug.Log("not active");
+            //Debug.Log("not active");
             m_countDownBall = 5;
             m_countDownText.gameObject.SetActive(false);
             if (m_countDownFlag)
             {
-                StopCoroutine(BallCountDown());
+                //StopCoroutine(BallCountDown());
                 m_countDownFlag = false;
             }
 
             if (m_flashing)
             {
-                StopCoroutine(FlashCoroutine());
-                StopCoroutine(FlashCountdown());
+                //StopCoroutine(FlashCoroutine());
+                //StopCoroutine(FlashCountdown());
                 m_flashing = false; 
             }
             m_timeLeft = 5.0f;

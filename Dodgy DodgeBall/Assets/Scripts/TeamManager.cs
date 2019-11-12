@@ -91,25 +91,25 @@ public class TeamManager : MonoBehaviour
         bool foundRed = false;
         for (int i = 0; i < StaticVariables.m_playerStates.Length; i++)
         {
-            if (StaticVariables.m_playerStates[i] == State.LEFT)
+            if (StaticVariables.m_playerStates[i] == State.RIGHT)
             {
                 if (!foundBlue)
                 {
-                    m_redTeam.Add(Instantiate(m_blueplayer1Prefab, m_blueSpawns[i].transform.position, Quaternion.identity));
-                    foundRed = true;
+                    m_blueTeam.Add(Instantiate(m_blueplayer1Prefab, m_blueSpawns[0].transform.position, Quaternion.identity));
+                    foundBlue = true;
                 }
                 else
-                    m_redTeam.Add(Instantiate(m_blueplayer2Prefab, m_blueSpawns[1].transform.position, Quaternion.identity));
+                    m_blueTeam.Add(Instantiate(m_blueplayer2Prefab, m_blueSpawns[1].transform.position, Quaternion.identity));
             }
-            if (StaticVariables.m_playerStates[i] == State.RIGHT)
+            if (StaticVariables.m_playerStates[i] == State.LEFT)
             {
                 if (!foundRed)
                 {
-                    m_blueTeam.Add(Instantiate(m_redplayer1Prefab, m_redSpawns[0].transform.position, Quaternion.identity));
-                    foundRed = true;  ;
+                    m_redTeam.Add(Instantiate(m_redplayer1Prefab, m_redSpawns[0].transform.position, Quaternion.identity));
+                    foundRed = true;  
                 }
                 else
-                    m_blueTeam.Add(Instantiate(m_redplayer2Prefab, m_redSpawns[1].transform.position, Quaternion.identity));
+                    m_redTeam.Add(Instantiate(m_redplayer2Prefab, m_redSpawns[1].transform.position, Quaternion.identity));
 
             }
         }

@@ -53,7 +53,7 @@ public class BallIncrease : MonoBehaviour
     {
 
         m_audioSource.PlayOneShot(m_collisionSound);
-        Debug.Log("testbounce " + m_rb.velocity.magnitude);
+        //Debug.Log("testbounce " + m_rb.velocity.magnitude);
 
         // If magnitude is less then m_mininumSpeed then apply force using m_bounceAmount
         if (m_rb.velocity.magnitude < m_mininumSpeed)

@@ -152,7 +152,7 @@ public class SelectManager : MonoBehaviour
 
 
 
-        Debug.Log("REDCOUNT: " + red);
-        Debug.Log("BLUECOUNT: " + blue); 
+        //Debug.Log("REDCOUNT: " + red);
+        //Debug.Log("BLUECOUNT: " + blue); 
     }
 }

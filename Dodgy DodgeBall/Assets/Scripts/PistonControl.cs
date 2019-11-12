@@ -16,12 +16,17 @@ public class PistonControl : MonoBehaviour
     public List<Animator> m_animLights = new List<Animator>();
     public float m_interval = 15.0f;
     public float m_holdInterval = 10.0f; // How long the pistons will stay up
+    public float m_timeBetweenAnims = 1.0f;
     public bool m_togglePistons = true;
 
     private bool m_extend = false;
+    private bool m_lower = false;
+
     private float m_count = 0.0f;
     private bool m_playingBool = false; // if the animation is playing/up
     private bool m_runOnce = false;
+    private bool m_raiseCooldown = false;
+    private float m_time;
 
     private void Update()
     {
@@ -49,6 +54,17 @@ public class PistonControl : MonoBehaviour
             }
         }
 
+        if(m_extend && (Time.time - m_time) > m_timeBetweenAnims)
+        {
+            m_anim.SetTrigger("Extend");
+            m_extend = false;    
+        }
+        else if(m_lower && (Time.time - m_time) > m_timeBetweenAnims)
+        {
+            m_anim.SetTrigger("Retract");
+            m_lower = false;
+        }
+
         if (RoundManager.m_isPlaying && m_togglePistons)
         {
             //print("count: " + m_count);
@@ -57,11 +73,13 @@ public class PistonControl : MonoBehaviour
                 m_count += Time.deltaTime;
                 if ((int)m_count % (int)m_interval == 0 && (int)m_count != 0)
                 {
-                    StartCoroutine(PistonRaise());
+                    m_time = Time.time;
+                    //StartCoroutine(m_raiseCo);
+                    //m_anim.SetTrigger("Extend");
 
                     foreach(Animator piston in m_animLights)
                     {
-                        piston.SetTrigger("Extend");     
+                        piston.SetTrigger("Lights");     
                     }     
                     m_extend = true;
                     m_playingBool = true;
@@ -73,13 +91,13 @@ public class PistonControl : MonoBehaviour
                 m_count += Time.deltaTime;
                 if ((int)m_count % (int)m_holdInterval == 0 && (int)m_count != 0)
                 {
-                    StartCoroutine(PistonLower());
-                    m_anim.SetTrigger("Retract");     
+                    m_time = Time.time;
+                    //StartCoroutine(m_lowerCo);
                     foreach(Animator piston in m_animLights)
                     {
-                        piston.SetTrigger("Extend");     
+                        piston.SetTrigger("Lights");     
                     }                   
-                    m_extend = false;
+                    m_lower = true;
                     m_playingBool = false;
                     m_count = 0.0f;
                 }
@@ -92,31 +110,24 @@ public class PistonControl : MonoBehaviour
     {
         if(RoundManager.m_pauseGame)
             return;
+    }
 
-        if ((!RoundManager.m_blueTeamAlive ||
-            !RoundManager.m_redTeamAlive) &&
-            m_playingBool == true)
+    public void Reset()
+    {
+        print("Yes");
+        if (m_playingBool == true)
         {
-            StartCoroutine(PistonLower());
+            m_anim.SetTrigger("Retract");
             foreach(Animator piston in m_animLights)
             {
-                piston.SetTrigger("Extend");     
-            }       
+                piston.SetTrigger("Lights");     
+            }
 
-            m_count = 0;
             m_playingBool = false;
-            print("Yee");
         }
-    }
-
-    private IEnumerator PistonRaise()
-    {
-        yield return new WaitForSeconds(1.0f);
-        m_anim.SetTrigger("Extend");
-    }
-    private IEnumerator PistonLower()
-    {
-        yield return new WaitForSeconds(1.0f);
-        m_anim.SetTrigger("Retract");
+        m_extend = false;
+        m_lower = false;
+        m_count = 0.0f;
+        m_time = 0.0f;
     }
 }

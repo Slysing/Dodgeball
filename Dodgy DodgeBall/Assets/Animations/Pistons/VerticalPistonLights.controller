@@ -9,13 +9,7 @@ AnimatorController:
   m_Name: VerticalPistonLights
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: Extend
-    m_Type: 9
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
-  - m_Name: Retract
+  - m_Name: Lights
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -131,7 +125,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: Extend
+    m_ConditionEvent: Lights
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102445964869508014}
