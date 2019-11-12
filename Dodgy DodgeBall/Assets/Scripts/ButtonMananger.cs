@@ -40,6 +40,9 @@ public class ButtonMananger : MonoBehaviour
     [SerializeField] private GameObject m_controlPanel = null;
     [SerializeField] private Button m_controlBackButton = null;
 
+    [Header("Credits Button")]
+    [SerializeField] private Button m_creditsButton = null;
+
     [Header("Exit Button")]
     [SerializeField] private Button m_exitButton;
 
@@ -53,6 +56,7 @@ public class ButtonMananger : MonoBehaviour
         m_startButton.onClick.AddListener(StartGameClick);
         m_controlButton.onClick.AddListener(ControlsClick);
         m_controlBackButton.onClick.AddListener(ControlBackClick);
+        m_creditsButton.onClick.AddListener(CreditsClick);
 
         // runs for the first ever launch of the game on the device
         // otherwise load previous settings
@@ -185,6 +189,11 @@ public class ButtonMananger : MonoBehaviour
                 }
             }
         };
+    }
+
+    private void CreditsClick()
+    {
+        SceneManager.LoadScene(2);
     }
 
     // Update is called once per frame
