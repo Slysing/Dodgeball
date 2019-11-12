@@ -234,5 +234,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_audioSource: {fileID: 0}
   m_collisionSound: {fileID: 0}
-  m_bounceAmount: 8
+  m_bounceAmount: 2
   m_mininumSpeed: 15
