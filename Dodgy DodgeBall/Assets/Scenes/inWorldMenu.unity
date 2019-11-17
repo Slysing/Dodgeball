@@ -931,6 +931,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 422523589}
   m_Mesh: {fileID: 4300092, guid: b0dae5e0c40f3de409ad0a0bc224d27a, type: 3}
+--- !u!1 &458933034 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4349864524925813754, guid: 6cccb2e470b73ca4bbb503824e777529,
+    type: 3}
+  m_PrefabInstance: {fileID: 4349864525955876260}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &477273893
 GameObject:
   m_ObjectHideFlags: 0
@@ -2941,7 +2947,7 @@ MonoBehaviour:
   m_Script: {fileID: -619905303, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 458933034}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &1138177819
@@ -5088,7 +5094,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2101060348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6289,6 +6295,11 @@ PrefabInstance:
       objectReference: {fileID: 1513105192}
     - target: {fileID: 4349864526280041237, guid: 6cccb2e470b73ca4bbb503824e777529,
         type: 3}
+      propertyPath: m_colourButtons.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4349864526280041237, guid: 6cccb2e470b73ca4bbb503824e777529,
+        type: 3}
       propertyPath: m_menuAnim
       value: 
       objectReference: {fileID: 1513105194}
@@ -6312,6 +6323,16 @@ PrefabInstance:
       propertyPath: m_creditsButton
       value: 
       objectReference: {fileID: 847561190}
+    - target: {fileID: 4349864526280041237, guid: 6cccb2e470b73ca4bbb503824e777529,
+        type: 3}
+      propertyPath: m_colourButtons.Array.data[4]
+      value: 
+      objectReference: {fileID: 847561188}
+    - target: {fileID: 4349864526280041237, guid: 6cccb2e470b73ca4bbb503824e777529,
+        type: 3}
+      propertyPath: m_selectCanvas
+      value: 
+      objectReference: {fileID: 2101060347}
     - target: {fileID: 631489944, guid: 6cccb2e470b73ca4bbb503824e777529, type: 3}
       propertyPath: m_Colors.m_HighlightedColor.r
       value: 0.6132076
@@ -6633,6 +6654,7 @@ MonoBehaviour:
   m_colourButtons: []
   m_menuAnim: {fileID: 0}
   m_startButton: {fileID: 0}
+  m_selectCanvas: {fileID: 0}
   m_settingsPanel: {fileID: 0}
   m_settingsButton: {fileID: 0}
   m_settingsBackButton: {fileID: 0}

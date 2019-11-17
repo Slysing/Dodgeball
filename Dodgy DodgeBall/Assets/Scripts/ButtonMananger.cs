@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ButtonMananger : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class ButtonMananger : MonoBehaviour
 
     [Header("Start Button")]
     public Button m_startButton = null;
+    public GameObject m_selectCanvas = null;
 
     [Header("Settings Menu")]
     public GameObject m_settingsPanel = null;
@@ -184,7 +186,7 @@ public class ButtonMananger : MonoBehaviour
                 {
                     StartCoroutine(CameraTranslate(m_animationClips[i]));
                     m_isTranslating = true;
-
+                    m_selectCanvas.SetActive(true);
                     break;
                 }
             }
@@ -199,8 +201,8 @@ public class ButtonMananger : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (m_currentEventSystem.currentSelectedGameObject == null)
-            m_currentEventSystem.SetSelectedGameObject(m_startButton.gameObject);
+        //if (m_currentEventSystem.currentSelectedGameObject == null)
+        //    m_currentEventSystem.SetSelectedGameObject(m_startButton.gameObject);
         //Iterates through the array of buttons changing the color of the "highlighted" color variable giving the chaging color effect
         foreach (GameObject button in m_colourButtons)
         {

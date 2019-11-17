@@ -202,8 +202,8 @@ public class RoundManager : MonoBehaviour
             player.GetComponent<Rigidbody>().velocity = Vector3.zero;
         }
 
-        GetComponent<TeamManager>().Reset();
         GetComponent<BallManager>().ResetBalls();
+        GetComponent<TeamManager>().EndGame();
     }
 
     private void RestartRound()

@@ -66,7 +66,12 @@ public class TeamManager : MonoBehaviour
             idx++;
         }
     }
-
+    
+    public void EndGame()
+    {
+        m_blueTeam.Clear();
+        m_redTeam.Clear();
+    }
  private void Start()
     {
         // This only here in place of a team select
