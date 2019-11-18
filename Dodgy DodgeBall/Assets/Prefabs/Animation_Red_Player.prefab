@@ -872,7 +872,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5466182ffeab5b64cac7b46a7517411b, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1002,7 +1002,7 @@ GameObject:
   - component: {fileID: 3090648072316001596}
   - component: {fileID: 3090648072325362404}
   m_Layer: 0
-  m_Name: Red_Player_Animated
+  m_Name: Animation_Red_Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
