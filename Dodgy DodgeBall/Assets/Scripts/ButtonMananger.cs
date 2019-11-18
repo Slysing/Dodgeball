@@ -51,6 +51,8 @@ public class ButtonMananger : MonoBehaviour
     public EventSystem m_currentEventSystem;
     [HideInInspector] public bool m_startClicked;
 
+    
+
     private void Start()
     {
         m_currentEventSystem.GetComponent<EventSystem>();
@@ -211,5 +213,8 @@ public class ButtonMananger : MonoBehaviour
             cb.highlightedColor = Color.Lerp(Color.red, Color.blue, Mathf.PingPong(Time.time, 1));
             currentButton.colors = cb;
         }
+
+        if (m_currentEventSystem.currentSelectedGameObject == null)
+            m_currentEventSystem.SetSelectedGameObject(m_startButton.gameObject); 
     }
 }
