@@ -42,7 +42,7 @@ public class StaticVariables : MonoBehaviour
             {
                 m_playerStates[i] = m_smRefernce.m_states[i];
             }
-            SceneManager.LoadScene("Beta");
+            SceneManager.LoadScene("Gold");
         }
     }
 }
