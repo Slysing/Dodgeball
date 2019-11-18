@@ -59,7 +59,7 @@ public class Player : MonoBehaviour
 
     public float m_moveSpeed_Xbox;
     private Vector3 m_moveInput_Xbox;
-    public XboxController m_controller;
+    [HideInInspector] public XboxController m_controller;
 
     public const float m_MaxTriggerScale = 1.21f;
 
@@ -77,19 +77,10 @@ public class Player : MonoBehaviour
     private Camera m_mainCamera;
 
     // Ball
-    public float m_timeLeft;
 
-    //TESTING PURPOSE
-    private float currentTime = 0f;
-    private float startingTime = 5f;
-    [SerializeField] private TextMeshProUGUI countdownText;
-
-    //public TextMeshProUGUI m_countDownText;
-    //public int m_countDownBall = 5;
-    //private bool m_countDownFlag = false;
-
-    public float m_ballCountdown = 1.2f;
-    private bool m_flashing = false;
+    private float currentTime = 5f;
+    [SerializeField] TextMeshProUGUI countdownText;
+    [SerializeField] TextMeshProUGUI m_playerNumber;
 
     public Material m_redMaterial = null;
     public Material m_blueMaterial = null;
@@ -98,10 +89,10 @@ public class Player : MonoBehaviour
     public Animator playerAnim;
     public GameObject deathParticle;
 
+    
+
     public void Start()
     {
-        currentTime = startingTime;
-
         #region Switch for Controllers
         //  switch (m_controller)
         //  {
@@ -142,6 +133,15 @@ public class Player : MonoBehaviour
         {
             m_hand = transform.gameObject;
         }
+
+        if (m_controller == XboxController.First)
+            m_playerNumber.text = "P1";
+        else if (m_controller == XboxController.Second)
+            m_playerNumber.text = "P2";
+        else if (m_controller == XboxController.Third)
+            m_playerNumber.text = "P3";
+        else if (m_controller == XboxController.Fourth)
+            m_playerNumber.text = "P4";
     }
 
     // Fixed update is general used for anything physics related
@@ -246,17 +246,18 @@ public class Player : MonoBehaviour
 
     public void Update()
     {
-        Countdown();
-
         // If the game is paused dont run the update
         if (RoundManager.m_pauseGame)
             return;
+
+        // PUT ALL CODE UNDERNEATH THE PAUSE GAME
+
+        Countdown();
 
         if (m_holdingBall == true)
         {
             if (m_fakeBallCollider.activeSelf != true)
                 m_fakeBallCollider.SetActive(true);
-            m_timeLeft -= Time.deltaTime;
             m_moveSpeed_Xbox = 10.0f;
 
 
@@ -293,9 +294,8 @@ public class Player : MonoBehaviour
             //    //StopCoroutine(FlashCountdown());
             //    m_flashing = false;
             //}
-            m_timeLeft = 5.0f;
+
             m_moveSpeed_Xbox = 15.0f;
-            m_ballCountdown = 1.2f;
         }
 
         if ((Input.GetKeyDown(KeyCode.Space) || XCI.GetAxis(XboxAxis.LeftTrigger, m_controller) > 0) && !m_dashCooldown)
@@ -391,19 +391,21 @@ public class Player : MonoBehaviour
 
     public void ResetBallCountDownUI()
     {
-        startingTime = 5f;
-        currentTime = 0f;
+        currentTime = 5f;
     }
 
     public void Countdown()
     {
         if (m_holdingBall == true)
         {
-            countdownText.gameObject.SetActive(true);
+            if (currentTime >= 0)
+            {
+                countdownText.gameObject.SetActive(true);
+                countdownText.text = currentTime.ToString("0");
+            }
             currentTime -= 1 * Time.deltaTime;
-            countdownText.text = currentTime.ToString("0");
 
-            if ((int)currentTime == 0)
+            if ((int)currentTime <= -1)
             {
                 Death();
             }
@@ -411,9 +413,8 @@ public class Player : MonoBehaviour
         else
         {
             countdownText.gameObject.SetActive(false);
-            currentTime = startingTime;
+            currentTime = 5f;
         }
-
     }
 
     // Thowing function with a cooldown

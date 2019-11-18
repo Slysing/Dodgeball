@@ -72,7 +72,8 @@ public class TeamManager : MonoBehaviour
         m_blueTeam.Clear();
         m_redTeam.Clear();
     }
- private void Start()
+
+    private void Start()
     {
         // This only here in place of a team select
         //m_redTeam.Add(Instantiate(m_redplayer1Prefab, m_redSpawns[0].transform.position, Quaternion.identity));
@@ -80,17 +81,6 @@ public class TeamManager : MonoBehaviour
 
         //m_blueTeam.Add(Instantiate(m_blueplayer1Prefab, m_blueSpawns[0].transform.position, Quaternion.identity));
         //m_blueTeam.Add(Instantiate(m_blueplayer2Prefab, m_blueSpawns[1].transform.position, Quaternion.identity));
-
-        //m_blueTeam[0].GetComponent<Player>().m_PlayerControllerNumber = 2;
-        ////m_blueTeam[0].GetComponent<Player>().gameObject.tag = "BlueTeam";
-        //m_blueTeam[0].transform.Find("Catch_Range").gameObject.tag = "RedTeam";
-        ////m_blueTeam[1].GetComponent<Player>().m_PlayerControllerNumber = 2;
-        //m_redTeam[0].GetComponent<Player>().m_PlayerControllerNumber = 1;
-        //m_redTeam[0].transform.Find("Catch_Range").gameObject.tag = "RedTeam";
-
-        //m_redTeam[1].GetComponent<Player>().m_PlayerControllerNumber = 4;
-        //m_blueTeam[0].GetComponent<MeshRenderer>().material = m_blueMaterial;
-        //m_redTeam[0].GetComponent<MeshRenderer>().material = m_redMaterial;
 
         bool foundBlue = false;
         bool foundRed = false;
@@ -100,61 +90,100 @@ public class TeamManager : MonoBehaviour
             {
                 if (!foundBlue)
                 {
-                    m_blueTeam.Add(Instantiate(m_blueplayer1Prefab, m_blueSpawns[0].transform.position, Quaternion.identity));
+                    switch (i)
+                    {
+                        case 0:
+                            m_blueplayer1Prefab.GetComponent<Player>().m_controller = XboxCtrlrInput.XboxController.First;
+                            m_blueTeam.Add(Instantiate(m_blueplayer1Prefab, m_blueSpawns[0].transform.position, Quaternion.identity));
+                            break;
+                        case 1:
+                            m_blueplayer1Prefab.GetComponent<Player>().m_controller = XboxCtrlrInput.XboxController.Second;
+                            m_blueTeam.Add(Instantiate(m_blueplayer1Prefab, m_blueSpawns[0].transform.position, Quaternion.identity));
+                            break;
+                        case 2:
+                            m_blueplayer1Prefab.GetComponent<Player>().m_controller = XboxCtrlrInput.XboxController.Third;
+                            m_blueTeam.Add(Instantiate(m_blueplayer1Prefab, m_blueSpawns[0].transform.position, Quaternion.identity));
+                            break;
+                        case 3:
+                            m_blueplayer1Prefab.GetComponent<Player>().m_controller = XboxCtrlrInput.XboxController.Fourth;
+                            m_blueTeam.Add(Instantiate(m_blueplayer1Prefab, m_blueSpawns[0].transform.position, Quaternion.identity));
+                            break;
+                    }
                     foundBlue = true;
                 }
                 else
-                    m_blueTeam.Add(Instantiate(m_blueplayer2Prefab, m_blueSpawns[1].transform.position, Quaternion.identity));
+                {
+                    switch (i)
+                    {
+                        case 0:
+                            m_blueplayer2Prefab.GetComponent<Player>().m_controller = XboxCtrlrInput.XboxController.First;
+                            m_blueTeam.Add(Instantiate(m_blueplayer2Prefab, m_blueSpawns[1].transform.position, Quaternion.identity));
+                            break;
+                        case 1:
+                            m_blueplayer2Prefab.GetComponent<Player>().m_controller = XboxCtrlrInput.XboxController.Second;
+                            m_blueTeam.Add(Instantiate(m_blueplayer2Prefab, m_blueSpawns[1].transform.position, Quaternion.identity));
+                            break;
+                        case 2:
+                            m_blueplayer2Prefab.GetComponent<Player>().m_controller = XboxCtrlrInput.XboxController.Third;
+                            m_blueTeam.Add(Instantiate(m_blueplayer2Prefab, m_blueSpawns[1].transform.position, Quaternion.identity));
+                            break;
+                        case 3:
+                            m_blueplayer2Prefab.GetComponent<Player>().m_controller = XboxCtrlrInput.XboxController.Fourth;
+                            m_blueTeam.Add(Instantiate(m_blueplayer2Prefab, m_blueSpawns[1].transform.position, Quaternion.identity));
+                            break;
+                    }
+                }
             }
             if (StaticVariables.m_playerStates[i] == State.LEFT)
             {
                 if (!foundRed)
                 {
-                    m_redTeam.Add(Instantiate(m_redplayer1Prefab, m_redSpawns[0].transform.position, Quaternion.identity));
-                    foundRed = true;  
+                    switch (i)
+                    {
+                        case 0:
+                            m_redplayer1Prefab.GetComponent<Player>().m_controller = XboxCtrlrInput.XboxController.First;
+                            m_redTeam.Add(Instantiate(m_redplayer1Prefab, m_redSpawns[0].transform.position, Quaternion.identity));
+                            break;
+                        case 1:
+                            m_redplayer1Prefab.GetComponent<Player>().m_controller = XboxCtrlrInput.XboxController.Second;
+                            m_redTeam.Add(Instantiate(m_redplayer1Prefab, m_redSpawns[0].transform.position, Quaternion.identity));
+                            break;
+                        case 2:
+                            m_redplayer1Prefab.GetComponent<Player>().m_controller = XboxCtrlrInput.XboxController.Third;
+                            m_redTeam.Add(Instantiate(m_redplayer1Prefab, m_redSpawns[0].transform.position, Quaternion.identity));
+                            break;
+                        case 3:
+                            m_redplayer1Prefab.GetComponent<Player>().m_controller = XboxCtrlrInput.XboxController.Fourth;
+                            m_redTeam.Add(Instantiate(m_redplayer1Prefab, m_redSpawns[0].transform.position, Quaternion.identity));
+                            break;
+                    }
+
+                    foundRed = true;
                 }
                 else
-                    m_redTeam.Add(Instantiate(m_redplayer2Prefab, m_redSpawns[1].transform.position, Quaternion.identity));
+                {
 
+                    switch (i)
+                    {
+                        case 0:
+                            m_redplayer2Prefab.GetComponent<Player>().m_controller = XboxCtrlrInput.XboxController.First;
+                            m_redTeam.Add(Instantiate(m_redplayer2Prefab, m_redSpawns[1].transform.position, Quaternion.identity));
+                            break;
+                        case 1:
+                            m_redplayer2Prefab.GetComponent<Player>().m_controller = XboxCtrlrInput.XboxController.Second;
+                            m_redTeam.Add(Instantiate(m_redplayer2Prefab, m_redSpawns[1].transform.position, Quaternion.identity));
+                            break;
+                        case 2:
+                            m_redplayer2Prefab.GetComponent<Player>().m_controller = XboxCtrlrInput.XboxController.Third;
+                            m_redTeam.Add(Instantiate(m_redplayer2Prefab, m_redSpawns[1].transform.position, Quaternion.identity));
+                            break;
+                        case 3:
+                            m_redplayer2Prefab.GetComponent<Player>().m_controller = XboxCtrlrInput.XboxController.Fourth;
+                            m_redTeam.Add(Instantiate(m_redplayer2Prefab, m_redSpawns[1].transform.position, Quaternion.identity));
+                            break;
+                    }
+                }
             }
         }
-        //{
-        //    if(playerlist[i] == LEFT) //blue
-        //    {
-        //        if (!foundBlue)
-        //        {
-        //            m_blueTeam.Add(Instantiate(m_blueplayer1Prefab, m_blueSpawns[i].transform.position, Quaternion.identity));
-        //            foundBlue = true;
-        //        }
-        //        else
-        //        {
-        //            //other prefab
-        //        }
-        //    }
-
-        //    if (playerlist[i] == Right) //red
-        //    {
-        //        if (!foundBlue)
-        //        {
-        //            m_blueTeam.Add(Instantiate(m_blueplayer1Prefab, m_blueSpawns[i].transform.position, Quaternion.identity));
-        //            foundBlue = true;
-        //        }
-        //        else
-        //        {
-        //            //other prefab
-        //        }
-        //    }
-        //}
-
-        //if (StaticVariables.m_p1Blue)
-        //    m_blueTeam.Add(Instantiate(m_blueplayer1Prefab, m_blueSpawns[0].transform.position, Quaternion.identity));
-        //else
-        //    m_redTeam.Add(Instantiate(m_redplayer1Prefab, m_redSpawns[0].transform.position, Quaternion.identity));
-        //if (StaticVariables.m_p2Blue)
-        //    m_blueTeam.Add(Instantiate(m_blueplayer2Prefab, m_blueSpawns[1].transform.position, Quaternion.identity));
-        //else
-        //    m_redTeam.Add(Instantiate(m_redplayer2Prefab, m_redSpawns[1].transform.position, Quaternion.identity));
-
-
     }
 }
