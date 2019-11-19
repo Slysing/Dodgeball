@@ -59,6 +59,7 @@ public class CatchCollide : MonoBehaviour
                         if (other.tag == "Red Ball")
                             return;
                         other.tag = "Blue Ball";
+                        other.gameObject.layer = 20;
                         other.GetComponent<MeshRenderer>().material = m_blueMaterial;
                         break;
 
@@ -66,10 +67,10 @@ public class CatchCollide : MonoBehaviour
                         if (other.tag == "Blue Ball")
                             return;
                         other.tag = "Red Ball";
+                        other.gameObject.layer = 19;
                         other.GetComponent<MeshRenderer>().material = m_redMaterial;
                         break;
                 }
-
                 // checks the colour and sets if the colour is different
                 // prevents setting the colour every loop
                 //if (ballMesh.material != m_testColour)
@@ -102,7 +103,7 @@ public class CatchCollide : MonoBehaviour
     private IEnumerator cooldown()
     {
         m_cooldown = true;
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(.2f);
         m_cooldown = false;
     }
 }

@@ -250,6 +250,14 @@ public class Player : MonoBehaviour
         if (RoundManager.m_pauseGame)
             return;
 
+        if (RoundManager.m_pauseRound)
+        {
+            ResetBallCountDownUI();
+            countdownText.gameObject.SetActive(false);
+            m_holdingBall = false;
+            DropBall();
+            return;
+        }
         // PUT ALL CODE UNDERNEATH THE PAUSE GAME
 
         Countdown();
@@ -304,7 +312,7 @@ public class Player : MonoBehaviour
             if (playerAnim != null)
             {
                 playerAnim.SetTrigger("Dash");
-                Debug.Log("Dash");
+                //Debug.Log("Dash");
             }
         }
         /*
@@ -355,6 +363,7 @@ public class Player : MonoBehaviour
         if (m_ball != null)
         {
             m_ball.tag = "Neutral Ball";
+            m_ball.gameObject.layer = 9;
             m_ball.GetComponent<MeshRenderer>().material = m_greenMaterial;
             m_ball = null;
         }
@@ -386,11 +395,7 @@ public class Player : MonoBehaviour
 
     public void SetBall(GameObject ball)
     {
-        if (RoundManager.m_pauseRound)
-        {
-            DropBall();
-            return;
-        }
+
         
 
         m_ball = ball;

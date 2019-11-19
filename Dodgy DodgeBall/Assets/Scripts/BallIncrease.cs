@@ -48,6 +48,9 @@ public class BallIncrease : MonoBehaviour
         }
     }
 
+    public static void Reset()
+    {
+    }
     private void OnCollisionExit(Collision collider)
     {
         m_audioSource.PlayOneShot(m_collisionSound);

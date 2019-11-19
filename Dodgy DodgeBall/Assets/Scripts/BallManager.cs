@@ -90,6 +90,7 @@ public class BallManager : MonoBehaviour
             ball.transform.position = m_ballPoolPosition;
             ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
             ball.tag = "Neutral Ball";
+            ball.gameObject.layer = 9;
             ball.GetComponent<MeshRenderer>().material = m_greenMaterial;
         }
         m_currentBallCount = 0;

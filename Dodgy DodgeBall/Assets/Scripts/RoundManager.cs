@@ -196,7 +196,7 @@ public class RoundManager : MonoBehaviour
                 m_pauseRound = true;
                 m_nextRoundTimer -= Time.deltaTime;
                 m_anim.SetBool("FlashBlue", true);
-                //GetComponent<BallManager>().ResetBalls();
+                GetComponent<BallManager>().ResetBalls();
 
                 if ((int)m_nextRoundTimer == 0)
                 {
@@ -205,7 +205,7 @@ public class RoundManager : MonoBehaviour
                     m_blueScoreText.text = m_blueScore.ToString();
                     // restart round
                     RestartRound();
-                    m_anim.SetBool("FlashRed", false);
+                    m_anim.SetBool("FlashBlue", false);
                 }                 
             }
         }
