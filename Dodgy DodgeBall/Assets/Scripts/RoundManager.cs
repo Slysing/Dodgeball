@@ -16,6 +16,8 @@ public class RoundManager : MonoBehaviour
 {
     public static bool m_pauseGame = false;
 
+    public static bool m_pauseRound = false;
+
     [Header("Config")]
     public int m_roundsToWin = 3;
 
@@ -54,6 +56,9 @@ public class RoundManager : MonoBehaviour
 
     private float m_gameStartTimer = 3;
 
+    public Animator m_anim = null;
+    float m_nextRoundTimer = 5f;
+
     private void Start()
     {
         m_gameStart = true; // temp, but the variable will the entry point of a round
@@ -64,6 +69,24 @@ public class RoundManager : MonoBehaviour
 
     private void Update()
     {
+        if (m_redScore == m_roundsToWin)
+        {
+            EndGame();
+            Debug.Log("Red Wins");
+            return;
+            // Game over red wins
+            // m_isGameOver = true
+        }
+
+        if (m_blueScore == m_roundsToWin)
+        {
+            EndGame();
+            Debug.Log("Blue Wins");
+            return;
+            // Game over blue wins
+            // m_isGameOver = true;
+        }
+
         // If the game is paused dont run the update
         if (Input.GetKeyDown(KeyCode.P) || XCI.GetButtonDown(XboxButton.Start))
         {
@@ -150,36 +173,40 @@ public class RoundManager : MonoBehaviour
                 else
                     m_redTeamAlive = false;
             }
-
+            // If blue team is NOT alive
             if (!m_blueTeamAlive)
             {
-                m_redScore++;
-                m_redScoreText.text = m_redScore.ToString();
-                if (m_redScore == m_roundsToWin)
+                m_pauseRound = true;
+                m_nextRoundTimer -= Time.deltaTime;
+                m_anim.SetBool("FlashRed", true);
+                GetComponent<BallManager>().ResetBalls();
+
+                if((int)m_nextRoundTimer == 0)
                 {
-                    EndGame();
-                    Debug.Log("Red Wins");
-                    return;
-                    // Game over red wins
-                    // m_isGameOver = true
+                    m_pauseRound = false;
+                    m_redScore++;
+                    m_redScoreText.text = m_redScore.ToString();
+                    // restart round
+                    RestartRound();
+                    m_anim.SetBool("FlashRed", false);
                 }
-                // restart round
-                RestartRound();
             }
             else if (!m_redTeamAlive)
             {
-                m_blueScore++;
-                m_blueScoreText.text = m_blueScore.ToString();
-                if (m_blueScore == m_roundsToWin)
+                m_pauseRound = true;
+                m_nextRoundTimer -= Time.deltaTime;
+                m_anim.SetBool("FlashBlue", true);
+                //GetComponent<BallManager>().ResetBalls();
+
+                if ((int)m_nextRoundTimer == 0)
                 {
-                    EndGame();
-                    Debug.Log("Blue Wins");
-                    return;
-                    // Game over blue wins
-                    // m_isGameOver = true;
-                }
-                // restart round
-                RestartRound();
+                    m_pauseRound = false;
+                    m_blueScore++;
+                    m_blueScoreText.text = m_blueScore.ToString();
+                    // restart round
+                    RestartRound();
+                    m_anim.SetBool("FlashRed", false);
+                }                 
             }
         }
     }
@@ -208,6 +235,8 @@ public class RoundManager : MonoBehaviour
 
     private void RestartRound()
     {
+        m_nextRoundTimer = 5f;
+
         // m_isPlayer determines if the scoring/duration system runs
         m_isPlaying = false;
         // StartCoroutine(Cooldown(m_roundCooldown));

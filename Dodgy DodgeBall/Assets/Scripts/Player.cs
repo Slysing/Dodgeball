@@ -377,6 +377,7 @@ public class Player : MonoBehaviour
 
     private void BallCollide(PLAYER_TEAM team)
     {
+
         if (team != m_currentTeam)
         {
             Death();
@@ -385,6 +386,13 @@ public class Player : MonoBehaviour
 
     public void SetBall(GameObject ball)
     {
+        if (RoundManager.m_pauseRound)
+        {
+            DropBall();
+            return;
+        }
+        
+
         m_ball = ball;
         m_holdingBall = true;
     }

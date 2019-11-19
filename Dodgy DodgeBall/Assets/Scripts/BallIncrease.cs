@@ -25,7 +25,7 @@ public class BallIncrease : MonoBehaviour
 
     private void Update()
     {
-        if (RoundManager.m_pauseGame)
+        if (RoundManager.m_pauseGame || RoundManager.m_pauseRound)
         {
             if (!m_runOnce)
             {

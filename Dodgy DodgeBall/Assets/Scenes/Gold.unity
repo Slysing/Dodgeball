@@ -43578,7 +43578,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d747d5fc9dd3be49a1bf275a93521b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_roundsToWin: 5
+  m_roundsToWin: 1
   m_roundCooldown: 3
   m_startCooldown: 3
   m_currentRound: 1
@@ -43601,6 +43601,7 @@ MonoBehaviour:
     type: 3}
   m_RoundBeginSprint1: {fileID: 21300000, guid: 1dad87da8dd90734e94be338c81c6c08,
     type: 3}
+  m_anim: {fileID: 1656362924835560082}
 --- !u!114 &1032035648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101797,6 +101798,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2986008306319225699}
+  - component: {fileID: 1656362924835560082}
   m_Layer: 0
   m_Name: Light_003_Arena_001
   m_TagString: Untagged
@@ -101804,6 +101806,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!95 &1656362924835560082
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1656362924835560081}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 78b9a142632152848ad2d55b81414c07, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!33 &1914733359586690050
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -102358,6 +102379,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4310035089268465944}
   - component: {fileID: 4310035089268465945}
+  - component: {fileID: 4310035089268465959}
   m_Layer: 0
   m_Name: SpotLight_004_RedSideFence_002
   m_TagString: Untagged
@@ -102365,6 +102387,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!95 &4310035089268465959
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4310035089268465958}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4db8dd276221dee4689c5432e6e29cdd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!108 &4310035090035381826
 Light:
   m_ObjectHideFlags: 0
@@ -102482,6 +102523,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4310035090282478597}
   - component: {fileID: 4310035090282478594}
+  - component: {fileID: 4310035090282478596}
   m_Layer: 0
   m_Name: SpotLight_005_BlueSideFence_002
   m_TagString: Untagged
@@ -102489,6 +102531,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!95 &4310035090282478596
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4310035090282478595}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bcde7cae9b0c9364bb550866e3b83caf, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!4 &4310035090282478597
 Transform:
   m_ObjectHideFlags: 0
