@@ -216,7 +216,7 @@ MonoBehaviour:
   m_playerNumber: {fileID: 1786417169316847396}
   m_redMaterial: {fileID: 2100000, guid: 23a8616c26cda6b42a0f0c7addb25bcd, type: 2}
   m_blueMaterial: {fileID: 2100000, guid: 9f3c0d71726640048a75596d79f60dcd, type: 2}
-  m_greenMaterial: {fileID: 2100000, guid: 58d38782de18caf41a9364100971f621, type: 2}
+  m_greenMaterial: {fileID: 2100000, guid: 08afbba01bab0b8439deddf0ba38b113, type: 2}
   playerAnim: {fileID: 4882747459055859889}
   deathParticle: {fileID: 8954288908535567504, guid: 8fd53a05fe746984b9752b2840cb0c1b,
     type: 3}
@@ -813,7 +813,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2100000, guid: d08ab63ebff55a04a9408b64eb84efcb, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f3cb2ceb66088d4a93331b47931c904, type: 3}
 --- !u!95 &4882747459055859889 stripped

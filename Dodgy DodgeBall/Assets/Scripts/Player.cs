@@ -440,7 +440,7 @@ public class Player : MonoBehaviour
 
         rb.AddForce(force, ForceMode.Impulse);
 
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(.2f);
         m_ball = null;
         m_holdingBall = false;
 
