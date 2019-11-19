@@ -237,7 +237,7 @@ Animator:
   m_GameObject: {fileID: 165473977}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 76d4117e765a8b845b7659075766e043, type: 2}
+  m_Controller: {fileID: 9100000, guid: 8be26409650e35c4891fead698fadf55, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -2526,8 +2526,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 4e8824ac940a9694087ad03547548721, type: 3}
   m_controllers: 01000000020000000300000004000000
   m_bmReference: {fileID: 4349864525955876261}
-  m_states: 02000000020000000200000002000000
   m_play: {fileID: 1060684120}
+  m_states: 02000000020000000200000002000000
   m_startGame: 0
 --- !u!114 &1071688040
 MonoBehaviour:
@@ -3814,7 +3814,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1510370865}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -313.04, y: 30.23, z: -34.49}
+  m_LocalPosition: {x: -240.8, y: 30.23, z: -34.49}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4315,6 +4315,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1679438748}
   m_Mesh: {fileID: 4300096, guid: b0dae5e0c40f3de409ad0a0bc224d27a, type: 3}
+--- !u!1 &1687702600 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4349864526280041225, guid: 6cccb2e470b73ca4bbb503824e777529,
+    type: 3}
+  m_PrefabInstance: {fileID: 4349864525955876260}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1833275233
 GameObject:
   m_ObjectHideFlags: 0
@@ -4916,12 +4922,12 @@ GameObject:
   - component: {fileID: 2101060349}
   - component: {fileID: 2101060348}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: SelectScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2101060348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9708,6 +9714,16 @@ PrefabInstance:
       propertyPath: m_selectCanvas
       value: 
       objectReference: {fileID: 2101060347}
+    - target: {fileID: 4349864526280041237, guid: 6cccb2e470b73ca4bbb503824e777529,
+        type: 3}
+      propertyPath: m_mainMenuCanvas
+      value: 
+      objectReference: {fileID: 1687702600}
+    - target: {fileID: 4349864526280041237, guid: 6cccb2e470b73ca4bbb503824e777529,
+        type: 3}
+      propertyPath: m_delayTime
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 631489944, guid: 6cccb2e470b73ca4bbb503824e777529, type: 3}
       propertyPath: m_Colors.m_HighlightedColor.r
       value: 0.6132076
@@ -9752,6 +9768,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 5dec3db743ec2b049ab688f70b3de86b,
         type: 3}
+    - target: {fileID: 4349864524925813701, guid: 6cccb2e470b73ca4bbb503824e777529,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4349864526065580692, guid: 6cccb2e470b73ca4bbb503824e777529,
         type: 3}
       propertyPath: m_Sprite
@@ -9772,7 +9793,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 4349864525955876260}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1687702600}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f0ccc4937703e04ebe9e9cca7845d5d, type: 3}
@@ -10067,6 +10088,8 @@ MonoBehaviour:
   m_exitButton: {fileID: 0}
   m_currentEventSystem: {fileID: 0}
   m_startClicked: 0
+  m_mainMenuCanvas: {fileID: 0}
+  m_delayTime: 0
 --- !u!114 &7647150198359778696
 MonoBehaviour:
   m_ObjectHideFlags: 0

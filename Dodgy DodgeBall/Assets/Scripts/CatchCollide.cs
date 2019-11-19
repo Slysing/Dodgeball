@@ -46,43 +46,54 @@ public class CatchCollide : MonoBehaviour
            other.tag == "Blue Ball" ||
            other.tag == "Neutral Ball")
         {
-            // Set timer from 0 seconds upto 5 seconds then set the ball back to Neutral and Have the ball leave the collider
-
-            MeshRenderer ballMesh = other.GetComponent<MeshRenderer>();
-            // sets the ball's team accordinly and if the ball is of the opposing colour dont pick up
-            switch (m_team)
+            if (other.GetComponent<BallBehaviour>().m_owner == null)
             {
-                case PLAYER_TEAM.TEAM_BLUE:
-                    if (other.tag == "Red Ball")
-                        return;
-                    other.tag = "Blue Ball";
-                    other.GetComponent<MeshRenderer>().material = m_blueMaterial;
-                    break;
+                other.GetComponent<BallBehaviour>().m_owner = transform.parent.gameObject;
+                // Set timer from 0 seconds upto 5 seconds then set the ball back to Neutral and Have the ball leave the collider
 
-                case PLAYER_TEAM.TEAM_RED:
-                    if (other.tag == "Blue Ball")
-                        return;
-                    other.tag = "Red Ball";
-                    other.GetComponent<MeshRenderer>().material = m_redMaterial;
-                    break;
+                MeshRenderer ballMesh = other.GetComponent<MeshRenderer>();
+                // sets the ball's team accordinly and if the ball is of the opposing colour dont pick up
+                switch (m_team)
+                {
+                    case PLAYER_TEAM.TEAM_BLUE:
+                        if (other.tag == "Red Ball")
+                            return;
+                        other.tag = "Blue Ball";
+                        other.GetComponent<MeshRenderer>().material = m_blueMaterial;
+                        break;
+
+                    case PLAYER_TEAM.TEAM_RED:
+                        if (other.tag == "Blue Ball")
+                            return;
+                        other.tag = "Red Ball";
+                        other.GetComponent<MeshRenderer>().material = m_redMaterial;
+                        break;
+                }
+
+                // checks the colour and sets if the colour is different
+                // prevents setting the colour every loop
+                //if (ballMesh.material != m_testColour)
+                //    ballMesh.material = m_testColour;
+
+                m_player.GetComponent<Player>().SetBall(other.gameObject);
+
+                //Debug.Log("Now a " + other.tag);
+                if (Input.GetKeyDown(KeyCode.Space) || XCI.GetAxis(XboxAxis.RightTrigger, m_controller) == 0)
+                {
+                    m_lastBall = other.gameObject;
+                    StartCoroutine(cooldown());
+                }
+
             }
 
-            // checks the colour and sets if the colour is different
-            // prevents setting the colour every loop
-            //if (ballMesh.material != m_testColour)
-            //    ballMesh.material = m_testColour;
-
-            m_player.GetComponent<Player>().SetBall(other.gameObject);
-
-            //Debug.Log("Now a " + other.tag);
-            if (Input.GetKeyDown(KeyCode.Space) || XCI.GetAxis(XboxAxis.RightTrigger, m_controller) == 0)
-            {
-                m_lastBall = other.gameObject;
-                StartCoroutine(cooldown());
-            }
         }
     }
 
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.GetComponent<BallBehaviour>() != null)
+            other.GetComponent<BallBehaviour>().m_owner = null;
+    }
     public void ResetCooldown()
     {
         m_cooldown = false;

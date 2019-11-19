@@ -51,6 +51,10 @@ public class ButtonMananger : MonoBehaviour
     public EventSystem m_currentEventSystem;
     [HideInInspector] public bool m_startClicked;
 
+    [Header("Main Menu Canvas")]
+    [SerializeField] private GameObject m_mainMenuCanvas;
+    public float m_delayTime; 
+
     
 
     private void Start()
@@ -189,6 +193,7 @@ public class ButtonMananger : MonoBehaviour
                     StartCoroutine(CameraTranslate(m_animationClips[i]));
                     m_isTranslating = true;
                     m_selectCanvas.SetActive(true);
+                    StartCoroutine(DelayedDeactivate(m_mainMenuCanvas)); 
                     break;
                 }
             }
@@ -216,5 +221,12 @@ public class ButtonMananger : MonoBehaviour
 
         if (m_currentEventSystem.currentSelectedGameObject == null)
             m_currentEventSystem.SetSelectedGameObject(m_startButton.gameObject); 
+    }
+
+    private IEnumerator DelayedDeactivate(GameObject turnOff)
+    {
+        yield return new WaitForSeconds(m_delayTime);
+
+        turnOff.SetActive(false); 
     }
 }

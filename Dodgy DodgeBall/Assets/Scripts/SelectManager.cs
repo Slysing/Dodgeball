@@ -12,27 +12,35 @@ public enum State
 
 public class SelectManager : MonoBehaviour
 {
+    //Used for the allocation of player location and sprites----------------------
+    [Header("Location and Sprites")]
     public List<GameObject> m_players = new List<GameObject>();
-
     public List<GameObject> m_locations = new List<GameObject>();
-
     public List<Sprite> m_sprites = new List<Sprite>();
+    //----------------------------------------------------------------------------
 
+    //Controller allocation-------------------------------------------------------
+    [Header("Controllers")]
     public List<XboxController> m_controllers = new List<XboxController>();
-
-    public ButtonMananger m_bmReference;
-
     private static bool m_didQueryNumOfCtrlrs = false;
+    //----------------------------------------------------------------------------
 
-    public List<State> m_states = new List<State>();
-
+    //Reference to the ButtonManager script and buttons---------------------------
+    [Header("Script Refernce")]
+    public ButtonMananger m_bmReference;
     public GameObject m_play;
+    //----------------------------------------------------------------------------
 
+    //Static variables------------------------------------------------------------
+    [HideInInspector]public List<State> m_states = new List<State>();
     [HideInInspector] public bool m_startGame = false;
+    //----------------------------------------------------------------------------
+
 
     // Start is called before the first frame update
     private void Start()
     {
+        #region Controller Set Up
         if (!m_didQueryNumOfCtrlrs)
         {
             m_didQueryNumOfCtrlrs = true;
@@ -53,26 +61,23 @@ public class SelectManager : MonoBehaviour
 
             XCI.DEBUG_LogControllerNames();
         }
-
-        for (int i = 0; i < 4; i++)
-        {
-            m_states.Add(State.MIDDLE);
-        }
+        #endregion
     }
 
     // Update is called once per frame
     private void Update()
     {
-        int blue = 0;
+        #region Input
+        int blue = 0;                                                               //Count for each team 
         int red = 0;
-
-        if (XCI.GetDPadDown(XboxDPad.Left, m_controllers[0]))
+        
+        if (XCI.GetDPadDown(XboxDPad.Left, m_controllers[0]))                       //Input for each player 
         {
-            m_players[0].transform.position = m_locations[0].transform.position;
-            m_players[0].GetComponent<Image>().sprite = m_sprites[0];
-            m_states[0] = State.LEFT;
+            m_players[0].transform.position = m_locations[0].transform.position;    //Setting the location for the sprite depending on the input of the user
+            m_players[0].GetComponent<Image>().sprite = m_sprites[0];               //Setting the sprite depending on the location of the sprite 
+            m_states[0] = State.LEFT;                                               //Saving the team of the player to be carried across to the game 
         }
-        if (XCI.GetDPadDown(XboxDPad.Right, m_controllers[0]))
+        if (XCI.GetDPadDown(XboxDPad.Right, m_controllers[0]))                      //Repeated process for the other side 
         {
             m_players[0].transform.position = m_locations[1].transform.position;
             m_players[0].GetComponent<Image>().sprite = m_sprites[1];
@@ -80,7 +85,7 @@ public class SelectManager : MonoBehaviour
         }
         if (XCI.GetDPadDown(XboxDPad.Left, m_controllers[1]))
         {
-            m_players[1].transform.position = m_locations[2].transform.position;
+            m_players[1].transform.position = m_locations[2].transform.position;    //Repeated for P2 and so forth 
             m_players[1].GetComponent<Image>().sprite = m_sprites[2];
             m_states[1] = State.LEFT;
         }
@@ -114,7 +119,10 @@ public class SelectManager : MonoBehaviour
             m_players[3].GetComponent<Image>().sprite = m_sprites[3];
             m_states[3] = State.RIGHT;
         }
+        #endregion
 
+        //Counting how many players on each team,
+        //used to make sure that the teams are vaild to start the game 
         for (int i = 0; i < 4; i++)
         {
             switch (m_states[i])
@@ -129,6 +137,7 @@ public class SelectManager : MonoBehaviour
             }
         }
 
+        //Checking of the teams are valid 
         if (red == 1 && blue == 1)
             m_play.SetActive(true);
         else if (red == 2 && blue == 2)
@@ -143,8 +152,5 @@ public class SelectManager : MonoBehaviour
                 m_startGame = true;
             }
         }
-
-        //Debug.Log("REDCOUNT: " + red);
-        //Debug.Log("BLUECOUNT: " + blue);
     }
 }
