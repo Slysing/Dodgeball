@@ -560,7 +560,7 @@ GameObject:
   - component: {fileID: 3723419904176043262}
   - component: {fileID: 3723419902626261728}
   - component: {fileID: 3509700527688718969}
-  m_Layer: 10
+  m_Layer: 18
   m_Name: Player 1 - Red Team
   m_TagString: Red Team
   m_Icon: {fileID: 0}

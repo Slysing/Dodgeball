@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 3723419904176043257}
   - component: {fileID: 3723419904176043262}
   - component: {fileID: 3723419902626261728}
-  m_Layer: 13
+  m_Layer: 17
   m_Name: Player 2 - Blue Team
   m_TagString: Blue Team
   m_Icon: {fileID: 0}
@@ -444,16 +444,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3723419903024095747}
     m_Modifications:
-    - target: {fileID: 1812312320096270349, guid: 7036fb6d44a1d5e4fa2305d6d8a57ade,
-        type: 3}
-      propertyPath: m_Name
-      value: Particle_006_PlayerDeath_001
-      objectReference: {fileID: 0}
-    - target: {fileID: 1812312320096270349, guid: 7036fb6d44a1d5e4fa2305d6d8a57ade,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1914973399919548128, guid: 7036fb6d44a1d5e4fa2305d6d8a57ade,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -507,6 +497,16 @@ PrefabInstance:
     - target: {fileID: 1914973399919548128, guid: 7036fb6d44a1d5e4fa2305d6d8a57ade,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1812312320096270349, guid: 7036fb6d44a1d5e4fa2305d6d8a57ade,
+        type: 3}
+      propertyPath: m_Name
+      value: Particle_006_PlayerDeath_001
+      objectReference: {fileID: 0}
+    - target: {fileID: 1812312320096270349, guid: 7036fb6d44a1d5e4fa2305d6d8a57ade,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -599,11 +599,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3723419903024095747}
     m_Modifications:
-    - target: {fileID: 1619729813284918228, guid: 903d6dd0f6bce82489df0cb7b23e6880,
-        type: 3}
-      propertyPath: m_Name
-      value: Player Number Tracker 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8033212108171053065, guid: 903d6dd0f6bce82489df0cb7b23e6880,
         type: 3}
       propertyPath: m_havePropertiesChanged
@@ -759,6 +754,11 @@ PrefabInstance:
       propertyPath: m_isInputParsingRequired
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1619729813284918228, guid: 903d6dd0f6bce82489df0cb7b23e6880,
+        type: 3}
+      propertyPath: m_Name
+      value: Player Number Tracker 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5263402324759608113, guid: 903d6dd0f6bce82489df0cb7b23e6880,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -769,15 +769,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: Countdown Timer
       objectReference: {fileID: 0}
-    - target: {fileID: 2336876333837396812, guid: 903d6dd0f6bce82489df0cb7b23e6880,
-        type: 3}
-      propertyPath: m_Name
-      value: Player 4
-      objectReference: {fileID: 0}
     - target: {fileID: 3656688272573224893, guid: 903d6dd0f6bce82489df0cb7b23e6880,
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -215
+      objectReference: {fileID: 0}
+    - target: {fileID: 2336876333837396812, guid: 903d6dd0f6bce82489df0cb7b23e6880,
+        type: 3}
+      propertyPath: m_Name
+      value: Player 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 903d6dd0f6bce82489df0cb7b23e6880, type: 3}
@@ -818,10 +818,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3723419903024095747}
     m_Modifications:
-    - target: {fileID: 100056, guid: 5e17f6c5b2814e54e8eb136e87933e07, type: 3}
-      propertyPath: m_Name
-      value: Walk_Animation
-      objectReference: {fileID: 0}
     - target: {fileID: 400056, guid: 5e17f6c5b2814e54e8eb136e87933e07, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -865,6 +861,10 @@ PrefabInstance:
     - target: {fileID: 400056, guid: 5e17f6c5b2814e54e8eb136e87933e07, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100056, guid: 5e17f6c5b2814e54e8eb136e87933e07, type: 3}
+      propertyPath: m_Name
+      value: Walk_Animation
       objectReference: {fileID: 0}
     - target: {fileID: 9500000, guid: 5e17f6c5b2814e54e8eb136e87933e07, type: 3}
       propertyPath: m_Controller
