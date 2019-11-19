@@ -16,13 +16,29 @@ public class GameSettings : MonoBehaviour
     {
         if (m_pistonControl == null)
             m_pistonControl = gameObject.GetComponent<PistonControl>();
+        
+    }
+
+    public void Update()
+    {
         GetSettings();
     }
 
     // Grabs settings from player prefs and applies them accordingly
     public void GetSettings()
     {
-        m_pistonControl.m_togglePistons = PlayerPrefs.GetInt("PistonsToggle") == 1 ? true : false;
+        //m_pistonControl.m_togglePistons = PlayerPrefs.GetInt("PistonToggle") == 1 ? true : false;
+
+        if (PlayerPrefs.GetInt("PistonToggle") == 1)
+        {
+            print("Pistons = True");
+            m_pistonControl.m_togglePistons = true;
+        }
+        else
+        {
+            print("Pistons = False");
+            m_pistonControl.m_togglePistons = false;
+        }
 
         if (PlayerPrefs.GetInt("MusicToggle") == 0)
         {
