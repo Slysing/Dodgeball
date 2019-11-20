@@ -39,8 +39,14 @@ public class RoundManager : MonoBehaviour
     private bool m_roundStart = false;
     private bool m_gameStart = true; // Used to run the initial timer once
     public bool m_resetBallOnce = false;
-
     public float m_endScreenTimer = 5.0f;
+
+    [Header("Ui")]
+    public Image m_playerIconBlue = null;
+    public Image m_playerIconPurple = null;
+    public Image m_playerIconRed = null;
+    public Image m_playerIconOrange = null;
+
     public TextMeshProUGUI m_redScoreText;
     public TextMeshProUGUI m_blueScoreText;
     public TextMeshProUGUI m_RoundTimer;
@@ -55,10 +61,21 @@ public class RoundManager : MonoBehaviour
     public Sprite m_RoundBeginSprint2;
     public Sprite m_RoundBeginSprint1;
 
-    private float m_gameStartTimer = 3;
+    private Color m_fadedColour;
+    private Color m_normalColour;
 
+    [Header("Animations")]
     public Animator m_anim = null;
+
+    private float m_gameStartTimer = 3;
     float m_nextRoundTimer = 5f;
+
+    private void Awake()
+    {
+        m_fadedColour = Color.white;
+        m_normalColour = Color.white;
+        m_fadedColour.a = .3f;
+    }
 
     private void Start()
     {
@@ -66,6 +83,24 @@ public class RoundManager : MonoBehaviour
         m_isPlaying = false;
         m_RoundBeginImage.enabled = true;
         m_gameStartTimer = m_startCooldown;
+        if(TeamManager.m_blueTeam.Count == 1)
+        {   
+            if(TeamManager.m_blueTeam[0].GetComponent<Player>().m_controller == XboxController.Second)
+            {
+                Color newColour = m_playerIconPurple.color;
+                newColour.a = .3f;
+                m_playerIconPurple.color = newColour;
+            }
+        }
+        if(TeamManager.m_redTeam.Count == 1)
+        {
+            if(TeamManager.m_redTeam[0].GetComponent<Player>().m_controller == XboxController.First)
+            {
+                Color newColour = m_playerIconOrange.color;
+                newColour.a = .3f;
+                m_playerIconOrange.color = newColour;
+            }
+        }
     }
 
     private void Update()
@@ -104,6 +139,8 @@ public class RoundManager : MonoBehaviour
             if (m_pausePanel.activeSelf)
                 m_pausePanel.SetActive(false);
         }
+
+        CheckPlayers();
 
         if (m_gameStart)
         {
@@ -181,6 +218,8 @@ public class RoundManager : MonoBehaviour
                 m_nextRoundTimer -= Time.deltaTime;
                 m_anim.SetBool("FlashRed", true);
                 ResetBalls();
+                m_playerIconPurple.color = m_fadedColour;
+                m_playerIconBlue.color = m_fadedColour;
 
                 if((int)m_nextRoundTimer == 0)
                 {
@@ -197,6 +236,8 @@ public class RoundManager : MonoBehaviour
                 m_nextRoundTimer -= Time.deltaTime;
                 m_anim.SetBool("FlashBlue", true);
                 ResetBalls();
+                m_playerIconRed.color = m_fadedColour;
+                m_playerIconOrange.color = m_fadedColour;
 
                 if ((int)m_nextRoundTimer == 0)
                 {
@@ -206,6 +247,61 @@ public class RoundManager : MonoBehaviour
                     m_anim.SetBool("FlashBlue", false);
                 }                 
             }
+        }
+    }
+
+    private void CheckPlayers()
+    {
+        if(!(TeamManager.m_redTeam.Count == 1))
+        {
+            int index = 0;
+            foreach(GameObject player in TeamManager.m_redTeam)
+            {
+                if(!player.GetComponent<Player>().m_isAlive)
+                {
+                    switch(index)
+                    {
+                        case 0:
+                        {
+                            m_playerIconRed.color = m_fadedColour;
+                            break;
+                        }
+                        case 1:
+                        {
+                            m_playerIconOrange.color = m_fadedColour;
+                            break;
+                        }
+                    }
+                }
+                index++;
+            }
+            index = 0;
+            foreach(GameObject player in TeamManager.m_blueTeam)
+            {
+                if(!player.GetComponent<Player>().m_isAlive)
+                {
+                    switch(index)
+                    {
+                        case 0:
+                        {
+                            m_playerIconBlue.color = m_fadedColour;
+                            break;
+                        }
+                        case 1:
+                        {
+                            m_playerIconPurple.color = m_fadedColour;
+                            break;
+                        }
+                    }
+                }
+                index++;
+            }
+        }
+        else
+        {
+            m_playerIconOrange.color = m_fadedColour;
+        
+            m_playerIconPurple.color = m_fadedColour;
         }
     }
 
@@ -271,6 +367,11 @@ public class RoundManager : MonoBehaviour
         m_isPlaying = false;
         m_RoundBeginImage.enabled = true;
         m_gameStartTimer = m_startCooldown;
+
+        m_playerIconBlue.color = m_normalColour;
+        m_playerIconPurple.color = m_normalColour;
+        m_playerIconRed.color = m_normalColour;
+        m_playerIconOrange.color = m_normalColour;
 
         foreach (var player in TeamManager.m_redTeam)
         {

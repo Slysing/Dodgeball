@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
+using System;
 
 public class StaticVariables : MonoBehaviour
 {
@@ -42,7 +44,7 @@ public class StaticVariables : MonoBehaviour
             {
                 m_playerStates[i] = m_smRefernce.m_states[i];
             }
-            SceneManager.LoadScene("Gold");
+            SceneManager.LoadScene(1);
         }
     }
 }

@@ -7,6 +7,6 @@ public class PlayScript : MonoBehaviour
 
     public void LoadScene()
     {
-        SceneManager.LoadScene("Gold");
+        SceneManager.LoadScene(1);
     }
 }
