@@ -34,8 +34,8 @@ TagManager:
   - BallPassRed
   - RedBall
   - BlueBall
-  - 
-  - 
+  - Collider
+  - BallCollider
   - 
   - 
   - 
