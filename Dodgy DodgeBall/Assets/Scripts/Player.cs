@@ -309,6 +309,7 @@ public class Player : MonoBehaviour
 
     private void Death()
     {
+       
         m_isAlive = false;
         m_catchRange.GetComponent<CatchCollide>().ResetCooldown();
 
@@ -324,6 +325,8 @@ public class Player : MonoBehaviour
         m_moveSpeed_Xbox = m_speed;
 
         DropBall();
+        //m_ball.SetActive(false);
+
         gameObject.SetActive(false);
     }
 

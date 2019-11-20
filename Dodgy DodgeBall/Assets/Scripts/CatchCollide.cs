@@ -57,8 +57,8 @@ public class CatchCollide : MonoBehaviour
                 switch (m_team)
                 {
                     case PLAYER_TEAM.TEAM_BLUE:
-                        if (other.tag == "Red Ball")
-                            return;
+                        //if (other.tag == "Red Ball")
+                        //    return;
                         other.tag = "Blue Ball";
                         other.gameObject.layer = 20;
                         other.GetComponent<MeshRenderer>().material = m_blueMaterial;
@@ -66,8 +66,8 @@ public class CatchCollide : MonoBehaviour
                         break;
 
                     case PLAYER_TEAM.TEAM_RED:
-                        if (other.tag == "Blue Ball")
-                            return;
+                        //if (other.tag == "Blue Ball")
+                        //    return;
                         other.tag = "Red Ball";
                         other.gameObject.layer = 19;
                         other.GetComponent<MeshRenderer>().material = m_redMaterial;
