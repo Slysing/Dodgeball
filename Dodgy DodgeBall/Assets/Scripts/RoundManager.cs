@@ -33,11 +33,12 @@ public class RoundManager : MonoBehaviour
     public static bool m_redTeamAlive = true;
     public static bool m_blueTeamAlive = true;
     public bool m_isGameOver = false;
-
-    private bool m_roundStart = false;
     public float m_roundDuration;
+
     public static bool m_isPlaying = false; // static bool to be used globally to pause the game
+    private bool m_roundStart = false;
     private bool m_gameStart = true; // Used to run the initial timer once
+    public bool m_resetBallOnce = false;
 
     public float m_endScreenTimer = 5.0f;
     public TextMeshProUGUI m_redScoreText;
@@ -179,11 +180,10 @@ public class RoundManager : MonoBehaviour
                 m_pauseRound = true;
                 m_nextRoundTimer -= Time.deltaTime;
                 m_anim.SetBool("FlashRed", true);
-                GetComponent<BallManager>().ResetBalls();
+                ResetBalls();
 
                 if((int)m_nextRoundTimer == 0)
                 {
-                    m_pauseRound = false;
                     m_redScore++;
                     m_redScoreText.text = m_redScore.ToString();
                     // restart round
@@ -196,14 +196,12 @@ public class RoundManager : MonoBehaviour
                 m_pauseRound = true;
                 m_nextRoundTimer -= Time.deltaTime;
                 m_anim.SetBool("FlashBlue", true);
-                GetComponent<BallManager>().ResetBalls();
+                ResetBalls();
 
                 if ((int)m_nextRoundTimer == 0)
                 {
-                    m_pauseRound = false;
                     m_blueScore++;
                     m_blueScoreText.text = m_blueScore.ToString();
-                    // restart round
                     RestartRound();
                     m_anim.SetBool("FlashBlue", false);
                 }                 
@@ -211,8 +209,28 @@ public class RoundManager : MonoBehaviour
         }
     }
 
+    // will reset all the balls onces
+    private void ResetBalls()
+    {
+        if(!m_resetBallOnce)
+        {
+            GetComponent<BallManager>().ResetBalls();
+            m_resetBallOnce = true; 
+        }
+    }
+
+    // runs once at the end of the game
     private void EndGame()
     {
+        if(m_resetBallOnce)
+        {
+            return;            
+        }
+        else
+        {
+            m_resetBallOnce = true;
+        }
+
         m_isGameOver = true;
         m_isPlaying = false;
 
@@ -233,9 +251,14 @@ public class RoundManager : MonoBehaviour
         GetComponent<TeamManager>().EndGame();
     }
 
+    // at the end of each round this should run
+    // resetting all needed variables and timers
+    // along with the players and balls
     private void RestartRound()
     {
         m_nextRoundTimer = 5f;
+        m_resetBallOnce = false;
+        m_pauseRound = false;
 
         // m_isPlayer determines if the scoring/duration system runs
         m_isPlaying = false;
@@ -261,10 +284,7 @@ public class RoundManager : MonoBehaviour
         }
 
         GetComponent<TeamManager>().Reset();
-        GetComponent<BallManager>().ResetBalls();
         GetComponent<PistonControl>().Reset();
-
-
     }
 
     private IEnumerator Cooldown(int seconds)
@@ -295,6 +315,7 @@ public class RoundManager : MonoBehaviour
             m_endText.text = "Red Wins!";
 
         yield return new WaitForSeconds(m_endScreenTimer);
+        m_resetBallOnce = false;
         SceneManager.LoadScene(0);
     }
 }

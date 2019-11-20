@@ -7,6 +7,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class BallManager : MonoBehaviour
 {
@@ -20,10 +21,12 @@ public class BallManager : MonoBehaviour
     private List<GameObject> m_ballPool = new List<GameObject>();
     private Vector3 m_ballPoolPosition = new Vector3(999f, 999f, 999f);
     private int m_ballPoolSize = 200;
+    private static System.Random rng = new System.Random();
 
     public Material m_redMaterial = null;
     public Material m_blueMaterial = null;
     public Material m_greenMaterial = null;
+    
 
     // Start is called before the first frame update
     private void Start()
@@ -84,6 +87,9 @@ public class BallManager : MonoBehaviour
 
     public void ResetBalls()
     {
+        print("Imma reset now");
+        Shuffle(ref m_ballPool);
+
         foreach (GameObject ball in m_ballPool)
         {
             ball.SetActive(false);
@@ -168,6 +174,20 @@ public class BallManager : MonoBehaviour
         foreach (var point in m_spawnPoints)
         {
             Gizmos.DrawWireSphere(point.transform.position, .5f);
+        }
+    }
+
+    // shuffles a passed in list
+    public static void Shuffle<T>(ref List<T> list)
+    {
+        int number = list.Count;
+        while(number > 1)
+        {
+            number--;
+            int next = rng.Next(number + 1);
+            T value = list[next];
+            list[next]= list[number];
+            list[number] = value;
         }
     }
 }
