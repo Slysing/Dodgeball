@@ -462,7 +462,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8492107111815941031}
   m_LocalRotation: {x: -0, y: 0.023771912, z: -0, w: 0.9997175}
-  m_LocalPosition: {x: 0.058, y: 1, z: 1.999}
+  m_LocalPosition: {x: 0.068, y: 1, z: 1.45}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2776725698959737302}
@@ -480,6 +480,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FakeBall
+      objectReference: {fileID: 0}
+    - target: {fileID: 1662045165358221342, guid: caf23747ea1471444aa009be2e297206,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2754936605044120836, guid: caf23747ea1471444aa009be2e297206,
         type: 3}
@@ -623,14 +628,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3300000, guid: 72be7f74bc28ac746840cf06687d729a, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 4300000, guid: af9e33e127a5b9e488465287efd37851, type: 3}
     - target: {fileID: 2300000, guid: 72be7f74bc28ac746840cf06687d729a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3300000, guid: 72be7f74bc28ac746840cf06687d729a, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: af9e33e127a5b9e488465287efd37851, type: 3}
     m_RemovedComponents:
     - {fileID: 2300000, guid: 72be7f74bc28ac746840cf06687d729a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 72be7f74bc28ac746840cf06687d729a, type: 3}

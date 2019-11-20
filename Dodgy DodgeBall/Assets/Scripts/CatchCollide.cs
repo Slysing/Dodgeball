@@ -34,21 +34,22 @@ public class CatchCollide : MonoBehaviour
                                 "Name: " + gameObject.name +
                                 ", Parent: " + transform.parent.name);
         }
+        m_controller = gameObject.transform.parent.GetComponent<Player>().m_controller;
         m_team = gameObject.transform.parent.GetComponent<Player>().m_currentTeam;
     }
 
     // When an object is colliding with the catch range
     private void OnTriggerStay(Collider other)
     {
-        if (m_cooldown || RoundManager.m_pauseGame)
+        if (m_cooldown || RoundManager.m_pauseGame || RoundManager.m_pauseRound)
             return;
         if (other.tag == "Red Ball" ||
            other.tag == "Blue Ball" ||
            other.tag == "Neutral Ball")
         {
-            if (other.GetComponent<BallBehaviour>().m_owner == null)
+            if (other.GetComponent<BallBehaviour>().m_owner == null && m_player.GetComponent<Player>().m_holdingBall == false)
             {
-                other.GetComponent<BallBehaviour>().m_owner = transform.parent.gameObject;
+                
                 // Set timer from 0 seconds upto 5 seconds then set the ball back to Neutral and Have the ball leave the collider
 
                 MeshRenderer ballMesh = other.GetComponent<MeshRenderer>();
@@ -61,6 +62,7 @@ public class CatchCollide : MonoBehaviour
                         other.tag = "Blue Ball";
                         other.gameObject.layer = 20;
                         other.GetComponent<MeshRenderer>().material = m_blueMaterial;
+                        other.GetComponent<BallBehaviour>().m_owner = gameObject;
                         break;
 
                     case PLAYER_TEAM.TEAM_RED:
@@ -69,6 +71,7 @@ public class CatchCollide : MonoBehaviour
                         other.tag = "Red Ball";
                         other.gameObject.layer = 19;
                         other.GetComponent<MeshRenderer>().material = m_redMaterial;
+                        other.GetComponent<BallBehaviour>().m_owner = gameObject;
                         break;
                 }
                 // checks the colour and sets if the colour is different
@@ -79,21 +82,22 @@ public class CatchCollide : MonoBehaviour
                 m_player.GetComponent<Player>().SetBall(other.gameObject);
 
                 //Debug.Log("Now a " + other.tag);
-                if (Input.GetKeyDown(KeyCode.Space) || XCI.GetAxis(XboxAxis.RightTrigger, m_controller) == 0)
-                {
-                    m_lastBall = other.gameObject;
-                    StartCoroutine(cooldown());
-                }
 
             }
 
+        }
+        if (Input.GetKeyDown(KeyCode.Space) || XCI.GetAxis(XboxAxis.RightTrigger, m_controller) > 0)
+        {
+            print(m_controller);
+            m_lastBall = other.gameObject;
+            StartCoroutine(cooldown());
+            other.GetComponent<BallBehaviour>().m_owner = null;
+            //m_player.GetComponent<Player>().m_holdingBall = false;  
         }
     }
 
     public void OnTriggerExit(Collider other)
     {
-        if (other.GetComponent<BallBehaviour>() != null)
-            other.GetComponent<BallBehaviour>().m_owner = null;
     }
     public void ResetCooldown()
     {

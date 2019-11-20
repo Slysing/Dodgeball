@@ -45,7 +45,7 @@ public class Player : MonoBehaviour
     public GameObject m_fakeBallCollider = null;
 
     //private float m_speedMultiplier = 20f;
-    [SerializeField] private bool m_holdingBall = false;
+    [SerializeField] public bool m_holdingBall = false;
 
     private GameObject m_ball = null;
     private Rigidbody m_rb = null;
@@ -59,7 +59,7 @@ public class Player : MonoBehaviour
 
     public float m_moveSpeed_Xbox;
     private Vector3 m_moveInput_Xbox;
-    [HideInInspector] public XboxController m_controller;
+    public XboxController m_controller;
 
     public const float m_MaxTriggerScale = 1.21f;
 
@@ -267,42 +267,11 @@ public class Player : MonoBehaviour
             if (m_fakeBallCollider.activeSelf != true)
                 m_fakeBallCollider.SetActive(true);
             m_moveSpeed_Xbox = 10.0f;
-
-
-
-
-            //if (!m_flashing)
-            //{
-            //    //StartCoroutine(FlashCountdown());
-            //    //StartCoroutine(FlashCoroutine());
-            //    m_flashing = true;
-            //}
-
-            //if (!m_countDownFlag)
-            //{
-            //    m_countDownText.gameObject.SetActive(true);
-            //    StartCoroutine(BallCountDown());
-            //    m_countDownFlag = true;
-            //}
         }
         else
         {
-            //Debug.Log("not active");
-            //m_countDownBall = 5;
-            //m_countDownText.gameObject.SetActive(false);
-            //if (m_countDownFlag)
-            //{
-            //    //StopCoroutine(BallCountDown());
-            //    m_countDownFlag = false;
-            //}
-
-            //if (m_flashing)
-            //{
-            //    //StopCoroutine(FlashCoroutine());
-            //    //StopCoroutine(FlashCountdown());
-            //    m_flashing = false;
-            //}
-
+            if (m_fakeBallCollider.activeSelf == true)
+                m_fakeBallCollider.SetActive(false);
             m_moveSpeed_Xbox = 15.0f;
         }
 
@@ -332,7 +301,7 @@ public class Player : MonoBehaviour
                 if (playerAnim != null)
                 {
                     playerAnim.SetTrigger("Throw");
-                    Debug.Log("Throw");
+                    //Debug.Log("Throw");
                 }
             }
         }
@@ -395,9 +364,6 @@ public class Player : MonoBehaviour
 
     public void SetBall(GameObject ball)
     {
-
-        
-
         m_ball = ball;
         m_holdingBall = true;
     }

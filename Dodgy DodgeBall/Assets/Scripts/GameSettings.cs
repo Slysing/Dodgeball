@@ -31,12 +31,10 @@ public class GameSettings : MonoBehaviour
 
         if (PlayerPrefs.GetInt("PistonToggle") == 1)
         {
-            print("Pistons = True");
             m_pistonControl.m_togglePistons = true;
         }
         else
         {
-            print("Pistons = False");
             m_pistonControl.m_togglePistons = false;
         }
 
