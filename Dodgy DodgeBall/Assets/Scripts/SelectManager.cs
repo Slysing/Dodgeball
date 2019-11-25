@@ -80,53 +80,59 @@ public class SelectManager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        float p1LeftStick = XCI.GetAxis(XboxAxis.LeftStickX, m_controllers[0]);
+        float p2LeftStick = XCI.GetAxis(XboxAxis.LeftStickX, m_controllers[1]);
+        float p3LeftStick = XCI.GetAxis(XboxAxis.LeftStickX, m_controllers[2]);
+        float p4LeftStick = XCI.GetAxis(XboxAxis.LeftStickX, m_controllers[3]);
+
+
         #region Input
         int blue = 0;                                                               //Count for each team 
         int red = 0;
         
-        if (XCI.GetDPadDown(XboxDPad.Left, m_controllers[0]))                       //Input for each player 
+        if (XCI.GetDPadDown(XboxDPad.Left, m_controllers[0]) || p1LeftStick < 0)                  //Input for each player 
         {
             m_players[0].transform.position = m_locations[0].transform.position;    //Setting the location for the sprite depending on the input of the user
             m_players[0].GetComponent<Image>().sprite = m_sprites[0];               //Setting the sprite depending on the location of the sprite 
             m_states[0] = State.LEFT;                                               //Saving the team of the player to be carried across to the game 
         }
-        if (XCI.GetDPadDown(XboxDPad.Right, m_controllers[0]))                      //Repeated process for the other side 
+        if (XCI.GetDPadDown(XboxDPad.Right, m_controllers[0]) || p1LeftStick > 0)                      //Repeated process for the other side 
         {
             m_players[0].transform.position = m_locations[1].transform.position;
             m_players[0].GetComponent<Image>().sprite = m_sprites[1];
             m_states[0] = State.RIGHT;
         }
-        if (XCI.GetDPadDown(XboxDPad.Left, m_controllers[1]))
+        if (XCI.GetDPadDown(XboxDPad.Left, m_controllers[1]) || p2LeftStick < 0)
         {
             m_players[1].transform.position = m_locations[2].transform.position;    //Repeated for P2 and so forth 
             m_players[1].GetComponent<Image>().sprite = m_sprites[2];
             m_states[1] = State.LEFT;
         }
-        if (XCI.GetDPadDown(XboxDPad.Right, m_controllers[1]))
+        if (XCI.GetDPadDown(XboxDPad.Right, m_controllers[1]) || p2LeftStick > 0)
         {
             m_players[1].transform.position = m_locations[3].transform.position;
             m_players[1].GetComponent<Image>().sprite = m_sprites[3];
             m_states[1] = State.RIGHT;
         }
-        if (XCI.GetDPadDown(XboxDPad.Left, m_controllers[2]))
+        if (XCI.GetDPadDown(XboxDPad.Left, m_controllers[2]) || p3LeftStick < 0)
         {
             m_players[2].transform.position = m_locations[4].transform.position;
             m_players[2].GetComponent<Image>().sprite = m_sprites[0];
             m_states[2] = State.LEFT;
         }
-        if (XCI.GetDPadDown(XboxDPad.Right, m_controllers[2]))
+        if (XCI.GetDPadDown(XboxDPad.Right, m_controllers[2]) || p3LeftStick > 0)
         {
             m_players[2].transform.position = m_locations[5].transform.position;
             m_players[2].GetComponent<Image>().sprite = m_sprites[1];
             m_states[2] = State.RIGHT;
         }
-        if (XCI.GetDPadDown(XboxDPad.Left, m_controllers[3]))
+        if (XCI.GetDPadDown(XboxDPad.Left, m_controllers[3]) || p4LeftStick < 0)
         {
             m_players[3].transform.position = m_locations[6].transform.position;
             m_players[3].GetComponent<Image>().sprite = m_sprites[2];
             m_states[3] = State.LEFT;
         }
-        if (XCI.GetDPadDown(XboxDPad.Right, m_controllers[3]))
+        if (XCI.GetDPadDown(XboxDPad.Right, m_controllers[3]) || p4LeftStick > 0)
         {
             m_players[3].transform.position = m_locations[7].transform.position;
             m_players[3].GetComponent<Image>().sprite = m_sprites[3];
