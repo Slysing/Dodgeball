@@ -2,6 +2,10 @@
 using UnityEngine;
 using UnityEngine.UI;
 using XboxCtrlrInput;
+using UnityEngine.Animations;
+using System.Collections;
+using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public enum State
 {
@@ -36,6 +40,15 @@ public class SelectManager : MonoBehaviour
     [HideInInspector] public bool m_startGame = false;
     //----------------------------------------------------------------------------
 
+    //Public Objects--------------------------------------------------------------
+    [Header("Public Variables")]
+    public Animator m_mainAnimator;
+    public GameObject m_mainMenuCanvas = null;
+    public GameObject m_teamSelectCanvas = null;
+    public float m_delayTime = 0;
+    public EventSystem m_mainEventSystem = null;
+    public Button m_startGameButton = null;
+    //----------------------------------------------------------------------------
 
     // Start is called before the first frame update
     private void Start()
@@ -145,12 +158,30 @@ public class SelectManager : MonoBehaviour
         else
             m_play.SetActive(false);
 
+        //If the teams are valid and any player presses A then the game will begin 
         if (m_play.activeInHierarchy)
         {
-            if (XCI.GetButton(XboxButton.A, m_controllers[0]))
+            if (XCI.GetButton(XboxButton.A, m_controllers[0]) ||
+                XCI.GetButton(XboxButton.A, m_controllers[1]) ||
+                XCI.GetButton(XboxButton.A, m_controllers[2]) ||
+                XCI.GetButton(XboxButton.A, m_controllers[3]))
             {
                 m_startGame = true;
             }
         }
+
+        //At any point any player can press be to return to the main menue 
+        if ((XCI.GetButton(XboxButton.B, m_controllers[0]) ||
+            XCI.GetButton(XboxButton.B, m_controllers[1]) ||
+            XCI.GetButton(XboxButton.B, m_controllers[2]) ||
+            XCI.GetButton(XboxButton.B, m_controllers[3])) && !m_bmReference.m_isTranslating)
+        {
+            Debug.Log("FUCK");
+            m_mainMenuCanvas.SetActive(true);
+            m_bmReference.SelectScreenBack();
+            m_startGameButton.Select(); 
+        }
+
+
     }
 }

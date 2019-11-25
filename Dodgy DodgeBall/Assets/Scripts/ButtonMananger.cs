@@ -16,7 +16,7 @@ public class ButtonMananger : MonoBehaviour
 {
     [SerializeField] private GameObject[] m_colourButtons;
     private List<AnimationClip> m_animationClips = new List<AnimationClip>();
-    private bool m_isTranslating = false;
+    [SerializeField] public bool m_isTranslating = false;
 
     public Animator m_menuAnim = null;
 
@@ -52,8 +52,10 @@ public class ButtonMananger : MonoBehaviour
     [HideInInspector] public bool m_startClicked;
 
     [Header("Main Menu Canvas")]
-    [SerializeField] private GameObject m_mainMenuCanvas;
-    public float m_delayTime; 
+    [SerializeField] private GameObject m_mainMenuCanvas = null;
+    public float m_deactivateDelayTime = 0;
+    public float m_activateDelayTime = 0;
+    [SerializeField] private GameObject m_teamSelectCanvas = null;
 
     
 
@@ -112,14 +114,6 @@ public class ButtonMananger : MonoBehaviour
         }
     }
 
-    // will wait for length of animationclip
-    public IEnumerator CameraTranslate(AnimationClip animClip)
-    {
-        float tempTime = animClip.length;
-        yield return new WaitForSeconds(tempTime);
-        m_isTranslating = false;
-    }
-
     // applies settings to prefs and translates back to main menu
     private void SettingsBackClick()
     {
@@ -135,6 +129,15 @@ public class ButtonMananger : MonoBehaviour
             m_settingsButton.Select();
         }
     }
+
+    // will wait for length of animationclip
+    public IEnumerator CameraTranslate(AnimationClip animClip)
+    {
+        float tempTime = animClip.length;
+        yield return new WaitForSeconds(tempTime);
+        m_isTranslating = false;
+    }
+
 
     private void ApplySettings()
     {
@@ -193,13 +196,33 @@ public class ButtonMananger : MonoBehaviour
                     StartCoroutine(CameraTranslate(m_animationClips[i]));
                     m_isTranslating = true;
                     m_selectCanvas.SetActive(true);
-                    StartCoroutine(DelayedDeactivate(m_mainMenuCanvas)); 
+                    StartCoroutine(DelayedDeactivate(m_mainMenuCanvas));
+                    m_currentEventSystem.SetSelectedGameObject(null); 
                     break;
                 }
             }
-        };
+        }
     }
 
+    public void SelectScreenBack()
+    {
+        if (!m_isTranslating)
+        {
+            m_menuAnim.SetTrigger("ToggleMainMenu");
+            for (int i = 0; i < m_animationClips.Count; i++)
+            {
+                if (m_animationClips[i].name == "CharacterSelect")
+                {
+                    m_isTranslating = true;
+                    StartCoroutine(CameraTranslate(m_animationClips[i]));
+                    StartCoroutine(DelayedDeactivate(m_teamSelectCanvas));
+                    //m_startButton.Select();
+                    break;
+                }
+            }
+        }
+    }
+    
     private void CreditsClick()
     {
         SceneManager.LoadScene(2);
@@ -208,8 +231,6 @@ public class ButtonMananger : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        //if (m_currentEventSystem.currentSelectedGameObject == null)
-        //    m_currentEventSystem.SetSelectedGameObject(m_startButton.gameObject);
         //Iterates through the array of buttons changing the color of the "highlighted" color variable giving the chaging color effect
         foreach (GameObject button in m_colourButtons)
         {
@@ -218,14 +239,13 @@ public class ButtonMananger : MonoBehaviour
             cb.highlightedColor = Color.Lerp(Color.red, Color.blue, Mathf.PingPong(Time.time, 1));
             currentButton.colors = cb;
         }
-
-        if (m_currentEventSystem.currentSelectedGameObject == null)
-            m_currentEventSystem.SetSelectedGameObject(m_startButton.gameObject); 
     }
+
+
 
     private IEnumerator DelayedDeactivate(GameObject turnOff)
     {
-        yield return new WaitForSeconds(m_delayTime);
+        yield return new WaitForSeconds(m_deactivateDelayTime);
 
         turnOff.SetActive(false); 
     }
