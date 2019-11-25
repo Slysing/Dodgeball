@@ -805,8 +805,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4280326416
-  m_fontColor: {r: 0.06550375, g: 0.6037736, b: 0.12606512, a: 1}
+    rgba: 4279409920
+  m_fontColor: {r: 0, g: 0.6156863, b: 0.07058824, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1045,8 +1045,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4280326416
-  m_fontColor: {r: 0.06550375, g: 0.6037736, b: 0.12606512, a: 1}
+    rgba: 4279409920
+  m_fontColor: {r: 0, g: 0.6156863, b: 0.07058824, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2220,7 +2220,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6c38b3645b301064c9c7576515949169, type: 2}
+  - {fileID: 2100000, guid: 0d4c014d20fd981478f769492fc736d7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6519,7 +6519,7 @@ RectTransform:
   m_GameObject: {fileID: 991792582}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 0.8, z: 1}
   m_Children:
   - {fileID: 1262198823}
   m_Father: {fileID: 789752081}
@@ -6527,7 +6527,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -9.799988, y: 39.100006}
+  m_AnchoredPosition: {x: -9.799988, y: 25}
   m_SizeDelta: {x: 280.8, y: 116.5}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &991792584
@@ -7271,7 +7271,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6c38b3645b301064c9c7576515949169, type: 2}
+  - {fileID: 2100000, guid: 0d4c014d20fd981478f769492fc736d7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7791,8 +7791,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278955469
-  m_fontColor: {r: 0.8039216, g: 0.6784314, b: 0.043137256, a: 1}
+    rgba: 4278244607
+  m_fontColor: {r: 1, g: 0.83505154, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -8032,7 +8032,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: '
+
+'
 --- !u!222 &1262198825
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8994,8 +8996,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278955469
-  m_fontColor: {r: 0.8039216, g: 0.6784314, b: 0.043137256, a: 1}
+    rgba: 4278244607
+  m_fontColor: {r: 1, g: 0.83505154, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -9403,11 +9405,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2957965228930586093, guid: ff5355ab340e049498c05e140e5663f9,
-        type: 3}
-      propertyPath: m_Name
-      value: Cardboard_Box_01
-      objectReference: {fileID: 0}
     - target: {fileID: 2957965228930419149, guid: ff5355ab340e049498c05e140e5663f9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9477,6 +9474,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1.2823
+      objectReference: {fileID: 0}
+    - target: {fileID: 2957965228930586093, guid: ff5355ab340e049498c05e140e5663f9,
+        type: 3}
+      propertyPath: m_Name
+      value: Cardboard_Box_01
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff5355ab340e049498c05e140e5663f9, type: 3}
@@ -9549,8 +9551,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4280326416
-  m_fontColor: {r: 0.06550375, g: 0.6037736, b: 0.12606512, a: 1}
+    rgba: 4279409920
+  m_fontColor: {r: 0, g: 0.6156863, b: 0.07058824, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -10256,7 +10258,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6c38b3645b301064c9c7576515949169, type: 2}
+  - {fileID: 2100000, guid: 0d4c014d20fd981478f769492fc736d7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -11059,8 +11061,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278955469
-  m_fontColor: {r: 0.8039216, g: 0.6784314, b: 0.043137256, a: 1}
+    rgba: 4278244607
+  m_fontColor: {r: 1, g: 0.83505154, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -11297,8 +11299,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4280326416
-  m_fontColor: {r: 0.06550375, g: 0.6037736, b: 0.12606512, a: 1}
+    rgba: 4279344128
+  m_fontColor: {r: 0, g: 0.6132076, b: 0.06713946, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -12630,7 +12632,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6c38b3645b301064c9c7576515949169, type: 2}
+  - {fileID: 2100000, guid: 0d4c014d20fd981478f769492fc736d7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -13690,15 +13692,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: '
-
-
-
-    Technical Researcher
-
-    Technical Director
-
-    Assistive Programmer '
+  m_text: "\n\n\nTechnical Researcher\nTechnical Director\nAssistive Programmer \n\n\nMusic
+    Producer\nUI Designer\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a8574cf9ef6af7a4f815b2585e36afdb, type: 2}
   m_sharedMaterial: {fileID: 21652465290711602, guid: a8574cf9ef6af7a4f815b2585e36afdb,
@@ -13708,8 +13703,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278955469
-  m_fontColor: {r: 0.8039216, g: 0.6784314, b: 0.043137256, a: 1}
+    rgba: 4278244607
+  m_fontColor: {r: 1, g: 0.83505154, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -13768,12 +13763,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 2098224153}
-    characterCount: 64
+    characterCount: 94
     spriteCount: 0
-    spaceCount: 9
-    wordCount: 7
+    spaceCount: 16
+    wordCount: 11
     linkCount: 0
-    lineCount: 6
+    lineCount: 10
     pageCount: 1
     materialCount: 1
   m_havePropertiesChanged: 0
@@ -24535,7 +24530,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6c38b3645b301064c9c7576515949169, type: 2}
+  - {fileID: 2100000, guid: 0d4c014d20fd981478f769492fc736d7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -27252,6 +27247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_colourButtons: []
+  m_isTranslating: 0
   m_menuAnim: {fileID: 0}
   m_startButton: {fileID: 0}
   m_selectCanvas: {fileID: 0}
@@ -27269,7 +27265,9 @@ MonoBehaviour:
   m_currentEventSystem: {fileID: 0}
   m_startClicked: 0
   m_mainMenuCanvas: {fileID: 0}
-  m_delayTime: 0
+  m_deactivateDelayTime: 0
+  m_activateDelayTime: 0
+  m_teamSelectCanvas: {fileID: 0}
 --- !u!114 &7647150198359778696
 MonoBehaviour:
   m_ObjectHideFlags: 0
