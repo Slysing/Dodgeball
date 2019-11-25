@@ -1,8 +1,8 @@
 ﻿/* TeamManager.cs
- * Authors: Leith Merrifield
+ * Authors:     Leith Merrifield and Connor Young 
  * Description: Handles creation of teams and spawning/resetting of players
- * Creation:
- * Modifield:
+ * Creation:    
+ * Modified:   25/11/19
  */
 
 using System.Collections.Generic;
@@ -85,17 +85,24 @@ public class TeamManager : MonoBehaviour
         //m_blueTeam.Add(Instantiate(m_blueplayer2Prefab, m_blueSpawns[1].transform.position, Quaternion.identity));
 
         // --- FOR MAIN GAME ---
-
+        #region and Prefab allocation
+        //Bool to whether a player has joined the red or blue team 
         bool foundBlue = false;
         bool foundRed = false;
+        
+        //Loops through players to assign them to the right prefab on the right team 
         for (int i = 0; i < StaticVariables.m_playerStates.Length; i++)
         {
+            //If the player is on the right team (blue)
            if (StaticVariables.m_playerStates[i] == State.RIGHT)
            {
+                //If no one has been asigned to the team yet 
                if (!foundBlue)
                {
+                    //Since the current loop corresonds with the player I use the index to find the right controller 
                    switch (i)
                    {
+                        //This will assign the first prefab the to correct controller 
                        case 0:
                            m_blueplayer1Prefab.GetComponent<Player>().m_controller = XboxCtrlrInput.XboxController.First;
                            m_blueTeam.Add(Instantiate(m_blueplayer1Prefab, m_blueSpawns[0].transform.position, Quaternion.identity));
@@ -113,12 +120,14 @@ public class TeamManager : MonoBehaviour
                            m_blueTeam.Add(Instantiate(m_blueplayer1Prefab, m_blueSpawns[0].transform.position, Quaternion.identity));
                            break;
                    }
+                    //The first blue player has been found 
                    foundBlue = true;
                }
                else
                {
                    switch (i)
                    {
+                        //Repeated for the 2nd prefab
                        case 0:
                            m_blueplayer2Prefab.GetComponent<Player>().m_controller = XboxCtrlrInput.XboxController.First;
                            m_blueTeam.Add(Instantiate(m_blueplayer2Prefab, m_blueSpawns[1].transform.position, Quaternion.identity));
@@ -138,6 +147,7 @@ public class TeamManager : MonoBehaviour
                    }
                }
            }
+           //Repeated if the player is of the left team (red)
            if (StaticVariables.m_playerStates[i] == State.LEFT)
            {
                if (!foundRed)
@@ -189,5 +199,6 @@ public class TeamManager : MonoBehaviour
                }
            }
         }
+        #endregion
     }
 }

@@ -1,4 +1,11 @@
-﻿using System.Collections.Generic;
+﻿/* SelectManager
+ * Author:      Connor Young
+ * Description: Gets input from users to select the team which they would like to play on
+ * Creation:    21/10/19
+ * Modified:    25/11/19
+ */
+
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using XboxCtrlrInput;
@@ -80,62 +87,57 @@ public class SelectManager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        //Varaibles used for getting input for the left joystick on each controller 
+        #region Joystick input 
         float p1LeftStick = XCI.GetAxis(XboxAxis.LeftStickX, m_controllers[0]);
         float p2LeftStick = XCI.GetAxis(XboxAxis.LeftStickX, m_controllers[1]);
         float p3LeftStick = XCI.GetAxis(XboxAxis.LeftStickX, m_controllers[2]);
         float p4LeftStick = XCI.GetAxis(XboxAxis.LeftStickX, m_controllers[3]);
+        #endregion
 
 
         #region Input
         int blue = 0;                                                               //Count for each team 
         int red = 0;
         
-        if (XCI.GetDPadDown(XboxDPad.Left, m_controllers[0]) || p1LeftStick < 0)                  //Input for each player 
+        if (XCI.GetDPadDown(XboxDPad.Left, m_controllers[0]) || p1LeftStick < 0)    //Input for each player 
         {
             m_players[0].transform.position = m_locations[0].transform.position;    //Setting the location for the sprite depending on the input of the user
-            m_players[0].GetComponent<Image>().sprite = m_sprites[0];               //Setting the sprite depending on the location of the sprite 
             m_states[0] = State.LEFT;                                               //Saving the team of the player to be carried across to the game 
         }
-        if (XCI.GetDPadDown(XboxDPad.Right, m_controllers[0]) || p1LeftStick > 0)                      //Repeated process for the other side 
+        if (XCI.GetDPadDown(XboxDPad.Right, m_controllers[0]) || p1LeftStick > 0)   //Repeated process for the other side 
         {
             m_players[0].transform.position = m_locations[1].transform.position;
-            m_players[0].GetComponent<Image>().sprite = m_sprites[1];
             m_states[0] = State.RIGHT;
         }
         if (XCI.GetDPadDown(XboxDPad.Left, m_controllers[1]) || p2LeftStick < 0)
         {
             m_players[1].transform.position = m_locations[2].transform.position;    //Repeated for P2 and so forth 
-            m_players[1].GetComponent<Image>().sprite = m_sprites[2];
             m_states[1] = State.LEFT;
         }
         if (XCI.GetDPadDown(XboxDPad.Right, m_controllers[1]) || p2LeftStick > 0)
         {
             m_players[1].transform.position = m_locations[3].transform.position;
-            m_players[1].GetComponent<Image>().sprite = m_sprites[3];
             m_states[1] = State.RIGHT;
         }
         if (XCI.GetDPadDown(XboxDPad.Left, m_controllers[2]) || p3LeftStick < 0)
         {
             m_players[2].transform.position = m_locations[4].transform.position;
-            m_players[2].GetComponent<Image>().sprite = m_sprites[0];
             m_states[2] = State.LEFT;
         }
         if (XCI.GetDPadDown(XboxDPad.Right, m_controllers[2]) || p3LeftStick > 0)
         {
             m_players[2].transform.position = m_locations[5].transform.position;
-            m_players[2].GetComponent<Image>().sprite = m_sprites[1];
             m_states[2] = State.RIGHT;
         }
         if (XCI.GetDPadDown(XboxDPad.Left, m_controllers[3]) || p4LeftStick < 0)
         {
             m_players[3].transform.position = m_locations[6].transform.position;
-            m_players[3].GetComponent<Image>().sprite = m_sprites[2];
             m_states[3] = State.LEFT;
         }
         if (XCI.GetDPadDown(XboxDPad.Right, m_controllers[3]) || p4LeftStick > 0)
         {
             m_players[3].transform.position = m_locations[7].transform.position;
-            m_players[3].GetComponent<Image>().sprite = m_sprites[3];
             m_states[3] = State.RIGHT;
         }
         #endregion
@@ -153,6 +155,20 @@ public class SelectManager : MonoBehaviour
                 case State.RIGHT:
                     blue++;
                     break;
+            }
+
+            //Allocts the stripe for each player depending on whether they 
+            // are the first or second person on each team 
+            if (m_states[i] != State.MIDDLE)
+            {
+                if (m_states[i] == State.LEFT && red == 1)                      //If the user is on the left and the first on the team
+                    m_players[i].GetComponent<Image>().sprite = m_sprites[0];   //then it will be allocated the first team icon 
+                else if (m_states[i] == State.LEFT && red == 2)
+                    m_players[i].GetComponent<Image>().sprite = m_sprites[2];   //If they are the second then they will get the second sprite 
+                else if (m_states[i] == State.RIGHT && blue == 1)
+                    m_players[i].GetComponent<Image>().sprite = m_sprites[1];   //Repeate for the blue team 
+                else if (m_states[i] == State.RIGHT && blue == 2)
+                    m_players[i].GetComponent<Image>().sprite = m_sprites[3];
             }
         }
 
@@ -182,7 +198,6 @@ public class SelectManager : MonoBehaviour
             XCI.GetButton(XboxButton.B, m_controllers[2]) ||
             XCI.GetButton(XboxButton.B, m_controllers[3])) && !m_bmReference.m_isTranslating)
         {
-            Debug.Log("FUCK");
             m_mainMenuCanvas.SetActive(true);
             m_bmReference.SelectScreenBack();
             m_startGameButton.Select(); 

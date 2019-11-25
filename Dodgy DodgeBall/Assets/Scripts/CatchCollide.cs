@@ -1,7 +1,8 @@
-﻿/*   CatchCollide.cs
- *   Authors: Leith Merrifield, Boran Baykan
- *   Description: Handles ball entering player catch range
- *   Creation: 07/10/2019
+﻿/* CatchCollide.cs
+ * Authors:     Leith Merrifield, Boran Baykan and Connor Young
+ * Description: Handles ball entering player catch range
+ * Creation:    07/10/2019
+ * Modified:    25/11/2019
  */
 
 using System.Collections;
@@ -47,6 +48,7 @@ public class CatchCollide : MonoBehaviour
            other.tag == "Blue Ball" ||
            other.tag == "Neutral Ball")
         {
+            //If the ball does not have a current owner and if the player is not currently holding a ball 
             if (other.GetComponent<BallBehaviour>().m_owner == null && m_player.GetComponent<Player>().m_holdingBall == false)
             {
                 
@@ -91,6 +93,7 @@ public class CatchCollide : MonoBehaviour
             print(m_controller);
             m_lastBall = other.gameObject;
             StartCoroutine(cooldown());
+            //Sets the ball owner to null when thrown so it can be caught 
             other.GetComponent<BallBehaviour>().m_owner = null;
             //m_player.GetComponent<Player>().m_holdingBall = false;  
         }

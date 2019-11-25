@@ -1,17 +1,20 @@
-﻿using UnityEngine;
+﻿/* StaticVariables
+ * Author:      Connor Young
+ * Description: Variables to be carried from the main menu to the main game scene 
+ * Creation:    21/10/19
+ * Modified:    25/11/19
+ */
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using System;
 
 public class StaticVariables : MonoBehaviour
 {
+    //Reference to the Select Manager Script 
     public SelectManager m_smRefernce;
 
-    public static bool m_p1Blue;
-    public static bool m_p2Blue;
-    public static bool m_p3Blue;
-    public static bool m_p4Blue;
-
+    //Publically accessable list of the players states 
     public static State[] m_playerStates = new State[4];
 
     // Start is called before the first frame update
@@ -22,28 +25,16 @@ public class StaticVariables : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        //If the game has been started 
         if (m_smRefernce.m_startGame)
         {
-            //if (m_smRefernce.m_states[0] == State.LEFT)
-            //    m_p1Blue = true;
-            //else
-            //    m_p1Blue = false;
-            //if (m_smRefernce.m_states[1] == State.LEFT)
-            //    m_p2Blue = true;
-            //else
-            //    m_p2Blue = false;
-            //if (m_smRefernce.m_states[2] == State.LEFT)
-            //    m_p3Blue = true;
-            //else
-            //    m_p3Blue = false;
-            //if (m_smRefernce.m_states[3] == State.LEFT)
-            //    m_p4Blue = true;
-            //else
-            //    m_p4Blue = false;
+            //Cycle through for the amount of players 
             for (int i = 0; i < m_playerStates.Length; i++)
             {
+                //Set the current index state in the static list 
                 m_playerStates[i] = m_smRefernce.m_states[i];
             }
+            //Once cycled through the complete list of players load the game scene 
             SceneManager.LoadScene(1);
         }
     }

@@ -1,4 +1,10 @@
-﻿using System.Collections;
+﻿/*
+ * Author:      Connor Young
+ * Description: Keeps track of the current holder and owner of the ball 
+ * Creation:    18/11/19
+ * Modified:    20/11/19
+ */
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
