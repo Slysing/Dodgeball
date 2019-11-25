@@ -142,6 +142,9 @@ public class RoundManager : MonoBehaviour
 
         CheckPlayers();
 
+        if (m_isGameOver)
+            return;
+
         if (m_gameStart)
         {
             m_gameStartTimer -= Time.deltaTime;
@@ -170,9 +173,6 @@ public class RoundManager : MonoBehaviour
                 m_RoundBeginImage.enabled = false;
             }
         }
-
-        if (m_isGameOver)
-            return;
 
         if (m_isPlaying)
         {
@@ -318,7 +318,8 @@ public class RoundManager : MonoBehaviour
     // runs once at the end of the game
     private void EndGame()
     {
-        if(m_resetBallOnce)
+        m_RoundBeginImage.enabled = false;
+        if (m_resetBallOnce)
         {
             return;            
         }
