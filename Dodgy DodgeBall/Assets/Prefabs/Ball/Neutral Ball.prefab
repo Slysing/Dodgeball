@@ -233,8 +233,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e217cddfb8374c4cb2d7a4260f6368a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_audioSource: {fileID: 0}
-  m_collisionSound: {fileID: 0}
+  m_audioSource: {fileID: 6317608136607611710}
+  m_collisionSound: {fileID: 8300000, guid: 4bd34eda1f7b1294cb1fd5c80ce2789e, type: 3}
   m_bounceAmount: 2
   m_mininumSpeed: 15
 --- !u!114 &4051866146737448808
