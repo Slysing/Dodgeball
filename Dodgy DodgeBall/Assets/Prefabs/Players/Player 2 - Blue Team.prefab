@@ -217,7 +217,7 @@ MonoBehaviour:
   m_blueMaterial: {fileID: 2100000, guid: 9f3c0d71726640048a75596d79f60dcd, type: 2}
   m_greenMaterial: {fileID: 2100000, guid: 08afbba01bab0b8439deddf0ba38b113, type: 2}
   playerAnim: {fileID: 7992381660871935509}
-  deathParticle: {fileID: 8954288908535567504, guid: 8fd53a05fe746984b9752b2840cb0c1b,
+  deathParticle: {fileID: 2736265964998010765, guid: f76a57f09e9003c4c86ba308bba8da8c,
     type: 3}
 --- !u!1 &3723419903023742565
 GameObject:

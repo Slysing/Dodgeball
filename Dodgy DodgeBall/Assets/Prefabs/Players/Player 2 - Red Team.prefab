@@ -765,7 +765,7 @@ MonoBehaviour:
   m_blueMaterial: {fileID: 2100000, guid: 9f3c0d71726640048a75596d79f60dcd, type: 2}
   m_greenMaterial: {fileID: 2100000, guid: 08afbba01bab0b8439deddf0ba38b113, type: 2}
   playerAnim: {fileID: 5559220371581569951}
-  deathParticle: {fileID: 8954288908535567504, guid: 8fd53a05fe746984b9752b2840cb0c1b,
+  deathParticle: {fileID: 6733657262044547857, guid: de1e9c7fe4b29bd40859c47da10f8202,
     type: 3}
 --- !u!23 &3509700527688718969
 MeshRenderer:
