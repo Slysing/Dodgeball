@@ -79,8 +79,8 @@ public class Player : MonoBehaviour
     // Ball
 
     private float currentTime = 5f;
-    [SerializeField] TextMeshProUGUI countdownText;
-    [SerializeField] TextMeshProUGUI m_playerNumber;
+    [SerializeField] TextMeshProUGUI countdownText = null;
+    [SerializeField] TextMeshProUGUI m_playerNumber = null;
 
     public Material m_redMaterial = null;
     public Material m_blueMaterial = null;

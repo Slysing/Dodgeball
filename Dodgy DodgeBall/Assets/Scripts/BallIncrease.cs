@@ -13,7 +13,6 @@ public class BallIncrease : MonoBehaviour
     public float m_bounceAmount = 10.0f;
     public float m_mininumSpeed = 15.0f;
     private Rigidbody m_rb;
-    private float m_bounceSpeedMultiplier = 20.0f; // constant multiplier for force
     private Vector3 m_tempVelocity;
     private bool m_runOnce = false;
 

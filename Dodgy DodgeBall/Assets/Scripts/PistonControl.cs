@@ -23,7 +23,6 @@ public class PistonControl : MonoBehaviour
     private float m_count = 0.0f;
     private bool m_playingBool = false; // if the animation is playing/up
     private bool m_runOnce = false;
-    private bool m_raiseCooldown = false;
     private float m_time;
 
     private void Update()

@@ -14,7 +14,7 @@ using UnityEngine.SceneManagement;
 
 public class ButtonMananger : MonoBehaviour
 {
-    [SerializeField] private GameObject[] m_colourButtons;
+    [SerializeField] private GameObject[] m_colourButtons = null;
     private List<AnimationClip> m_animationClips = new List<AnimationClip>();
     [SerializeField] public bool m_isTranslating = false;
 
@@ -37,7 +37,7 @@ public class ButtonMananger : MonoBehaviour
     private int m_settingsClipIndex = 0;
 
     [Header("Controls Menu")]
-    [SerializeField] private Button m_controlButton;
+    [SerializeField] private Button m_controlButton = null;
 
     [SerializeField] private GameObject m_controlPanel = null;
     [SerializeField] private Button m_controlBackButton = null;
