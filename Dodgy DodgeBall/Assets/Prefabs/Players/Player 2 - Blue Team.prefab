@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1293799509910723319}
   m_LocalRotation: {x: -0, y: -0.69009787, z: -0, w: 0.72371614}
-  m_LocalPosition: {x: -0.08, y: 0.9, z: -0.32}
+  m_LocalPosition: {x: -0.04, y: 0.9, z: 0.48}
   m_LocalScale: {x: 2.8910782, y: 1, z: 3.137546}
   m_Children: []
   m_Father: {fileID: 3723419903024095747}
@@ -349,7 +349,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8492107111815941031}
   m_LocalRotation: {x: -0, y: 0.023771912, z: -0, w: 0.9997175}
-  m_LocalPosition: {x: 0.034, y: 1, z: 1.45}
+  m_LocalPosition: {x: 0.07, y: 1, z: 2.26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3362047538734951669}
@@ -449,6 +449,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3723419903024095747}
     m_Modifications:
+    - target: {fileID: 1812312320096270349, guid: 7036fb6d44a1d5e4fa2305d6d8a57ade,
+        type: 3}
+      propertyPath: m_Name
+      value: Particle_006_PlayerDeath_001
+      objectReference: {fileID: 0}
+    - target: {fileID: 1812312320096270349, guid: 7036fb6d44a1d5e4fa2305d6d8a57ade,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1914973399919548128, guid: 7036fb6d44a1d5e4fa2305d6d8a57ade,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -502,16 +512,6 @@ PrefabInstance:
     - target: {fileID: 1914973399919548128, guid: 7036fb6d44a1d5e4fa2305d6d8a57ade,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1812312320096270349, guid: 7036fb6d44a1d5e4fa2305d6d8a57ade,
-        type: 3}
-      propertyPath: m_Name
-      value: Particle_006_PlayerDeath_001
-      objectReference: {fileID: 0}
-    - target: {fileID: 1812312320096270349, guid: 7036fb6d44a1d5e4fa2305d6d8a57ade,
-        type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -604,6 +604,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3723419903024095747}
     m_Modifications:
+    - target: {fileID: 1619729813284918228, guid: 903d6dd0f6bce82489df0cb7b23e6880,
+        type: 3}
+      propertyPath: m_Name
+      value: Player Number Tracker 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8033212108171053065, guid: 903d6dd0f6bce82489df0cb7b23e6880,
         type: 3}
       propertyPath: m_havePropertiesChanged
@@ -759,11 +764,6 @@ PrefabInstance:
       propertyPath: m_isInputParsingRequired
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1619729813284918228, guid: 903d6dd0f6bce82489df0cb7b23e6880,
-        type: 3}
-      propertyPath: m_Name
-      value: Player Number Tracker 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5263402324759608113, guid: 903d6dd0f6bce82489df0cb7b23e6880,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -774,15 +774,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: Countdown Timer
       objectReference: {fileID: 0}
-    - target: {fileID: 3656688272573224893, guid: 903d6dd0f6bce82489df0cb7b23e6880,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -215
-      objectReference: {fileID: 0}
     - target: {fileID: 2336876333837396812, guid: 903d6dd0f6bce82489df0cb7b23e6880,
         type: 3}
       propertyPath: m_Name
       value: Player 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3656688272573224893, guid: 903d6dd0f6bce82489df0cb7b23e6880,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -215
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 903d6dd0f6bce82489df0cb7b23e6880, type: 3}
@@ -823,6 +823,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3723419903024095747}
     m_Modifications:
+    - target: {fileID: 100056, guid: 5e17f6c5b2814e54e8eb136e87933e07, type: 3}
+      propertyPath: m_Name
+      value: Walk_Animation
+      objectReference: {fileID: 0}
     - target: {fileID: 400056, guid: 5e17f6c5b2814e54e8eb136e87933e07, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -866,10 +870,6 @@ PrefabInstance:
     - target: {fileID: 400056, guid: 5e17f6c5b2814e54e8eb136e87933e07, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 100056, guid: 5e17f6c5b2814e54e8eb136e87933e07, type: 3}
-      propertyPath: m_Name
-      value: Walk_Animation
       objectReference: {fileID: 0}
     - target: {fileID: 9500000, guid: 5e17f6c5b2814e54e8eb136e87933e07, type: 3}
       propertyPath: m_Controller

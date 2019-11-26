@@ -11,12 +11,15 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class ButtonMananger : MonoBehaviour
 {
     [SerializeField] private GameObject[] m_colourButtons = null;
     private List<AnimationClip> m_animationClips = new List<AnimationClip>();
     [SerializeField] public bool m_isTranslating = false;
+    private Color m_defaultTextColour = new Color();
+    private bool m_runColourOnce = false;
 
     public Animator m_menuAnim = null;
 
@@ -52,6 +55,7 @@ public class ButtonMananger : MonoBehaviour
     [HideInInspector] public bool m_startClicked;
 
     [Header("Main Menu Canvas")]
+    public AudioSource m_menuMusic = null;
     [SerializeField] private GameObject m_mainMenuCanvas = null;
     public float m_deactivateDelayTime = 0;
     public float m_activateDelayTime = 0;
@@ -83,6 +87,19 @@ public class ButtonMananger : MonoBehaviour
             m_volumeSlider.value = PlayerPrefs.GetFloat("Volume", 0.2f);
             m_musicToggle.isOn = PlayerPrefs.GetInt("MusicToggle", 1) == 1 ? true : false;
             m_pistonToggle.isOn = PlayerPrefs.GetInt("PistonToggle", 1) == 1 ? true : false;
+
+            m_menuMusic.volume = m_volumeSlider.value;
+
+            if (PlayerPrefs.GetInt("MusicToggle", 1) == 0)
+            {
+                m_menuMusic.mute = true;
+                m_menuMusic.Pause();
+            }
+            else
+            {
+                m_menuMusic.mute = false;
+                m_menuMusic.UnPause();
+            }
         }
 
         RuntimeAnimatorController ac = m_menuAnim.runtimeAnimatorController;    //Get Animator controller
@@ -121,7 +138,7 @@ public class ButtonMananger : MonoBehaviour
         {
             m_isTranslating = true;
 
-            ApplySettings();
+            //ApplySettings();
 
             StartCoroutine(CameraTranslate(m_animationClips[m_settingsClipIndex]));
             m_menuAnim.SetTrigger("ToggleSettings");
@@ -144,6 +161,18 @@ public class ButtonMananger : MonoBehaviour
         int piston = m_pistonToggle.isOn ? 1 : 0;
         int music = m_musicToggle.isOn ? 1 : 0;
         float volume = m_volumeSlider.value;
+        m_menuMusic.volume = volume;
+
+        if (music == 0)
+        {
+            m_menuMusic.mute = true;
+            m_menuMusic.Pause();
+        }
+        else
+        {
+            m_menuMusic.mute = false;
+            m_menuMusic.UnPause();
+        }
 
         PlayerPrefs.SetInt("PistonToggle", piston);
         PlayerPrefs.SetInt("MusicToggle", music);
@@ -231,9 +260,42 @@ public class ButtonMananger : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        //m_menuMusic.volume = m_volumeSlider.value;
+        ApplySettings();
         //Iterates through the array of buttons changing the color of the "highlighted" color variable giving the chaging color effect
         foreach (GameObject button in m_colourButtons)
         {
+            if(button.transform.childCount > 0)
+            {
+                
+                Transform child = button.transform.Find("Text");
+                TextMeshProUGUI text = child.gameObject.GetComponent<TextMeshProUGUI>();
+                if (!m_runColourOnce)
+                {
+                    m_defaultTextColour = text.color;
+                    m_runColourOnce = true;
+                }
+                Color rainbow = Color.Lerp(Color.red, Color.blue, Mathf.PingPong(Time.time, 1));
+
+                if (EventSystem.current.currentSelectedGameObject == button &&
+                    button.name != "Volume")
+                    text.color = rainbow;
+                else
+                    text.color = m_defaultTextColour;
+
+                if(button.name == "Volume")
+                {
+                    Transform Knob = button.transform.Find("Handle Slide Area/Handle");
+
+                    if (EventSystem.current.currentSelectedGameObject == button)
+                        Knob.gameObject.GetComponent<Image>().color = Color.blue;
+                    else
+                        Knob.gameObject.GetComponent<Image>().color = Color.black;
+
+                }
+                continue;
+            }
+
             Button currentButton = button.GetComponent<Button>();
             ColorBlock cb = currentButton.colors;
             cb.highlightedColor = Color.Lerp(Color.red, Color.blue, Mathf.PingPong(Time.time, 1));

@@ -323,9 +323,13 @@ public class Player : MonoBehaviour
 
         m_dashCooldown = false;
         m_moveSpeed_Xbox = m_speed;
+        
+        if(m_ball != null)
+        {
+            m_ball.SetActive(false);
+        }
 
         DropBall();
-        //m_ball.SetActive(false);
 
         gameObject.SetActive(false);
     }
@@ -354,6 +358,7 @@ public class Player : MonoBehaviour
                 BallCollide(PLAYER_TEAM.TEAM_RED);
                 break;
         }
+        collider.gameObject.SetActive(false);
     }
 
     private void BallCollide(PLAYER_TEAM team)

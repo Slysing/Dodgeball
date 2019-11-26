@@ -26,6 +26,7 @@ public class SelectManager : MonoBehaviour
     //Used for the allocation of player location and sprites----------------------
     [Header("Location and Sprites")]
     public List<GameObject> m_players = new List<GameObject>();
+    public List<Vector3> m_playerPosition = new List<Vector3>();
     public List<GameObject> m_locations = new List<GameObject>();
     public List<Sprite> m_sprites = new List<Sprite>();
     //----------------------------------------------------------------------------
@@ -82,6 +83,12 @@ public class SelectManager : MonoBehaviour
             XCI.DEBUG_LogControllerNames();
         }
         #endregion
+        foreach(GameObject player in m_players)
+        {
+            Vector3 temp = new Vector3();
+            temp = player.transform.position;
+            m_playerPosition.Add(temp);
+        }
     }
 
     // Update is called once per frame
@@ -200,7 +207,17 @@ public class SelectManager : MonoBehaviour
         {
             m_mainMenuCanvas.SetActive(true);
             m_bmReference.SelectScreenBack();
-            m_startGameButton.Select(); 
+            m_startGameButton.Select();
+
+            // IF BACK BUTTON IS PRESSED, SET THE PLAYERS BACK TO THE MIDDLE
+            int count = 0;
+            foreach(GameObject player in m_players)
+            {
+                player.GetComponent<Image>().sprite = m_sprites[4];
+                player.transform.position = m_playerPosition[count];
+                m_states[count] = State.MIDDLE;
+                count++;
+            }
         }
 
 

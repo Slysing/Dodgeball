@@ -45,6 +45,11 @@ public class BallIncrease : MonoBehaviour
                 m_rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
             }
         }
+
+        if(m_rb.velocity.magnitude >= m_mininumSpeed)
+        {
+            gameObject.GetComponent<BallBehaviour>().m_owner = null;
+        }
     }
 
     public static void Reset()

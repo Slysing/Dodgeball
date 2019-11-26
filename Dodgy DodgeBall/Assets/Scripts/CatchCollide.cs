@@ -93,8 +93,17 @@ public class CatchCollide : MonoBehaviour
             print(m_controller);
             m_lastBall = other.gameObject;
             StartCoroutine(cooldown());
-            //Sets the ball owner to null when thrown so it can be caught 
-            other.GetComponent<BallBehaviour>().m_owner = null;
+            //Sets the ball owner to null when thrown so it can be caught
+            
+            try
+            {
+
+                other.GetComponent<BallBehaviour>().m_owner = null;
+            }
+            catch
+            {
+                // shh
+            }
             //m_player.GetComponent<Player>().m_holdingBall = false;  
         }
     }
